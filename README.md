@@ -26,6 +26,10 @@ chords Strings | instrument: strings | voices: 3 | range: G3-B4 | pattern: 4: r 
 - loudness matched;
 - optionally played by a real sampled orchestra (the Sonatina Symphonic Orchestra), with natural playing: swells, legato and slight human timing.
 
+On Windows there is also an editor window with a piano roll, for looking at a score, playing it and changing notes by hand:
+
+![The Abend Orchestra editor window showing Evening Waltz: the flute melody in blue, the strings and cellos as grey shadows](docs/editor-window.png)
+
 ## Let an AI write the music
 
 [docs/AI-GUIDE.md](docs/AI-GUIDE.md) is the whole score format, written for AI models.
