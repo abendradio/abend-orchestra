@@ -11,6 +11,6 @@ Sources and licences (both CC0 1.0, public domain: no restrictions, no credit re
 Credit given anyway: Versilian Studios (Sam Gossner), Ivy Audio (Simon Dalzell) and the FreePats project.
 
 Every sample in this file is one of those recordings: 21 organ notes, 11 pedal notes and 17 accordion notes, in stereo.
-Built with Abend Orchestra's SFZ-to-SF2 converter. Velocity changes the level as for the other instruments; levels are
+Converted to SF2 with an internal tool from these sources (the tool is not part of the public code). Velocity changes the level as for the other instruments; levels are
 matched to the default organ and accordion (+15 dB organ, +4 dB pedal, -5.6 dB accordion baked into the samples).
 "organ" and "church organ" in a score keep the default General MIDI sound; only "pipe organ" and "accordion" use this file.

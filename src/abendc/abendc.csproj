@@ -7,6 +7,8 @@
     <RootNamespace>Abend</RootNamespace>
     <StartupObject>Abend.Cli</StartupObject>
     <InvariantGlobalization>true</InvariantGlobalization>
+    <!-- runs on .NET 8 or any newer runtime (8 is out of support since November 2026; 10 is the current LTS) -->
+    <RollForward>Major</RollForward>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="../engine/*.cs" />

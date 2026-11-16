@@ -4,8 +4,6 @@
 
 Claude wrote every line of this code. The station director has never written any. He says what he wants in plain words and listens to the result.
 
-> Draft (not yet released). The release download is still being built.
-
 ## What it does
 
 You write (or ask an AI to write) a **score script**: a small text file with a header, some tracks of notes, and chord blocks that play accompaniment patterns:
@@ -47,6 +45,7 @@ abendc song.abscore                 check it and write song.mid
 abendc song.abscore --check         only check
 abendc song.abscore --lint          also give style hints
 abendc --guide                      print the AI guide
+abendc --version                    print the version
 abendc render <folder or file> --out out [--library sonatina] [--expression] [--lufs -14] [--bass 5] ...
 ```
 
@@ -61,26 +60,37 @@ Abend Radio renders with `--lufs -14 --bass 5 --library sonatina --expression`.
 
 ## Getting started (release download)
 
-**Windows:** unzip `abend-orchestra-<version>-windows.zip`. Nothing to install except ffmpeg (`winget install --id Gyan.FFmpeg -e`).
-- `AbendOrchestra.exe` is the editor window: File > Open example.
-- `abendc.exe` is the command line.
+**Windows**
 
-Windows may warn that the program is from an unknown publisher (it isn't code-signed): choose "More info", then "Run anyway".
+1. Unzip `abend-orchestra-<version>-windows.zip`.
+2. Open the unzipped `abend-orchestra-<version>-windows` folder, then open PowerShell there (in File Explorer: File > Open Windows PowerShell, or right-click the folder > Open in Terminal).
+3. Install ffmpeg, which renders the MP3s: `winget install --id Gyan.FFmpeg -e`. Then **close the terminal and open a new one** in the same folder, so ffmpeg is found.
+4. Optional, for the orchestra: `powershell -ExecutionPolicy Bypass -File setup-sounds.ps1` (418 MB; it asks first).
+5. Try it:
+   ```
+   .\abendc.exe "examples\Evening Waltz.abscore" --check
+   .\abendc.exe render examples --out out                                   # default sounds
+   .\abendc.exe render examples --out out --library sonatina --expression   # the orchestra (after step 4)
+   ```
 
-**Mac and Linux:** unzip `abend-orchestra-<version>-portable.zip`.
-1. Install the [.NET 8 runtime](https://dotnet.microsoft.com/download/dotnet/8.0), FluidSynth and ffmpeg:
+`AbendOrchestra.exe` is the editor window: File > Open example. Windows may warn that the program is from an unknown publisher (it isn't code-signed): choose "More info", then "Run anyway".
+
+**Mac and Linux**
+
+1. Unzip `abend-orchestra-<version>-portable.zip` and open a terminal in the unzipped folder.
+2. Install the [.NET runtime](https://dotnet.microsoft.com/download) (version 8 or newer, for example .NET 10), FluidSynth and ffmpeg:
    - Mac: `brew install fluid-synth ffmpeg`;
    - Linux: `sudo apt install fluidsynth ffmpeg`.
-2. Make the scripts runnable once: `chmod +x abendc setup-sounds.sh`.
-3. Use `./abendc` as the command line.
+3. Make the launcher runnable once: `chmod +x abendc`.
+4. Optional, for the orchestra: `sh setup-sounds.sh` (418 MB; it asks first).
+5. Try it:
+   ```
+   ./abendc "examples/Evening Waltz.abscore" --check
+   ./abendc render examples --out out                                   # default sounds
+   ./abendc render examples --out out --library sonatina --expression   # the orchestra (after step 4)
+   ```
 
-Then, on either system:
-
-```
-abendc "examples/Evening Waltz.abscore" --check
-abendc render examples --out out                                   # default sounds
-abendc render examples --out out --library sonatina --expression   # the orchestra (after setup-sounds)
-```
+Rendering levels every piece to -14 LUFS, like music platforms. A very dynamic piece is gently narrowed so its quiet passages stay audible on the radio (the log then says "soft/loud range narrowed for radio"). To keep more of the contrast, add `--lra 30`.
 
 ## Sounds
 
@@ -89,22 +99,19 @@ The release download includes:
 - a sampled harpsichord, pipe organ and accordion;
 - FluidSynth (on Windows).
 
-The orchestra itself (the Sonatina Symphonic Orchestra, 418 MB) comes from its original source in one step:
-
-```
-powershell -ExecutionPolicy Bypass -File setup-sounds.ps1     # Windows
-sh setup-sounds.sh                                            # Mac and Linux
-```
-
-The script:
+The orchestra itself (the Sonatina Symphonic Orchestra, 418 MB) comes from its original source with the setup script (step 4 above). The script:
 - shows what it will download and asks first;
 - checks the file's SHA-256;
 - puts it in `soundfonts/Sonatina` with its licence;
 - tells you whether FluidSynth and ffmpeg are found.
 
+On Windows, `setup-sounds.ps1 -InstallFfmpeg` also installs ffmpeg with winget; this accepts winget's package agreements for you.
+
+abendc looks for FluidSynth, ffmpeg and the sounds in this order: `--tools`, the `ABEND_TOOLS` environment variable, the program's own folder (its `tools` and `soundfonts` folders), the folder you chose in the editor window, and, for the tools, your `PATH`.
+
 ## Building
 
-With the [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) (Windows, Mac or Linux):
+With the [.NET SDK](https://dotnet.microsoft.com/download), version 8 or newer (Windows, Mac or Linux):
 
 ```
 dotnet build src/abendc/abendc.csproj -c Release          # the command line
@@ -115,7 +122,7 @@ dotnet build src/editor/AbendOrchestra.csproj -c Release   # the editor window (
 You also need FluidSynth and ffmpeg for audio:
 - Mac: `brew install fluid-synth ffmpeg`;
 - Linux: `sudo apt install fluidsynth ffmpeg`;
-- Windows: FluidSynth comes with the release download, and ffmpeg via `winget install ffmpeg`.
+- Windows: FluidSynth comes with the release download, and ffmpeg via `winget install --id Gyan.FFmpeg -e`.
 
 On Windows without the SDK, `powershell -ExecutionPolicy Bypass -File build-windows.ps1` builds the same programs with the C# compiler that comes with Windows.
 
@@ -123,7 +130,7 @@ The same score gives the same MIDI on every system: the tests check it.
 
 ## About the code
 
-Abend Orchestra was written by Claude in Claude Code sessions, directed by someone who isn't a programmer. It works, and it's tested: 101 checks run on every build. It grew one feature at a time, whenever the station needed something new, rather than from a grand design, and you'll see that in places. Issues and contributions are welcome.
+Abend Orchestra was written by Claude in Claude Code sessions, directed by someone who isn't a programmer. It works, and it's tested: 110 checks run on every build. It grew one feature at a time, whenever the station needed something new, rather than from a grand design, and you'll see that in places. Issues and contributions are welcome.
 
 The first version was written by the Claude session that became Anselm Abend, the station's house composer, to play his first symphony, Per aspera. The orchestra developer has looked after it since.
 

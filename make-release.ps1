@@ -44,14 +44,15 @@ function CopyCommon($to) {
     foreach ($d in $want.Keys) {
         $dd = Join-Path $sf $d; New-Item -ItemType Directory -Force $dd | Out-Null
         foreach ($f in $want[$d]) { $p = Join-Path (Join-Path $src $d) $f; if (-not (Test-Path $p)) { throw "missing asset: $p" }; Copy-Item $p $dd }
-        $readme = Join-Path $root "release-assets\$d\README.txt"
-        if (Test-Path $readme) { Copy-Item $readme $dd }
+        # public READMEs (and the extras' CC0 licence) from release-assets\, never the station's own READMEs
+        $ra = Join-Path $root "release-assets\$d"
+        if (Test-Path $ra) { Get-ChildItem $ra -File | Copy-Item -Destination $dd }
     }
     # the info text inside the soundfonts names the program and the real sources (the copies only; -Assets is not changed)
     $vcsl = "Built by Abend Orchestra's WavToSf2 from CC0 recordings (Versilian Community Sample Library)."
     Set-Sf2Comment (Join-Path $sf "VCSL-Flemish-Harpsichord\VCSL-Flemish-Harpsichord.sf2") $vcsl
     Set-Sf2Comment (Join-Path $sf "VCSL-Harpsichord\VCSL-English-Harpsichord.sf2") $vcsl
-    Set-Sf2Comment (Join-Path $sf "Abend-Extras\Abend-Extras-2.sf2") "Built by Abend Orchestra's SfzToSf2 from CC0 recordings: the VCSL pipe organ (Versilian Community Sample Library; sampled by Ivy Audio) and the FreePats Button Accordion HN."
+    Set-Sf2Comment (Join-Path $sf "Abend-Extras\Abend-Extras-2.sf2") "Converted to SF2 from CC0 recordings: the VCSL pipe organ (Versilian Community Sample Library; sampled by Ivy Audio) and the FreePats Button Accordion HN."
 }
 
 # rewrites the ICMT (comment) entry of a SoundFont's INFO list; the sample data and presets stay byte for byte the same
@@ -107,6 +108,7 @@ $fsTo = Join-Path $win "tools\fluidsynth"; New-Item -ItemType Directory -Force $
 Get-ChildItem $fsBin.DirectoryName -File | Where-Object { $_.Extension -in ".exe", ".dll" } | Copy-Item -Destination $fsTo
 Copy-Item (Join-Path $root "licenses\LGPL-2.1.txt") (Join-Path $fsTo "LICENSE-LGPL-2.1.txt")
 Copy-Item (Join-Path $root "licenses\zlib-SDL3.txt") (Join-Path $fsTo "LICENSE-SDL3.txt")
+Copy-Item (Join-Path $root "licenses\sndfile-codecs.txt") (Join-Path $fsTo "LICENSES-sndfile-codecs.txt")
 Set-Content -Encoding UTF8 (Join-Path $fsTo "README.txt") @"
 FluidSynth $($fsBin.Directory.Parent.Name -replace '^fluidsynth-v?', '') for Windows, unmodified, as released by the FluidSynth project.
 Abend Orchestra runs it as a separate program (fluidsynth.exe); it is not part of Abend Orchestra's code.
@@ -115,6 +117,8 @@ FluidSynth (fluidsynth.exe, libfluidsynth-3.dll): GNU LGPL 2.1 or later, see LIC
   Source code: https://github.com/FluidSynth/fluidsynth (releases: https://github.com/FluidSynth/fluidsynth/releases)
 libsndfile (sndfile.dll): GNU LGPL 2.1 or later, see LICENSE-LGPL-2.1.txt.
   Source code: https://github.com/libsndfile/libsndfile
+  It has these codec libraries built in: libFLAC, libogg, libvorbis, libopus (BSD 3-clause), mpg123 (LGPL 2.1)
+  and LAME (LGPL 2 or later); see LICENSES-sndfile-codecs.txt.
 SDL3 (SDL3.dll): zlib licence, see LICENSE-SDL3.txt.
   Source code: https://github.com/libsdl-org/SDL
 "@

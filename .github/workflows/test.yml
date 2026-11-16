@@ -18,7 +18,9 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: |
+            8.0.x
+            10.0.x
       - name: Install FluidSynth and ffmpeg (Linux)
         if: runner.os == 'Linux'
         run: sudo apt-get update && sudo apt-get install -y fluidsynth ffmpeg
@@ -41,3 +43,11 @@ jobs:
           for f in examples/*.abscore examples/station/*.abscore; do
             dotnet src/abendc/bin/Release/net8.0/abendc.dll "$f" --check
           done
+      - name: The command line runs on the newest .NET installed (10)
+        shell: bash
+        env:
+          DOTNET_ROLL_FORWARD: LatestMajor
+        run: |
+          dotnet src/abendc/bin/Release/net8.0/abendc.dll --version
+          dotnet --list-runtimes
+          dotnet src/abendc/bin/Release/net8.0/abendc.dll "examples/station/The Rabbit Rondo.abscore" --check

@@ -29,7 +29,7 @@ else
   echo "  licence: Creative Commons Sampling Plus 1.0"
   go=1
   if [ "$yes" -ne 1 ]; then
-    printf "Download it now? (y/n) "; read -r a
+    printf "Download it now? (y/n) "; read -r a || a=n   # no terminal (e.g. piped): treat as no
     case "$a" in y*|Y*) ;; *) echo "Skipped. Run this script again when you want it."; go=0 ;; esac
   fi
   if [ "$go" -eq 1 ]; then
