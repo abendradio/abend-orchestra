@@ -130,9 +130,9 @@ The same score gives the same MIDI on every system: the tests check it.
 
 ## About the code
 
-Abend Orchestra was written by Claude in Claude Code sessions, directed by someone who isn't a programmer. It works, and it's tested: 110 checks run on every build. It grew one feature at a time, whenever the station needed something new, rather than from a grand design, and you'll see that in places. Issues and contributions are welcome.
+Abend Orchestra was written by Claude in Claude Code sessions, directed by someone who isn't a programmer. It works, and it's tested: over 100 checks run on every build. It grew one feature at a time, whenever the station needed something new, rather than from a grand design, and you'll see that in places. Issues and contributions are welcome.
 
-The first version was written by the Claude session that became Anselm Abend, the station's house composer, to play his first symphony, Per aspera. The orchestra developer has looked after it since.
+The first version was written by the Claude session that became Anselm Abend, the station's house composer, to play his first symphony, Per aspera. Another Claude session, the station's orchestra developer, has looked after it since.
 
 ## Licences
 

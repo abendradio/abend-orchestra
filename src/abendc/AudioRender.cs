@@ -109,20 +109,41 @@ namespace Abend
             return null;
         }
 
+        // "windows", "mac" or "linux": picks the one install command that fits this computer
+        public static string OsName()
+        {
+            if (Path.DirectorySeparatorChar == '\\') return "windows";
+            return Directory.Exists("/System/Library/CoreServices") ? "mac" : "linux";
+        }
+
+        // null when everything is found; otherwise one line per missing piece, each with its fix for this system
         public static string CheckSetup(RenderOptions o, out string fluid, out string ffmpeg, out string sf2)
+        {
+            return CheckSetup(o, out fluid, out ffmpeg, out sf2, true);
+        }
+
+        // commandLine: end with the --tools hint (the editor window asks for the folder instead)
+        public static string CheckSetup(RenderOptions o, out string fluid, out string ffmpeg, out string sf2, bool commandLine)
         {
             fluid = FindTool(Exe("fluidsynth"), o.ToolsDir);
             ffmpeg = FindTool(Exe("ffmpeg"), o.ToolsDir);
             sf2 = FindSoundFont(o.SoundFont, o.ToolsDir);
+            string os = OsName();
+            string setupScript = os == "windows" ? "powershell -ExecutionPolicy Bypass -File setup-sounds.ps1" : "sh setup-sounds.sh";
             var missing = new List<string>();
-            if (fluid == null) missing.Add("FluidSynth (" + Exe("fluidsynth") + ")");
-            if (ffmpeg == null) missing.Add("ffmpeg (" + Exe("ffmpeg") + ")");
-            if (sf2 == null) missing.Add(o.SoundFont != null ? "the soundfont " + o.SoundFont : "a .sf2 soundfont in a soundfonts folder");
+            if (fluid == null) missing.Add("Could not find FluidSynth (" + Exe("fluidsynth") + "). " + (os == "windows" ? "It comes with the Windows download, in tools\\fluidsynth: keep that folder next to abendc.exe."
+                : "Install it: " + (os == "mac" ? "brew install fluid-synth" : "sudo apt install fluidsynth")));
+            if (ffmpeg == null) missing.Add("Could not find ffmpeg (" + Exe("ffmpeg") + "). Install it: " + (os == "windows" ? "winget install --id Gyan.FFmpeg -e, then open a new terminal."
+                : os == "mac" ? "brew install ffmpeg" : "sudo apt install ffmpeg"));
+            if (sf2 == null) missing.Add(o.SoundFont != null ? "Could not find the soundfont " + o.SoundFont + "; check the file name."
+                : "Could not find the default sounds (a .sf2 file in a soundfonts folder). They come with the download: keep its soundfonts folder next to abendc.");
             if (o.Library != null && o.Harpsichord == null) o.HarpsichordFile = Library.FindHarpsichord(o.ToolsDir);
-            if (o.Library != null && o.Harpsichord != null) { if ((o.HarpsichordFile = Library.FindHarpsichord(o.ToolsDir, o.Harpsichord)) == null) missing.Add("the harpsichord soundfont " + o.Harpsichord); }
+            if (o.Library != null && o.Harpsichord != null) { if ((o.HarpsichordFile = Library.FindHarpsichord(o.ToolsDir, o.Harpsichord)) == null) missing.Add("Could not find the harpsichord soundfont " + o.Harpsichord + "; check the file name."); }
             if (o.Library != null) o.ExtrasFile = Library.FindExtras(o.ToolsDir);
-            if (o.Library != null && (o.LibraryFile = Library.Find(o.Library, o.ToolsDir)) == null) missing.Add("the " + o.Library + " library (soundfonts/Sonatina/*.sf2)");
-            return missing.Count == 0 ? null : "Could not find " + string.Join(", ", missing) + ". Install FluidSynth and ffmpeg (or put them in a tools folder next to abendc), run the setup script for the sounds (a soundfonts folder next to abendc), or pass --tools (or set ABEND_TOOLS) and --soundfont.";
+            if (o.Library != null && (o.LibraryFile = Library.Find(o.Library, o.ToolsDir)) == null) missing.Add("Could not find the " + o.Library.Substring(0, 1).ToUpperInvariant() + o.Library.Substring(1) + " orchestra (soundfonts/Sonatina). Get it with the setup script: " + setupScript);
+            if (missing.Count == 0) return null;
+            if (commandLine) missing.Add("If " + (missing.Count == 1 ? "it is" : "they are") + " in another folder, pass --tools <folder> (or set ABEND_TOOLS).");
+            return string.Join(Environment.NewLine, missing);
         }
 
         // ---------- batch ----------

@@ -11,13 +11,14 @@ namespace Abend
         {
             if (a.Length == 0) { Console.Error.WriteLine("Usage: abendc render <folder or file> [--out dir] [--soundfont f.sf2] [--lufs -14] [--lra 15] [--bass 0] [--bitrate 192] [--cover image] [--library sonatina] [--expression] [--harpsichord f.sf2] [--percussion generaluser] [--lint] [--force] [--dry-run]"); return 2; }
             var o = new RenderOptions();
-            string input = a[0];
+            string input = null;   // the folder or file; the options may come before or after it
             var ci = System.Globalization.CultureInfo.InvariantCulture;
             bool gapGiven = false;
             try
             {
-                for (int i = 1; i < a.Length; i++)
+                for (int i = 0; i < a.Length; i++)
                 {
+                    if (input == null && !a[i].StartsWith("-")) { input = a[i]; continue; }
                     switch (a[i])
                     {
                         case "--out": o.OutDir = a[++i]; break;
@@ -39,11 +40,12 @@ namespace Abend
                         case "--lint": ScoreScript.Lint = true; break;
                         case "--harpsichord": o.Harpsichord = a[++i]; break;
                         case "--percussion": o.Percussion = a[++i].ToLowerInvariant(); if (o.Percussion != "sonatina" && o.Percussion != "generaluser") { Console.Error.WriteLine("Known percussion: sonatina, generaluser"); return 2; } break;
-                        default: Console.Error.WriteLine("Unknown option: " + a[i]); return 2;
+                        default: Console.Error.WriteLine(a[i].StartsWith("-") ? "Unknown option: " + a[i] : "Give one folder or file to render (" + input + ", then " + a[i] + ")"); return 2;
                     }
                 }
             }
             catch (Exception) { Console.Error.WriteLine("Missing or bad value after " + a[a.Length - 1]); return 2; }
+            if (input == null) { Console.Error.WriteLine("Give a folder or a file to render, e.g.: abendc render examples --out out"); return 2; }
             // library renders pause about 3 s between songs and 2 s between the movements of an album;
             // a score's gap: header or --gap still decides
             if (!gapGiven && o.Library != null) { o.GapSeconds = 3.0; o.MovementGapSeconds = 2.0; }
@@ -136,10 +138,12 @@ Exit code 0 = built without errors, 1 = errors (listed with line numbers), 2 = b
             if (args[0] == "--guide") { Console.WriteLine(AiGuide.Text); return 0; }
             if (args[0] == "--example") { Console.Write(AiGuide.Example); return 0; }
 
-            string input = args[0], midiOut = null, abendOut = null; bool check = false; double? tuning = null;
-            for (int i = 1; i < args.Length; i++)
+            // the options may come before or after the score file
+            string input = null, midiOut = null, abendOut = null; bool check = false; double? tuning = null;
+            for (int i = 0; i < args.Length; i++)
             {
-                if (args[i] == "-o" && i + 1 < args.Length) midiOut = args[++i];
+                if (input == null && (args[i] == "-" || !args[i].StartsWith("-"))) input = args[i];
+                else if (args[i] == "-o" && i + 1 < args.Length) midiOut = args[++i];
                 else if (args[i] == "--abend" && i + 1 < args.Length) abendOut = args[++i];
                 else if (args[i] == "--check") check = true;
                 else if (args[i] == "--lint") ScoreScript.Lint = true;
@@ -148,8 +152,10 @@ Exit code 0 = built without errors, 1 = errors (listed with line numbers), 2 = b
                     double tv; if (!double.TryParse(args[++i], System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out tv) || tv < 415 || tv > 466) { Console.Error.WriteLine("--tuning is the frequency of A4 in Hz, 415 to 466"); return 2; }
                     tuning = tv;
                 }
+                else if (!args[i].StartsWith("-")) { Console.Error.WriteLine("Give one score file at a time (" + input + ", then " + args[i] + "); to render a folder, use: abendc render <folder>"); return 2; }
                 else { Console.Error.WriteLine("Unknown option: " + args[i]); return 2; }
             }
+            if (input == null) { Console.Error.WriteLine("No score file given, e.g.: abendc song.abscore --check"); return 2; }
             string text;
             try { text = input == "-" ? Console.In.ReadToEnd() : File.ReadAllText(input); }
             catch (Exception ex) { Console.Error.WriteLine("Cannot read " + input + ": " + ex.Message); return 2; }

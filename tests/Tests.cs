@@ -485,6 +485,60 @@ namespace Abend { public static class Tests { public static int Main() {
     finally { Directory.Delete(tdx, true); }
   }
 
+  // the command line: options cBefore or cAfter the score file; a missing tool names only itself and its install command
+  {
+    string cd = Path.Combine(Path.GetTempPath(), "abend-cli-" + Guid.NewGuid().ToString("N").Substring(0, 6)); Directory.CreateDirectory(cd);
+    var oldOut = Console.Out; var oldErr = Console.Error; var oldEnc = Console.OutputEncoding;
+    Func<string[], Tuple<int, string>> cli = a =>
+    {
+      var sw = new StringWriter(); Console.SetOut(sw); Console.SetError(sw);
+      int rc; try { rc = Cli.Main(a); } finally { Console.SetOut(oldOut); Console.SetError(oldErr); ScoreScript.Lint = false; }
+      return Tuple.Create(rc, sw.ToString());
+    };
+    try
+    {
+      string cSong = Path.Combine(cd, "song.abscore"), mid1 = Path.Combine(cd, "a.mid"), mid2 = Path.Combine(cd, "b.mid");
+      File.WriteAllText(cSong, "title: S\ntrack M | instrument: flute\n\\mf c5/1 | d5/1 |\n");
+      var cBefore = cli(new[] { "--lint", cSong }); var cAfter = cli(new[] { cSong, "--lint" });
+      var chk1 = cli(new[] { "--check", "--tuning", "444", cSong }); var chk2 = cli(new[] { cSong, "--tuning", "444", "--check" });
+      ok(cBefore.Item1 == 0 && cAfter.Item1 == 0 && cBefore.Item2 == cAfter.Item2 && cBefore.Item2.Contains("ok:")
+         && chk1.Item1 == 0 && chk1.Item2 == chk2.Item2 && chk1.Item2.Contains("444"), "cli: --lint, --check and --tuning work before or after the file: " + cBefore.Item2.Trim());
+      var co1 = cli(new[] { "-o", mid1, cSong }); var co2 = cli(new[] { cSong, "-o", mid2 });
+      ok(co1.Item1 == 0 && co2.Item1 == 0 && File.Exists(mid1) && File.ReadAllBytes(mid1).SequenceEqual(File.ReadAllBytes(mid2)),
+         "cli: -o before or after the file writes the same MIDI");
+      var cAb = cli(new[] { "--abend", Path.Combine(cd, "p.abend"), "--check", cSong });
+      var cTwo = cli(new[] { cSong, cSong }); var cNone = cli(new[] { "--check" }); var cBad = cli(new[] { "--nope", cSong });
+      ok(cAb.Item1 == 0 && cTwo.Item1 == 2 && cTwo.Item2.Contains("one score file") && cNone.Item1 == 2 && cNone.Item2.Contains("No score file") && cBad.Item1 == 2 && cBad.Item2.Contains("Unknown option: --nope"),
+         "cli: --abend before the file; two files, no file and an unknown option are bad usage: " + cNone.Item2.Trim());
+      var rbefore = cli(new[] { "render", "--dry-run", "--tools", cd, Path.Combine(cd, "nothing-here") });
+      ok(rbefore.Item1 == 2 && !rbefore.Item2.Contains("Unknown option"), "cli: render options may come before the folder");
+
+      // the setup message, with a tools folder that has nothing in it and no tools on PATH
+      string oldPath = Environment.GetEnvironmentVariable("PATH"), oldTools = Environment.GetEnvironmentVariable("ABEND_TOOLS");
+      Environment.SetEnvironmentVariable("PATH", cd); Environment.SetEnvironmentVariable("ABEND_TOOLS", null);
+      try
+      {
+        string f1, f2, f3;
+        var ro2 = new RenderOptions { ToolsDir = cd, SoundFont = cSong };   // any existing file passes as the soundfont here
+        string cMsg = AudioRender.CheckSetup(ro2, out f1, out f2, out f3);
+        string cOs = AudioRender.OsName();
+        string ffFix = cOs == "windows" ? "winget install --id Gyan.FFmpeg -e" : cOs == "mac" ? "brew install ffmpeg" : "sudo apt install ffmpeg";
+        bool fluidFound = f1 != null;   // a FluidSynth next to the test program (the Windows build folder) is found on purpose
+        if (f2 != null) Console.WriteLine("SKIP setup message tests: ffmpeg is found next to the test program or in the editor's saved folder");
+        else ok(cMsg != null && cMsg.Contains("Could not find ffmpeg") && cMsg.Contains(ffFix) && !cMsg.Contains("soundfont") && !cMsg.Contains("setup script")
+           && cMsg.Trim().EndsWith("(or set ABEND_TOOLS).") && (fluidFound || cMsg.Contains("Could not find FluidSynth"))
+           && cMsg.Split('\n').Length == (fluidFound ? 2 : 3), "setup: only what is missing, with this system's install command, --tools last: " + cMsg.Replace(Environment.NewLine, " / "));
+        string msgEditor = AudioRender.CheckSetup(ro2, out f1, out f2, out f3, false);
+        var ro3 = new RenderOptions { ToolsDir = cd, SoundFont = Path.Combine(cd, "gone.sf2"), Library = "sonatina" };
+        string msg3 = AudioRender.CheckSetup(ro3, out f1, out f2, out f3, false);
+        if (f2 == null && ro3.LibraryFile == null) ok(!msgEditor.Contains("--tools") && msg3.Contains("Could not find the soundfont " + ro3.SoundFont) && msg3.Contains("Sonatina orchestra") && msg3.Contains("setup-sounds"),
+           "setup: the editor's message has no --tools hint; a missing soundfont and the orchestra are named with their fix: " + msg3.Replace(Environment.NewLine, " / "));
+      }
+      finally { Environment.SetEnvironmentVariable("PATH", oldPath); Environment.SetEnvironmentVariable("ABEND_TOOLS", oldTools); }
+    }
+    finally { Console.OutputEncoding = oldEnc; Directory.Delete(cd, true); }
+  }
+
   Console.WriteLine(fails == 0 ? "ALL PASSED" : fails + " FAILED");
   return fails;
 } }

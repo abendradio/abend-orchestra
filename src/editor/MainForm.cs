@@ -519,7 +519,7 @@ namespace Abend
         {
             var o = new RenderOptions();
             string fl, ff, sf;
-            string first = AudioRender.CheckSetup(o, out fl, out ff, out sf);
+            string first = AudioRender.CheckSetup(o, out fl, out ff, out sf, false);
             if (first != null)
             {
                 // say exactly what is missing (often only ffmpeg, which the user installs: winget install --id Gyan.FFmpeg -e)
@@ -529,7 +529,7 @@ namespace Abend
                     if (fb.ShowDialog(this) != DialogResult.OK) return;
                     Settings.Set("radio", fb.SelectedPath);
                 }
-                var missing = AudioRender.CheckSetup(o, out fl, out ff, out sf);
+                var missing = AudioRender.CheckSetup(o, out fl, out ff, out sf, false);
                 if (missing != null) { MessageBox.Show(this, missing, "Export audio"); return; }
             }
             string target;
