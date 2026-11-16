@@ -539,6 +539,39 @@ namespace Abend { public static class Tests { public static int Main() {
     finally { Console.OutputEncoding = oldEnc; Directory.Delete(cd, true); }
   }
 
+  // render a folder: a .mid next to its score is passed over; a .mid of its own still renders; two scores with one name are a problem
+  {
+    string nDir = Path.Combine(Path.GetTempPath(), "abend-names-" + Guid.NewGuid().ToString("N").Substring(0, 6)); Directory.CreateDirectory(nDir);
+    try
+    {
+      var nOpt = new RenderOptions { SoundFont = Path.Combine(nDir, "test-sine.sf2"), DryRun = true, OutDir = Path.Combine(nDir, "out") };
+      TestSf2.Write(nOpt.SoundFont);
+      string nf1, nf2, nf3;
+      if (AudioRender.CheckSetup(nOpt, out nf1, out nf2, out nf3) != null) Console.WriteLine("SKIP render name tests: FluidSynth/ffmpeg not found");
+      else
+      {
+        string nSongs = Path.Combine(nDir, "songs"); Directory.CreateDirectory(Path.Combine(nSongs, "sub"));
+        string nScore = "title: S\ntrack M | instrument: flute\n\\mf c5/1 | d5/1 |\n";
+        File.WriteAllText(Path.Combine(nSongs, "Waltz.abscore"), nScore);
+        File.WriteAllText(Path.Combine(nSongs, "Both.abscore"), nScore); File.WriteAllText(Path.Combine(nSongs, "Both.txt"), nScore);
+        File.WriteAllText(Path.Combine(nSongs, "sub", "Waltz.abscore"), nScore);
+        var nSong = ScoreScript.Parse(nScore).Song;
+        MidiFile.Write(nSong, Path.Combine(nSongs, "Waltz.mid")); MidiFile.Write(nSong, Path.Combine(nSongs, "Alone.mid"));
+        var nSaid = new List<string>();
+        var nRs = AudioRender.RenderPath(nSongs, nOpt, nSaid.Add);
+        string nLog = string.Join(" / ", nSaid.Skip(1));
+        Func<string, RenderResult> nRes = name => nRs.FirstOrDefault(r => r.Source.EndsWith(Path.DirectorySeparatorChar + name) && !r.Source.Contains(Path.DirectorySeparatorChar + "sub" + Path.DirectorySeparatorChar));
+        ok(nSaid.Contains("skipped  Waltz.mid (made from Waltz.abscore)") && nRes("Waltz.mid") == null && nRes("Waltz.abscore") != null && nRes("Waltz.abscore").Status == "TO-DO"
+           && nRes("Alone.mid") != null && nRes("Alone.mid").Status == "TO-DO" && nRs.Count(r => r.Source.EndsWith("Waltz.abscore")) == 2,
+           "render: a .mid next to its score is skipped (not counted); a .mid of its own and a same-named score in a subfolder still render: " + nLog);
+        var nB1 = nRes("Both.abscore"); var nB2 = nRes("Both.txt");
+        ok(nB1 != null && nB2 != null && !nB1.Ok && !nB2.Ok && nB1.Status == "SKIPPED" && nB1.Detail == "Both.abscore and Both.txt would both become Both.mp3; rename one" && nRs.Count == 5,
+           "render: two scores with one name are both reported as a problem, neither rendered: " + (nB1 == null ? "missing" : nB1.Detail));
+      }
+    }
+    finally { Directory.Delete(nDir, true); }
+  }
+
   Console.WriteLine(fails == 0 ? "ALL PASSED" : fails + " FAILED");
   return fails;
 } }

@@ -162,6 +162,19 @@ namespace Abend
             say((o.Library != null ? "Soundfonts: " + o.Library.Substring(0, 1).ToUpperInvariant() + o.Library.Substring(1) + " (+ " + Path.GetFileName(sf2) + " for the other parts)" : "Soundfont: " + Path.GetFileName(sf2)) + "   target " + o.Lufs.ToString("0.#", CI) + " LUFS, " + o.Bitrate + " kbps" + (o.BassDb != 0 ? ", bass " + o.BassDb.ToString("+0.#;-0.#", CI) + " dB" : "")+ (o.Library != null ? ", library " + o.Library : "") + (o.Expression ? ", expression" : "") + "   output: " + o.OutDir);
             var results = new List<RenderResult>();
             string rootOut = o.OutDir, rootIn = Directory.Exists(input) ? Path.GetFullPath(input).TrimEnd('\\', '/') : null;
+            // files in one folder with the same name make the same MP3: a .mid next to its score (written by
+            // `abendc song.abscore`) is passed over; two scores with one name are a problem, and neither is rendered
+            var madeFrom = new Dictionary<string, string>();   // .mid -> the score it was made from
+            var clash = new Dictionary<string, string>();      // score -> the scores that share its name
+            foreach (var g in files.GroupBy(f => Path.Combine(Path.GetDirectoryName(Path.GetFullPath(f)), Path.GetFileNameWithoutExtension(f)).ToLowerInvariant()))
+            {
+                var scores = g.Where(IsScoreFile).ToList();
+                if (scores.Count == 0) continue;
+                foreach (var m in g.Where(f => !IsScoreFile(f))) madeFrom[m] = Path.GetFileName(scores[0]);
+                if (scores.Count > 1) foreach (var s in scores) clash[s] = string.Join(" and ", scores.Select(Path.GetFileName));
+            }
+            var listed = files;
+            files = files.Where(f => !madeFrom.ContainsKey(f) && !clash.ContainsKey(f)).ToList();
             // scores in one folder that share an album: header are rendered together with one loudness gain
             var albumOf = files.ToDictionary(f => f, f => AlbumOf(f));
             var albumsDone = new HashSet<string>();
@@ -173,10 +186,19 @@ namespace Abend
                 foreach (var g in files.Where(f => albumOf[f] == null).GroupBy(f => Path.GetDirectoryName(Path.GetFullPath(f)).ToLowerInvariant()))
                     foreach (var f in g.Take(g.Count() - 1)) o.InnerMovements.Add(f);
             }
-            foreach (var f in files)
+            foreach (var f in listed)
             {
                 // scores/symphonies/<work>/x.abscore -> out/symphonies/<work>/x.mp3
                 string sub = rootIn == null ? "" : Path.GetDirectoryName(Path.GetFullPath(f)).Substring(rootIn.Length).TrimStart('\\', '/');
+                string shown = (sub.Length > 0 ? sub + Path.DirectorySeparatorChar : "") + Path.GetFileName(f);
+                if (madeFrom.ContainsKey(f)) { say("skipped  " + shown + " (made from " + madeFrom[f] + ")"); continue; }
+                if (clash.ContainsKey(f))
+                {
+                    var cr = new RenderResult { Source = f, Status = "SKIPPED", Ok = false, Detail = clash[f] + " would both become " + Path.GetFileNameWithoutExtension(f) + ".mp3; rename one" };
+                    results.Add(cr);
+                    say(string.Format("{0,-8} {1}  - {2}", cr.Status, shown, cr.Detail));
+                    continue;
+                }
                 o.OutDir = sub.Length == 0 ? rootOut : Path.Combine(rootOut, sub);
                 Directory.CreateDirectory(o.OutDir);
                 List<RenderResult> rs;
@@ -203,6 +225,11 @@ namespace Abend
         {
             if (Path.GetFileName(f).Equals("render-log.txt", StringComparison.OrdinalIgnoreCase)) return false;
             try { return File.ReadLines(f).Any(l => Regex.IsMatch(l, @"^\s*(track|chords)\s+\S|(track|chords)\s+[^|]{1,60}\|\s*(instrument|voices)\s*:", RegexOptions.IgnoreCase)); } catch { return false; }   // the second form: lines run together
+        }
+
+        static bool IsScoreFile(string f)
+        {
+            return f.EndsWith(".abscore", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".txt", StringComparison.OrdinalIgnoreCase);
         }
 
         static string AlbumOf(string f)

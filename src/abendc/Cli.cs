@@ -97,7 +97,8 @@ namespace Abend
       --gap is the silence added after each track: 1.5 s, or 3 s with --library
       (2 s after each movement of an album: header work but the last; with --album, after
       each file of a folder but the last).
-      A .mid is titled after its file name; Song.title.txt next to Song.mid
+      A .mid next to a score of the same name (Song.mid next to Song.abscore) is
+      skipped: it was made from that score. A .mid is titled after its file name; Song.title.txt next to Song.mid
       gives it another title (its first line) without renaming the file.
       --bass 4 lifts the bass below about 100 Hz by 4 dB (for subwoofers) before
       the loudness is matched; 0 (the default) leaves the sound unchanged.
