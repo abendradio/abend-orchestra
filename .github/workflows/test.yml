@@ -1,0 +1,34 @@
+name: test
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Build abendc
+        run: dotnet build src/abendc/abendc.csproj -c Release
+      - name: Build the editor window (Windows only)
+        if: runner.os == 'Windows'
+        run: dotnet build src/editor/AbendComposer.csproj -c Release
+      - name: Run the tests
+        run: dotnet run --project tests/runner.csproj -c Release
+      - name: Check the example scores
+        shell: bash
+        run: |
+          for f in examples/*.abscore examples/station/*.abscore; do
+            dotnet src/abendc/bin/Release/net8.0/abendc.dll "$f" --check
+          done
