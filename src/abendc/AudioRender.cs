@@ -513,7 +513,7 @@ namespace Abend
                 r.Warnings.Add(mute.Count == t.Notes.Count
                     ? t.Name + ": none of its " + t.Notes.Count + " notes has a recording in " + name.Trim() + ", so the part is silent."
                     : t.Name + ": " + mute.Count + " of its " + t.Notes.Count + " notes have no recording in " + name.Trim() + " and will be silent (e.g. " +
-                      string.Join(", ", mute.Select(n => GM.NoteName(n.Pitch)).Distinct().Take(3)) + ").");
+                      string.Join(", ", mute.Select(n => ScoreScript.Spell(n.Pitch)).Distinct().Take(3)) + ").");
             }
         }
 

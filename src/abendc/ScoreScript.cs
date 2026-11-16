@@ -169,7 +169,10 @@ namespace Abend
                                 res.Percussion = val.ToLowerInvariant();
                                 if (res.Percussion != "sonatina" && res.Percussion != "generaluser") throw new Exception("percussion is sonatina (orchestral drums and timpani, the default) or generaluser (the default soundfont's kit)");
                                 break;
-                            case "key": keyName = val; break;
+                            case "key":
+                                keyName = val;
+                                if (KeyTonic(val) < 0) res.Warnings.Add("line " + ln + ": key \"" + val + "\" is not a key name I know (it is only used to check that the piece ends on its home chord). Write it like  key: D minor,  key: Bb major  or  key: F#m.");
+                                break;
                             case "style": case "description": break;
                             default: res.Warnings.Add("line " + ln + ": unknown header \"" + key + "\" ignored."); break;
                         }
@@ -236,8 +239,12 @@ namespace Abend
                 if (t.IsDrums || !(NamedRanges.TryGetValue((t.Instrument ?? "").Trim(), out r) || Ranges.TryGetValue(t.Program, out r))) continue;
                 var bad = t.Notes.Where(n => n.Pitch < r[0] || n.Pitch > r[1]).ToList();
                 if (bad.Count > 0)
-                    res.Warnings.Add(t.Name + ": " + bad.Count + " note(s) outside the instrument's comfortable range " + GM.NoteName(r[0]) + "-" + GM.NoteName(r[1]) + ", first " + GM.NoteName(bad[0].Pitch) + " in bar " + (bad[0].Start / song.BarTicks + 1) + ".");
+                    res.Warnings.Add(t.Name + ": " + bad.Count + " note(s) outside the instrument's comfortable range " + Spell(r[0]) + "-" + Spell(r[1]) + ", first " + Spell(bad[0].Pitch) + " in bar " + (bad[0].Start / song.BarTicks + 1) + ".");
             }
+            // a track written as notes with no dynamic at all plays at the default level
+            foreach (var t in song.Tracks)
+                if (!t.IsDrums && (t.Dyn == null || t.Dyn.Count == 0) && t.Notes.Any(n => melodic.Contains(n)))
+                    res.Warnings.Add(t.Name + ": the track has no dynamic, so it plays at a default level. Start it with one, e.g. \\mf c5/4 ...");
             foreach (var t in song.Tracks) Sym.Stable.Sort(t.Notes, (a, b) => a.Start.CompareTo(b.Start));
             if (res.Ok) res.Warnings.AddRange(MusicChecks(song, keyName));
             // tunes made mostly of scales: only notes written in "track" blocks (chord and pattern blocks, bass lines included, are left out)
@@ -351,7 +358,7 @@ namespace Abend
                     }
                     if (chordTone || held == null) continue;
                     count++;
-                    if (first == null) first = GM.NoteName(n.Pitch) + " against " + PcName(held.Pitch) + " in " + heldIn.Name + " in bar " + barOf(n.Start) + (off == 0 ? "" : " beat " + (off / beatT + 1));
+                    if (first == null) first = Spell(n.Pitch) + " against " + PcName(held.Pitch) + " in " + heldIn.Name + " in bar " + barOf(n.Start) + (off == 0 ? "" : " beat " + (off / beatT + 1));
                 }
                 if (count > 0)
                     w.Add(a.Name + ": " + count + " note(s) on strong beats clash by a semitone with a held note in another part, e.g. " + first + ". Melody notes on strong beats usually belong to the chord.");
@@ -385,7 +392,9 @@ namespace Abend
             return w;
         }
 
-        static string PcName(int p) { return GM.NoteName(60 + ((p % 12) + 12) % 12).TrimEnd('4'); }
+        static string PcName(int p) { return Spell(60 + ((p % 12) + 12) % 12).TrimEnd('4'); }
+        // a pitch spelled the way the notation writes it (bes4, fis3, c5), so a warning can be copied straight into a score
+        internal static string Spell(int p) { string[] n = { "c", "cis", "d", "ees", "e", "f", "fis", "g", "aes", "a", "bes", "b" }; return n[((p % 12) + 12) % 12] + (p / 12 - 1); }
 
         static string Names(List<string> n)
         {
@@ -397,7 +406,7 @@ namespace Abend
         public static int KeyTonic(string key)
         {
             if (key == null) return -1;
-            var m = Regex.Match(key.Trim(), @"^([A-Ga-g])(?:\s*-?\s*(flat|sharp)|(♭|♯|#|b|es|is|s))?(?=$|[\s,;()-])", RegexOptions.IgnoreCase);
+            var m = Regex.Match(key.Trim(), @"^([A-Ga-g])(?:\s*-?\s*(flat|sharp)|(♭|♯|#|b|es|is|s))?(?:m|min|maj)?(?=$|[\s,;()-])", RegexOptions.IgnoreCase);   // "D minor", "Bb major", "F#m", "Dm"
             if (!m.Success) return -1;
             int pc = "C D EF G A B".IndexOf(char.ToUpper(m.Groups[1].Value[0]));
             string acc = (m.Groups[2].Value + m.Groups[3].Value).ToLower();
@@ -510,24 +519,6 @@ namespace Abend
             return bad;
         }
 
-        static void AddBarErrors(ScoreResult res, string where, Exception ex, Song song, int start, string text, bool chords)
-        {
-            if (ex.Message.Contains("bar check failed"))
-            {
-                var bad = AuditBars(song, start, text, chords);
-                if (bad.Count > 1)
-                {
-                    foreach (var b in bad.Take(16)) res.Errors.Add(where + ": " + b);
-                    if (bad.Count > 16) res.Errors.Add(where + ": ... and " + (bad.Count - 16) + " more bars like these");
-                    string half = "adds up to " + Sym.Dsl.DurName(song.BarTicks / 2) + " ";
-                    if (bad.Count(b => b.Contains(half)) >= 3)
-                        res.Errors.Add(where + ": hint: many bars hold exactly HALF a bar. In " + song.Num + "/" + song.Den + " a bar lasts " + Sym.Dsl.DurName(song.BarTicks) +
-                            (song.Den == 8 && song.Num % 3 == 0 ? ", that is " + (song.Num / 3) + " dotted-quarter beats: put a bar line after every " + (song.Num / 3) + " dotted quarters, not after each one." : "; join each pair of half bars into one bar."));
-                    return;
-                }
-            }
-            res.Errors.Add(where + ": " + Help.Friendly(ex.Message));
-        }
 
         // A "<" or ">" standing alone between spaces is a hairpin with its backslash lost (ChatGPT writes them so, and shell
         // tools strip backslashes): read as \< and \>. A bare ">" was never valid. A bare "<" still opens a chord when what
@@ -565,12 +556,14 @@ namespace Abend
         static readonly Regex DurEnd = new Regex(@"/\d+\.*$");
         static readonly Regex DynTok =new Regex(@"^\\(ppp|pp|p|mp|mf|f|ff|fff|sf|fp|<|>|!)$");
 
-        // split a block body into (bar, text) chunks at "@N" marks; chunks without a mark continue after the previous one
-        static List<Tuple<int?, int, string>> Chunks(Block b)
+        // split a block body into (bar, text) chunks at "@N" marks; chunks without a mark continue after the previous one.
+        // Item4 maps the chunk's text back to the score: {offset in the text, source line} for each piece of a line.
+        static List<Tuple<int?, int, string, List<int[]>>> Chunks(Block b)
         {
-            var res = new List<Tuple<int?, int, string>>();
+            var res = new List<Tuple<int?, int, string, List<int[]>>>();
             int? bar = null; int line = b.Body.Count > 0 ? b.Body[0].Key : b.Line;
             var sb = new System.Text.StringBuilder();
+            var offs = new List<int[]>();
             var at = new Regex(@"(?<![\w])@\s*(\d+)");
             foreach (var kv in b.Body)
             {
@@ -578,16 +571,123 @@ namespace Abend
                 int pos = 0;
                 foreach (Match mm in at.Matches(s))
                 {
-                    sb.Append(' ').Append(s.Substring(pos, mm.Index - pos));
-                    if (sb.ToString().Trim().Length > 0) res.Add(Tuple.Create(bar, line, sb.ToString()));
-                    sb.Clear();
+                    sb.Append(' '); offs.Add(new[] { sb.Length, kv.Key }); sb.Append(s.Substring(pos, mm.Index - pos));
+                    if (sb.ToString().Trim().Length > 0) res.Add(Tuple.Create(bar, line, sb.ToString(), offs));
+                    sb.Clear(); offs = new List<int[]>();
                     bar = int.Parse(mm.Groups[1].Value); line = kv.Key; pos = mm.Index + mm.Length;
                 }
-                sb.Append('\n').Append(s.Substring(pos));
+                sb.Append('\n'); offs.Add(new[] { sb.Length, kv.Key }); sb.Append(s.Substring(pos));
             }
-            if (sb.ToString().Trim().Length > 0 || res.Count == 0) res.Add(Tuple.Create(bar, line, sb.ToString()));
+            if (sb.ToString().Trim().Length > 0 || res.Count == 0) res.Add(Tuple.Create(bar, line, sb.ToString(), offs));
             // each "@N" applies only to its own chunk; following chunks without a mark keep bar=null
             return res;
+        }
+
+        // ---------- errors with the right source line, and more than one per passage ----------
+        // the source line of a position in a chunk's text
+        static int LineAt(List<int[]> offs, int pos, int fallback)
+        {
+            int line = fallback;
+            foreach (var o in offs) { if (o[0] <= pos) line = o[1]; else break; }
+            return line;
+        }
+
+        // the bar an engine error is about ("bar check failed: bar 3 is too short" or "... bar 4+240 token 'x': ...")
+        static int ErrorBar(string msg)
+        {
+            var m = Regex.Match(msg, @"bar check failed: bar (\d+)");
+            if (!m.Success) m = Regex.Match(msg, @"\bbar (\d+)\+\d+ token");
+            int b; return m.Success && int.TryParse(m.Groups[1].Value, out b) ? b : -1;
+        }
+
+        static string ErrorToken(string msg)
+        {
+            if (msg.Contains("bar check failed")) return null;
+            var m = Regex.Match(msg, @"token '(.*?)': ");
+            return m.Success && m.Groups[1].Value != "|" ? m.Groups[1].Value : null;
+        }
+
+        // positions of the bar lines in a passage's text
+        static List<int> BarLines(string text)
+        {
+            var res = new List<int>();
+            for (int i = 0; i < text.Length; i++) if (text[i] == '|') res.Add(i);
+            return res;
+        }
+
+        // the source line of an error in bar `errBar` of a passage that starts at bar `firstBar` (text from `from` on)
+        static int ErrorLine(Tuple<int?, int, string, List<int[]>> ch, List<int> bars, int from, int firstBar, int errBar, string token)
+        {
+            string text = ch.Item3;
+            var inside = bars.Where(p => p >= from).ToList();
+            int i = errBar - firstBar;
+            int seg = i <= 0 ? from : (i - 1 < inside.Count ? inside[i - 1] + 1 : -1);
+            if (seg < 0) return ch.Item2;
+            int pos = seg;
+            if (token != null) { int t = text.IndexOf(token, seg, StringComparison.Ordinal); if (t >= 0) pos = t; }
+            while (pos < text.Length && char.IsWhiteSpace(text[pos])) pos++;
+            return LineAt(ch.Item4, pos, ch.Item2);
+        }
+
+        // reports the errors of a passage that failed: each with its own source line; after a bad bar, checking goes on at
+        // the next bar line (notation only, and not inside [ ]*N repeats, whose bars do not line up with the text)
+        static void PassageErrors(ScoreResult res, Song song, string kind, string name, Tuple<int?, int, string, List<int[]>> ch, int start,
+            Exception first, Func<int, string, Exception> retry)
+        {
+            string text = ch.Item3;
+            var bars = BarLines(text);
+            int firstBar = start / song.BarTicks + 1, from = 0, reported = 0;
+            bool resume = retry != null && text.IndexOf('[') < 0;
+            Exception ex = first;
+            while (true)
+            {
+                int errBar = ErrorBar(ex.Message);
+                int errLine = ch.Item2;
+                if (errBar > 0) errLine = ErrorLine(ch, bars, from, firstBar, errBar, ErrorToken(ex.Message));
+                else
+                {
+                    // chord errors name the symbol, not the bar: find the symbol in the text
+                    var sm = Regex.Match(ex.Message, @"(?:bad chord root in|' in) (\S+)\s*$");
+                    if (!sm.Success) sm = Regex.Match(ex.Message, @"bad chord pitch '(.+?)'");
+                    if (sm.Success) { int p = text.IndexOf(sm.Groups[1].Value, from, StringComparison.Ordinal); if (p >= 0) errLine = LineAt(ch.Item4, p, ch.Item2); }
+                }
+                string where = "line " + errLine + " (" + kind + " " + name + ")";
+                if (ex.Message.Contains("bar check failed") && from == 0)
+                {
+                    var bad = AuditBars(song, start, text, kind == "chords");
+                    if (bad.Count > 1)
+                    {
+                        string head = " (" + kind + " " + name + ")";
+                        foreach (var b in bad.Take(16))
+                        {
+                            var bm = Regex.Match(b, @"^bar (\d+)");
+                            int bl = bm.Success ? ErrorLine(ch, bars, 0, firstBar, int.Parse(bm.Groups[1].Value), null) : ch.Item2;
+                            res.Errors.Add("line " + bl + head + ": " + b);
+                        }
+                        if (bad.Count > 16) res.Errors.Add("line " + ch.Item2 + head + ": ... and " + (bad.Count - 16) + " more bars like these");
+                        string half = "adds up to " + Sym.Dsl.DurName(song.BarTicks / 2) + " ";
+                        if (bad.Count(b => b.Contains(half)) >= 3)
+                            res.Errors.Add("line " + ch.Item2 + head + ": hint: many bars hold exactly HALF a bar. In " + song.Num + "/" + song.Den + " a bar lasts " + Sym.Dsl.DurName(song.BarTicks) +
+                                (song.Den == 8 && song.Num % 3 == 0 ? ", that is " + (song.Num / 3) + " dotted-quarter beats: put a bar line after every " + (song.Num / 3) + " dotted quarters, not after each one." : "; join each pair of half bars into one bar."));
+                        return;
+                    }
+                }
+                res.Errors.Add(where + ": " + Help.Friendly(ex.Message));
+                reported++;
+                var inside = bars.Where(p => p >= from).ToList();
+                int i = errBar - firstBar;
+                bool more = resume && errBar > 0 && i >= 0 && i < inside.Count && reported < 16 && inside[i] + 1 < text.Length
+                    && text.Substring(inside[i] + 1).Replace("|", "").Trim().Length > 0;
+                if (!more)
+                {
+                    if (!resume || reported >= 16)
+                        res.Errors.Add(where + ": checking of this " + (kind == "chords" ? "block" : "passage") + " stopped here; there may be more errors after it.");
+                    return;
+                }
+                from = inside[i] + 1; firstBar = errBar + 1;
+                ex = retry(firstBar, text.Substring(from));
+                if (ex == null) return;
+            }
         }
 
         static Sym.Movement Scratch(Song s) { var mv = new Sym.Movement("score"); mv.Meter(1, s.Num, s.Den); return mv; }
@@ -613,7 +713,14 @@ namespace Abend
                     WarnLateStart(song, res, "line " + ch.Item2 + " (track " + tr.Name + ")", ch.Item1, notes);
                     nextTick = start + ph.Length;
                 }
-                catch (Exception ex) { AddBarErrors(res, "line " + ch.Item2 + " (track " + tr.Name + ")", ex, song, start, ch.Item3, false); nextTick = start; }
+                catch (Exception ex)
+                {
+                    PassageErrors(res, song, "track", tr.Name, ch, start, ex, (bar2, rest) =>
+                    {
+                        try { Engine.Notation(song, bar2, rest, transpose); return null; } catch (Exception e2) { return e2; }
+                    });
+                    nextTick = start;
+                }
             }
         }
 
@@ -709,7 +816,7 @@ namespace Abend
                     WarnLateStart(song, res, "line " + ch.Item2 + " (chords " + tr.Name + ")", ch.Item1, made.Skip(before).ToList());
                     nextTick = t;
                 }
-                catch (Exception ex) { AddBarErrors(res, "line " + ch.Item2 + " (chords " + tr.Name + ")", ex, song, start, ch.Item3, true); nextTick = t; }
+                catch (Exception ex) { PassageErrors(res, song, "chords", tr.Name, ch, start, ex, null); nextTick = t; }
             }
             if (marks.Count > 0)
             {

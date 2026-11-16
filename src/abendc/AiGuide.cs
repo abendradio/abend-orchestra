@@ -55,7 +55,8 @@ score.
     ...chord symbols...
 
 Allowed headers: title, composer, tempo, meter, key (only used to check that
-the piece ends on its home chord), cover, tuning (concert pitch: the
+the piece ends on its home chord; write it like key: D minor, key: Bb major
+or key: F#m), cover, tuning (concert pitch: the
 frequency of A4 in Hz, 415-466, default 440; e.g. tuning: 444), gap (the
 silence after the piece in the rendered MP3, 0-10 seconds; leave it out for the
 normal pause; gap: 0 for a movement that flows straight into the
@@ -277,7 +278,9 @@ Comfortable ranges (sounding pitch):
   timpani d2-a3    violin g3-e7    viola c3-e6    cello c2-a5    contrabass e1-g3
   piano a0-c8    electric piano e1-g6    voice/choir c3-a5    guitar e2-e5
   bass guitar e1-g3    synth lead and pads c3-c7
-Notes outside the orchestral ranges produce a warning.
+Notes outside the orchestral ranges produce a warning. Rendered with the
+sample library (--library sonatina), the recordings have their own ranges:
+see 6b.
 
 Bass: give the piece a real bass line, moving or held, whichever suits it.
 Important bass lines can be doubled an octave lower (cellos + contrabass,

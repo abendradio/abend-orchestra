@@ -64,11 +64,11 @@ namespace Abend { public static class Tests { public static int Main() {
   var startLate = score("", "track Melody | instrument: flute\n@2 \\mf r/1 | c5/1 | c5/1 |\n" + acc);
   ok(warned(startLate, "marked @2 has its first note in bar 3"), "warn: passage starts later than its @bar: " + startLate.Warnings.FirstOrDefault());
   var clash = score("", mel.Replace("c5/2 e5/2 |", "b4/1 |") + acc);
-  ok(warned(clash, "B4 against C in Strings in bar 1"), "warn: melody clashes with a held chord: " + clash.Warnings.FirstOrDefault());
+  ok(warned(clash, "b4 against c in Strings in bar 1"), "warn: melody clashes with a held chord: " + clash.Warnings.FirstOrDefault());
   var maj7 = score("", mel.Replace("c5/2 e5/2 |", "b4/1 |") + acc.Replace("voices: 3", "voices: 4").Replace("\\p C/1", "\\p Cmaj7/1"));
   ok(!warned(maj7, "clash"), "warn: a melody note that belongs to the chord (B over Cmaj7) is fine " + string.Join(" / ", maj7.Warnings));
   var ending = score("", mel.Replace("c5/1 |", "b4/1 |") + acc.Replace("G | C |", "C | G |"));
-  ok(warned(ending, "starts with C in the bass but ends with G"), "warn: does not end on the home chord: " + ending.Warnings.LastOrDefault());
+  ok(warned(ending, "starts with c in the bass but ends with g"), "warn: does not end on the home chord: " + ending.Warnings.LastOrDefault());
   string up = "c5/8 d5/8 e5/8 f5/8 g5/8 a5/8 b5/8 c6/8 |", down = "c6/8 b5/8 a5/8 g5/8 f5/8 e5/8 d5/8 c5/8 |", leaps = "c5/8 g5/8 e5/8 c6/8 a5/8 e5/8 g5/8 c5/8 |";
   ScoreScript.Lint = true;
   var scales = score("", "track Melody | instrument: flute\n\\mf " + up + down + up + down + up + down + "\n");
@@ -101,9 +101,25 @@ namespace Abend { public static class Tests { public static int Main() {
   }
   ok(stepsOk, "expression: pp < p < mf < f even when an entry is moved just before its mark " + stepInfo);
   var keyed = score("key: D major\n", mel + acc);
-  ok(warned(keyed, "ends with C in the bass, but its key is D major"), "warn: ending checked against the key: header: " + keyed.Warnings.LastOrDefault());
+  ok(warned(keyed, "ends with c in the bass, but its key is D major"), "warn: ending checked against the key: header: " + keyed.Warnings.LastOrDefault());
   ok(ScoreScript.KeyTonic("E-flat major") == 3 && ScoreScript.KeyTonic("Eb") == 3 && ScoreScript.KeyTonic("F# minor") == 6 && ScoreScript.KeyTonic("bes major") == 10 &&
      ScoreScript.KeyTonic("B minor") == 11 && ScoreScript.KeyTonic("As") == 8 && ScoreScript.KeyTonic("C") == 0 && ScoreScript.KeyTonic("nonsense") == -1, "key names: E-flat, Eb, F#, bes, B, As, C");
+  ok(ScoreScript.KeyTonic("Dm") == 2 && ScoreScript.KeyTonic("F#m") == 6 && ScoreScript.KeyTonic("Ebm") == 3 && ScoreScript.KeyTonic("Bm") == 11 && ScoreScript.KeyTonic("Bbmaj") == 10,
+     "key names: chord-style Dm, F#m, Ebm, Bm, Bbmaj");
+  ok(warned(score("key: Hello\n", mel + acc), "key \"Hello\" is not a key name I know") && !score("key: Dm\n", mel + acc).Warnings.Any(x => x.Contains("not a key name")), "warn: an unknown key: header");
+  ok(warned(score("", "track Bass | instrument: cello\nc3/1 | g2/1 | c3/1 | c3/1 |\n"), "Bass: the track has no dynamic") && !score("", mel + acc).Warnings.Any(x => x.Contains("no dynamic")),
+     "warn: a track without any dynamic");
+  // errors carry the line they are on, and checking goes on after a bad bar
+  var lines = ScoreScript.Parse("title: T\ntempo: 100\nmeter: 4/4\ntrack A | instrument: flute\n\\mf c5/4 d5/4 e5/4 f5/4 |\ng5/1 |\na5/2 g5/4 |\nQ5/1 |\nc5/1 |\nBb4/1 |\n");
+  ok(!lines.Ok && lines.Errors.Count == 3 && lines.Errors[0].StartsWith("line 7 ") && lines.Errors[0].Contains("bar 3 is too short") && lines.Errors[1].StartsWith("line 8 ") && lines.Errors[1].Contains("Q5/1")
+     && lines.Errors[2].StartsWith("line 10 ") && lines.Errors[2].Contains("Bb4/1"), "errors: each on its own line, all three in one passage: " + string.Join(" / ", lines.Errors));
+  var repErr = ScoreScript.Parse("title: T\ntempo: 100\nmeter: 4/4\ntrack A | instrument: flute\n\\mf [ c5/1 |\nQ5/1 | ]*2\n");
+  ok(!repErr.Ok && repErr.Errors[0].StartsWith("line 6 ") && repErr.Errors.Any(x => x.Contains("checking of this passage stopped here")), "errors: inside a repeat, the line is right and the stop is said: " + string.Join(" / ", repErr.Errors));
+  var chl = ScoreScript.Parse("title: T\ntempo: 100\nmeter: 4/4\nchords P | instrument: piano\n\\p C/1 | G |\nC | Gq7 |\n");
+  ok(!chl.Ok && chl.Errors[0].StartsWith("line 6 ") && chl.Errors[0].Contains("Gq7"), "errors: a bad chord symbol is reported on its own line: " + chl.Errors[0]);
+  var halves = ScoreScript.Parse("title: T\ntempo: 100\nmeter: 4/4\ntrack A | instrument: flute\n\\mf c5/2 d5/2 | e5/2 |\nf5/2 g5/2 | a5/4 |\nb5/1 |\n");
+  ok(!halves.Ok && halves.Errors.Any(x => x.StartsWith("line 5 ") && x.Contains("bar 2")) && halves.Errors.Any(x => x.StartsWith("line 6 ") && x.Contains("bar 4")), "errors: several short bars, each on its line: " + string.Join(" / ", halves.Errors));
+  ok(ScoreScript.Spell(70) == "bes4" && ScoreScript.Spell(54) == "fis3" && ScoreScript.Spell(60) == "c4", "warnings spell pitches as the notation does (bes4, fis3, c4)");
   var twice = score("", mel + acc + "chords Strings | voices: 3\n\\p F/1 | F | C | C |\n");
   ok(warned(twice, "start it with @5"), "warn: second block without @ plays on top of the first: " + twice.Warnings.FirstOrDefault());
   var mixed = score("", "track Piano | instrument: piano\n\\mf c5/2 e5/2 | g5/2 e5/2 | d5/2 b4/2 | c5/1 |\nchords Piano | voices: 3 | range: G3-E4\n\\p C/1 | C | G | C |\n");
