@@ -109,6 +109,7 @@ Get-ChildItem $fsBin.DirectoryName -File | Where-Object { $_.Extension -in ".exe
 Copy-Item (Join-Path $root "licenses\LGPL-2.1.txt") (Join-Path $fsTo "LICENSE-LGPL-2.1.txt")
 Copy-Item (Join-Path $root "licenses\zlib-SDL3.txt") (Join-Path $fsTo "LICENSE-SDL3.txt")
 Copy-Item (Join-Path $root "licenses\sndfile-codecs.txt") (Join-Path $fsTo "LICENSES-sndfile-codecs.txt")
+Copy-Item -Recurse (Join-Path $root "licenses\codecs") (Join-Path $fsTo "codecs")
 Set-Content -Encoding UTF8 (Join-Path $fsTo "README.txt") @"
 FluidSynth $($fsBin.Directory.Parent.Name -replace '^fluidsynth-v?', '') for Windows, unmodified, as released by the FluidSynth project.
 Abend Orchestra runs it as a separate program (fluidsynth.exe); it is not part of Abend Orchestra's code.
@@ -118,7 +119,7 @@ FluidSynth (fluidsynth.exe, libfluidsynth-3.dll): GNU LGPL 2.1 or later, see LIC
 libsndfile (sndfile.dll): GNU LGPL 2.1 or later, see LICENSE-LGPL-2.1.txt.
   Source code: https://github.com/libsndfile/libsndfile
   It has these codec libraries built in: libFLAC, libogg, libvorbis, libopus (BSD 3-clause), mpg123 (LGPL 2.1)
-  and LAME (LGPL 2 or later); see LICENSES-sndfile-codecs.txt.
+  and LAME (Library GPL 2); see LICENSES-sndfile-codecs.txt, and each library's own licence file in codecs\.
 SDL3 (SDL3.dll): zlib licence, see LICENSE-SDL3.txt.
   Source code: https://github.com/libsdl-org/SDL
 "@

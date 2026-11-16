@@ -4,34 +4,38 @@ FluidSynth's Windows build links these audio codec libraries into sndfile.dll (f
 Abend Orchestra does not use them directly; FluidSynth reads and writes WAV through libsndfile.
 
   libsndfile 1.2.2         GNU LGPL 2.1 or later         https://github.com/libsndfile/libsndfile
-  libFLAC 1.4.2            BSD 3-clause (Xiph.Org)       https://github.com/xiph/flac
-  libogg                   BSD 3-clause (Xiph.Org)       https://github.com/xiph/ogg
-  libvorbis (2020-07-04)   BSD 3-clause (Xiph.Org)       https://github.com/xiph/vorbis
-  libopus 1.4              BSD 3-clause (Xiph.Org and others; see its COPYING for the patent notes)  https://github.com/xiph/opus
+  libFLAC 1.4.2            BSD 3-clause                  https://github.com/xiph/flac
+  libogg                   BSD 3-clause                  https://github.com/xiph/ogg
+  libvorbis (2020-07-04)   BSD 3-clause                  https://github.com/xiph/vorbis
+  libopus 1.4              BSD 3-clause, with patent licences   https://github.com/xiph/opus
   mpg123                   GNU LGPL 2.1                  https://www.mpg123.de
-  LAME (libmp3lame)        GNU LGPL 2 or later           https://lame.sourceforge.io
+  LAME (libmp3lame)        GNU LGPL (Library GPL) 2      https://lame.sourceforge.io
 
-The LGPL text is in LGPL-2.1.txt. The full copyright lines of each BSD-licensed library are in its COPYING file at the
-source link above; the licence terms are these:
+Each library's own licence file is in the codecs folder next to this file, unchanged, as its project publishes it:
 
----------------------------------------------------------------------------------------------------------------------
-BSD 3-clause licence (libFLAC, libogg, libvorbis, libopus)
-Copyright (c) the Xiph.Org Foundation and the other contributors named in each project's COPYING file.
+  codecs/flac-COPYING.Xiph   libFLAC, from the 1.4.2 release
+  codecs/ogg-COPYING         libogg, from the project's current COPYING
+  codecs/vorbis-COPYING      libvorbis, from the project's current COPYING
+  codecs/opus-COPYING        libopus, from the 1.4 release
+  codecs/mpg123-COPYING      mpg123
+  codecs/lame-COPYING        LAME (the GNU Library General Public License, version 2)
+  codecs/lame-README         LAME's README, which names its authors and licence
 
-Redistribution and use in source and binary forms, with or without modification, are permitted provided that the
-following conditions are met:
+Copyright lines:
 
-- Redistributions of source code must retain the above copyright notice, this list of conditions and the following
-  disclaimer.
-- Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following
-  disclaimer in the documentation and/or other materials provided with the distribution.
-- Neither the name of the Xiph.org Foundation nor the names of its contributors may be used to endorse or promote
-  products derived from this software without specific prior written permission.
+  libFLAC     Copyright (C) 2000-2009 Josh Coalson
+              Copyright (C) 2011-2022 Xiph.Org Foundation
+  libogg      Copyright (c) 2002, Xiph.org Foundation
+  libvorbis   Copyright (c) 2002-2020 Xiph.org Foundation
+  libopus     Copyright 2001-2011 Xiph.Org, Skype Limited, Octasic, Jean-Marc Valin, Timothy B. Terriberry, CSIRO,
+              Gregory Maxwell, Mark Borgerding, Erik de Castro Lopo
+  mpg123      Copyright (c) 1995-2020 by Michael Hipp and others, free software under the terms of the LGPL v2.1
+  LAME        Originally developed by Mike Cheng, later developed by Mark Taylor; maintained by The LAME Project.
+              GNU Library General Public License, version 2
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
-INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE FOUNDATION OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS
-OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
-STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
-IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+libFLAC, libogg and libvorbis use the same BSD 3-clause terms, naming the Xiph.Org Foundation in the third clause.
+libopus uses BSD 3-clause terms whose third clause names the Internet Society, IETF and IETF Trust instead; its full
+text, and the royalty-free patent licences that Opus is subject to, are in codecs/opus-COPYING.
+
+The text of the GNU LGPL 2.1 (libsndfile, mpg123) is in the LGPL 2.1 licence file next to this one; the Library GPL 2
+(LAME) is in codecs/lame-COPYING.

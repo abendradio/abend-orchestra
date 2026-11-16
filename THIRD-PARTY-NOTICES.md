@@ -8,7 +8,7 @@ Abend Orchestra runs FluidSynth and ffmpeg as separate programs, and reads sound
 |---|---|---|
 | **FluidSynth** (https://www.fluidsynth.org) | GNU LGPL 2.1. Source: https://github.com/FluidSynth/fluidsynth | Windows: included in the release download, with its licence. Mac/Linux: install it with your package manager |
 | **libsndfile** 1.2.2 (sndfile.dll, part of FluidSynth's Windows build) | GNU LGPL 2.1. Source: https://github.com/libsndfile/libsndfile | Windows: included with FluidSynth |
-| **Codecs inside sndfile.dll**: libFLAC 1.4.2, libogg, libvorbis, libopus 1.4 (BSD 3-clause, Xiph.Org), mpg123 (LGPL 2.1), LAME (LGPL 2 or later) | see `licenses/sndfile-codecs.txt` | Windows: included with FluidSynth |
+| **Codecs inside sndfile.dll**: libFLAC 1.4.2, libogg, libvorbis, libopus 1.4 (BSD 3-clause), mpg123 (LGPL 2.1), LAME (Library GPL 2) | see `licenses/sndfile-codecs.txt`; each library's own licence file is in `licenses/codecs/` | Windows: included with FluidSynth |
 | **SDL3** (SDL3.dll, part of FluidSynth's Windows build) | zlib licence. Source: https://github.com/libsdl-org/SDL | Windows: included with FluidSynth |
 | **ffmpeg** (https://ffmpeg.org) | LGPL/GPL, depending on the build | Not included. Install it yourself (winget, Homebrew, apt); on Windows the setup script can run winget for you (`-InstallFfmpeg`) |
 
