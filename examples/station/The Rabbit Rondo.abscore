@@ -1,0 +1,1255 @@
+# The Rabbit Rondo, by Livia Spirelli. Copyright (c) 2026 Abend Radio (abendradio.com).
+# Licence: CC BY-NC-ND 4.0 (https://creativecommons.org/licenses/by-nc-nd/4.0/). See examples/station/LICENSE.
+
+title: The Rabbit Rondo
+composer: Livia Spirelli
+tempo: 176
+meter: 6/8
+key: A
+rit @196-198: 140
+fermata @198.1: 2
+
+# A jig in A major on one refrain. The form is the Fibonacci word A B A A B A B A A B A A B: 8 refrains and
+# 5 episodes (both Fibonacci numbers). Episode 3 is Fibonacci's rabbits: the refrain's head in canon, the voices piling
+# in faster and faster (gaps of 5, 3, 2, 1, 1 bars). The climax lifts to B major; the one soft episode is the refrain
+# upside down (its mirror around B keeps the same seven notes and turns A major into F-sharp minor).
+# Livia wrote it with a small generator program, which is why most parts are spelled out note by note.
+
+track Flutes | instrument: flute | pan: -20 | volume: 88
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | \mf a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 a5/4 e5/8 | fis5/4 d6/8 a5/4 fis5/8 |
+gis5/8 a5/8 b5/8 b5/4. | a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 cis6/4 e6/8 | d6/4 b5/8 gis5/4 b5/8 |
+b5/8 a5/8 gis5/8 e5/4. | a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 a5/4 e5/8 | fis5/4 d6/8 a5/4 fis5/8 |
+gis5/8 a5/8 b5/8 b5/4. | a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 cis6/4 e6/8 | d6/4 b5/8 gis5/4 b5/8 |
+cis6/8 b5/8 gis5/8 a5/4. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | \mf a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 a5/4 e5/8 | fis5/4 d6/8 a5/4 fis5/8 |
+gis5/8 a5/8 b5/8 b5/4. | a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 cis6/4 e6/8 | d6/4 b5/8 gis5/4 b5/8 |
+b5/8 a5/8 gis5/8 e5/4. | a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 a5/4 e5/8 | fis5/4 d6/8 a5/4 fis5/8 |
+gis5/8 a5/8 b5/8 b5/4. | \mf \> a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 cis6/4 e6/8 | d6/4 b5/8 gis5/4 b5/8 |
+cis6/8 b5/8 gis5/8 a5/4. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | \mf d5/4 a4/8 d5/4 e5/8 |
+fis5/4 e5/8 d5/4 a4/8 | b4/4 g5/8 d5/4 b4/8 |
+cis5/8 d5/8 e5/8 e5/4. | d5/4 b4/8 fis5/4 d5/8 |
+e5/4 gis5/8 b5/4 gis5/8 | b5/8 gis5/8 fis5/8 e5/4. |
+d5/4 b4/8 gis4/4 b4/8 | \mf a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 a5/4 e5/8 | fis5/4 d6/8 a5/4 fis5/8 |
+gis5/8 a5/8 b5/8 b5/4. | a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 cis6/4 e6/8 | d6/4 b5/8 gis5/4 b5/8 |
+b5/8 a5/8 gis5/8 e5/4. | a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 a5/4 e5/8 | fis5/4 d6/8 a5/4 fis5/8 |
+gis5/8 a5/8 b5/8 b5/4. | a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 cis6/4 e6/8 | d6/4 b5/8 gis5/4 b5/8 |
+cis6/8 b5/8 gis5/8 a5/4. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | \mp \< e6/4 b5/8 e6/4 fis6/8 |
+gis6/4 fis6/8 e6/4 b5/8 | e6/4 b5/8 e6/4 fis6/8 |
+gis6/4 fis6/8 e6/4 b5/8 | \mf a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 a5/4 e5/8 | fis5/4 d6/8 a5/4 fis5/8 |
+gis5/8 a5/8 b5/8 b5/4. | a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 cis6/4 e6/8 | d6/4 b5/8 gis5/4 b5/8 |
+b5/8 a5/8 gis5/8 e5/4. | a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 a5/4 e5/8 | fis5/4 d6/8 a5/4 fis5/8 |
+gis5/8 a5/8 b5/8 b5/4. | \mf \< a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 cis6/4 e6/8 | d6/4 b5/8 gis5/4 b5/8 |
+cis6/8 b5/8 ais5/8 fis5/4. | \ff b4/4 fis4/8 b4/4 cis5/8 |
+dis5/4 cis5/8 b4/4 fis4/8 | gis4/4 e5/8 b4/4 gis4/8 |
+ais4/8 b4/8 cis5/8 cis5/4. | b4/4 fis4/8 b4/4 cis5/8 |
+dis5/4 cis5/8 dis5/4 fis5/8 | e5/4 cis5/8 ais4/4 cis5/8 |
+cis5/8 b4/8 ais4/8 fis4/4. | b4/4 fis4/8 b4/4 cis5/8 |
+dis5/4 cis5/8 b4/4 fis4/8 | gis4/4 e5/8 b4/4 gis4/8 |
+ais4/8 b4/8 cis5/8 cis5/4. | \ff \> b4/4 fis4/8 b4/4 cis5/8 |
+dis5/4 cis5/8 dis5/4 fis5/8 | e5/4 cis5/8 ais4/4 cis5/8 |
+dis5/8 cis5/8 ais4/8 b4/4. | \p cis5/4 fis5/8 cis5/4 b4/8 |
+a4/4 b4/8 cis5/4 fis5/8 | e5/4 gis4/8 cis5/4 e5/8 |
+d5/8 d5/8 b4/8 b4/4. | cis5/4 fis5/8 cis5/4 b4/8 |
+a4/4 b4/8 a4/4 fis4/8 | gis4/4 b4/8 d5/4 b4/8 |
+b4/8 d5/8 d5/8 fis5/4. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | \f a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 a5/4 e5/8 | fis5/4 d6/8 a5/4 fis5/8 |
+gis5/8 a5/8 b5/8 b5/4. | a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 cis6/4 e6/8 | d6/4 b5/8 gis5/4 b5/8 |
+b5/8 a5/8 gis5/8 e5/4. | a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 a5/4 e5/8 | fis5/4 d6/8 a5/4 fis5/8 |
+gis5/8 a5/8 b5/8 b5/4. | \f \> a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 cis6/4 e6/8 | d6/4 b5/8 gis5/4 b5/8 |
+cis6/8 b5/8 gis5/8 a5/4. | \mf a5/4 e5/8 a5/4 b5/8 |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | a5/4 e5/8 a5/4 b5/8 |
+r/2. | r/2. |
+r/2. | r/2. |
+\mf \< gis6/4 fis6/8 e6/4 b5/8 | \f a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 cis6/4 e6/8 | d6/4 b5/8 gis5/4 b5/8 |
+cis6/8 b5/8 gis5/8 a5/4. | \mf <e5 a5>/2. |
+
+track Oboes | instrument: oboe | pan: -5 | volume: 80
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | \mf fis5/8 gis5/8 a5/8 cis6/4 a5/8 |
+b5/8 a5/8 gis5/8 e5/4. | fis5/8 a5/8 fis5/8 d6/4 a5/8 |
+b5/4. gis5/8 fis5/8 e5/8 | fis5/8 gis5/8 a5/8 cis6/4 e6/8 |
+d6/8 cis6/8 b5/8 a5/4. | b5/8 cis6/8 d6/8 cis6/4 a5/8 |
+gis5/4. e5/4. | \mf a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 a5/4 e5/8 | fis5/4 d6/8 a5/4 fis5/8 |
+gis5/8 a5/8 b5/8 b5/4. | \mf \< a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 cis6/4 e6/8 | d6/4 b5/8 gis5/4 b5/8 |
+cis6/8 b5/8 gis5/8 a5/4. | \mf a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 a5/4 e5/8 | fis5/4 d6/8 a5/4 fis5/8 |
+gis5/8 a5/8 b5/8 b5/4. | a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 cis6/4 e6/8 | d6/4 b5/8 gis5/4 b5/8 |
+b5/8 a5/8 gis5/8 e5/4. | a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 a5/4 e5/8 | fis5/4 d6/8 a5/4 fis5/8 |
+gis5/8 a5/8 b5/8 b5/4. | \mf \> a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 cis6/4 e6/8 | d6/4 b5/8 gis5/4 b5/8 |
+cis6/8 b5/8 gis5/8 a5/4. | r/2. |
+r/2. | \mf a5/4 fis5/8 d6/4 a5/8 |
+b5/8 a5/8 g5/8 fis5/4. | r/2. |
+r/2. | b5/4 g5/8 e5/4 g5/8 |
+fis5/8 g5/8 a5/8 e5/4. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | \mp \< gis5/4 fis5/8 e5/4 b4/8 |
+e5/4 b4/8 e5/4 fis5/8 | gis5/4 fis5/8 e5/4 b4/8 |
+e5/4 b4/8 e5/4 fis5/8 | \mf a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 a5/4 e5/8 | fis5/4 d6/8 a5/4 fis5/8 |
+gis5/8 a5/8 b5/8 b5/4. | a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 cis6/4 e6/8 | d6/4 b5/8 gis5/4 b5/8 |
+b5/8 a5/8 gis5/8 e5/4. | a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 a5/4 e5/8 | fis5/4 d6/8 a5/4 fis5/8 |
+gis5/8 a5/8 b5/8 b5/4. | \mf \< a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 cis6/4 e6/8 | d6/4 b5/8 gis5/4 b5/8 |
+cis6/8 b5/8 ais5/8 fis5/4. | \ff b4/4 fis4/8 b4/4 cis5/8 |
+dis5/4 cis5/8 b4/4 fis4/8 | gis4/4 e5/8 b4/4 gis4/8 |
+ais4/8 b4/8 cis5/8 cis5/4. | b4/4 fis4/8 b4/4 cis5/8 |
+dis5/4 cis5/8 dis5/4 fis5/8 | e5/4 cis5/8 ais4/4 cis5/8 |
+cis5/8 b4/8 ais4/8 fis4/4. | b4/4 fis4/8 b4/4 cis5/8 |
+dis5/4 cis5/8 b4/4 fis4/8 | gis4/4 e5/8 b4/4 gis4/8 |
+ais4/8 b4/8 cis5/8 cis5/4. | \ff \> b4/4 fis4/8 b4/4 cis5/8 |
+dis5/4 cis5/8 dis5/4 fis5/8 | e5/4 cis5/8 ais4/4 cis5/8 |
+dis5/8 cis5/8 ais4/8 b4/4. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | \f a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 a5/4 e5/8 | fis5/4 d6/8 a5/4 fis5/8 |
+gis5/8 a5/8 b5/8 b5/4. | a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 cis6/4 e6/8 | d6/4 b5/8 gis5/4 b5/8 |
+b5/8 a5/8 gis5/8 e5/4. | a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 a5/4 e5/8 | fis5/4 d6/8 a5/4 fis5/8 |
+gis5/8 a5/8 b5/8 b5/4. | \f \> a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 cis6/4 e6/8 | d6/4 b5/8 gis5/4 b5/8 |
+cis6/8 b5/8 gis5/8 a5/4. | r/2. |
+r/2. | r/2. |
+\mf a5/4 gis5/8 fis5/4 cis5/8 | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+\mf \< gis5/4 fis5/8 e5/4 b4/8 | r/2. |
+r/2. | \f a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 cis6/4 e6/8 | d6/4 b5/8 gis5/4 b5/8 |
+cis6/8 b5/8 gis5/8 a5/4. | \mf cis6/2. |
+
+track Clarinets | instrument: clarinet | pan: 20 | volume: 82
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | \mp \< fis4/8 gis4/8 a4/8 cis5/4 a4/8 |
+b4/8 a4/8 gis4/8 e4/4. | fis4/8 a4/8 fis4/8 d5/4 a4/8 |
+b4/4. gis4/8 fis4/8 e4/8 | fis4/8 gis4/8 a4/8 cis5/4 e5/8 |
+d5/8 cis5/8 b4/8 a4/4. | b4/8 cis5/8 d5/8 cis5/4 a4/8 |
+gis4/4. e4/4. | \mf fis4/8 gis4/8 a4/8 cis5/4 a4/8 |
+b4/8 a4/8 gis4/8 e4/4. | fis4/8 a4/8 fis4/8 d5/4 a4/8 |
+b4/4. gis4/8 fis4/8 e4/8 | fis4/8 gis4/8 a4/8 cis5/4 e5/8 |
+d5/8 cis5/8 b4/8 a4/4. | b4/8 cis5/8 d5/8 cis5/4 a4/8 |
+gis4/4. e4/4. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | \mf a4/4 e4/8 a4/4 b4/8 |
+cis5/4 b4/8 a4/4 e4/8 | fis4/4 d5/8 a4/4 fis4/8 |
+gis4/8 a4/8 b4/2 | a4/4 e4/8 a4/4 b4/8 |
+cis5/4 b4/8 cis5/4 e5/8 | d5/4 b4/8 gis4/4 b4/8 |
+b4/8 a4/8 gis4/8 e4/4. | a4/4 e4/8 a4/4 b4/8 |
+cis5/4 b4/8 a4/4 e4/8 | fis4/4 d5/8 a4/4 fis4/8 |
+gis4/8 a4/8 b4/2 | \mf \> a4/4 e4/8 a4/4 b4/8 |
+cis5/4 b4/8 cis5/4 e5/8 | d5/4 b4/8 gis4/4 b4/8 |
+cis5/8 b4/8 gis4/8 a4/4. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | \mf cis5/4 fis5/8 cis5/4 b4/8 |
+a4/4 b4/8 cis5/4 fis5/8 | e5/4 a4/8 d5/4 e5/8 |
+d5/8 cis5/8 b4/2 | cis5/4 fis5/8 cis5/4 b4/8 |
+a4/4 b4/8 a4/4 fis4/8 | gis4/4 b4/8 d5/4 b4/8 |
+b4/8 cis5/8 d5/8 fis5/4. | cis5/4 fis5/8 cis5/4 b4/8 |
+a4/4 b4/8 cis5/4 fis5/8 | e5/4 a4/8 d5/4 e5/8 |
+d5/8 cis5/8 b4/2 | cis5/4 fis5/8 cis5/4 b4/8 |
+a4/4 b4/8 a4/4 fis4/8 | gis4/4 b4/8 d5/4 b4/8 |
+gis4/8 b4/8 d5/8 cis5/4. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | \mp \< b4/4 fis4/8 b4/4 cis5/8 |
+d5/4 cis5/8 b4/4 fis4/8 | e4/4 b3/8 e4/4 fis4/8 |
+gis4/4 fis4/8 e4/4 b3/8 | e4/4 b3/8 e4/4 fis4/8 |
+gis4/4 fis4/8 e4/4 b3/8 | \mf a4/4 e4/8 a4/4 b4/8 |
+cis5/4 b4/8 a4/4 e4/8 | fis4/4 d5/8 a4/4 fis4/8 |
+gis4/8 a4/8 b4/2 | a4/4 e4/8 a4/4 b4/8 |
+cis5/4 b4/8 cis5/4 e5/8 | d5/4 b4/8 gis4/4 b4/8 |
+b4/8 a4/8 gis4/8 e4/4. | a4/4 e4/8 a4/4 b4/8 |
+cis5/4 b4/8 a4/4 e4/8 | fis4/4 d5/8 a4/4 fis4/8 |
+gis4/8 a4/8 b4/2 | \mf \< a4/4 e4/8 a4/4 b4/8 |
+cis5/4 b4/8 cis5/4 e5/8 | d5/4 b4/8 gis4/4 b4/8 |
+cis5/8 b4/8 ais4/8 fis4/4. | \ff b4/4 fis4/8 b4/4 cis5/8 |
+dis5/4 cis5/8 b4/4 fis4/8 | gis4/4 e5/8 b4/4 gis4/8 |
+ais4/8 b4/8 cis5/2 | b4/4 fis4/8 b4/4 cis5/8 |
+dis5/4 cis5/8 dis5/4 fis5/8 | e5/4 cis5/8 ais4/4 cis5/8 |
+cis5/8 b4/8 ais4/8 fis4/4. | b4/4 fis4/8 b4/4 cis5/8 |
+dis5/4 cis5/8 b4/4 fis4/8 | gis4/4 e5/8 b4/4 gis4/8 |
+ais4/8 b4/8 cis5/2 | \ff \> b4/4 fis4/8 b4/4 cis5/8 |
+dis5/4 cis5/8 dis5/4 fis5/8 | e5/4 cis5/8 ais4/4 cis5/8 |
+dis5/8 cis5/8 ais4/8 b4/4. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | \pp <a3 fis4>/2. |
+<a3 fis4>/2. | <gis3 e4>/2. |
+<b3 d4>/2. | \pp \< <a3 cis4>/2. |
+<a3 cis4>/2. | <gis3 b3>/4. <b3 d4>/4. |
+<b3 d4>/4. <a3 cis4>/4. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | \f cis5/4 fis5/8 cis5/4 b4/8 |
+a4/4 b4/8 cis5/4 fis5/8 | e5/4 a4/8 d5/4 e5/8 |
+d5/8 cis5/8 b4/2 | cis5/4 fis5/8 cis5/4 b4/8 |
+a4/4 b4/8 a4/4 fis4/8 | gis4/4 b4/8 d5/4 b4/8 |
+b4/8 cis5/8 d5/8 fis5/4. | cis5/4 fis5/8 cis5/4 b4/8 |
+a4/4 b4/8 cis5/4 fis5/8 | e5/4 a4/8 d5/4 e5/8 |
+d5/8 cis5/8 b4/2 | \f \> cis5/4 fis5/8 cis5/4 b4/8 |
+a4/4 b4/8 a4/4 fis4/8 | gis4/4 b4/8 d5/4 b4/8 |
+gis4/8 b4/8 d5/8 cis5/4. | r/2. |
+\mf fis5/4 e5/8 d5/4 a4/8 | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+fis5/4 e5/8 d5/4 a4/8 | r/2. |
+r/2. | r/2. |
+r/2. | \f a4/4 e4/8 a4/4 b4/8 |
+cis5/4 b4/8 cis5/4 e5/8 | d5/4 b4/8 gis4/4 b4/8 |
+cis5/8 b4/8 gis4/8 a4/4. | \mf <cis4 e4>/2. |
+
+track Horns | instrument: horn | pan: 10 | volume: 84
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | \mp <a3 e4>/4. r/4. |
+<a3 e4>/4. r/4. | <a3 d4>/4. r/4. |
+<b3 e4>/4. r/4. | \mp \< <a3 e4>/4. r/4. |
+<a3 fis4>/4. r/4. | <b3 fis4>/4. <b3 e4>/4. |
+<b3 e4>/4. <a3 e4>/4. | \mp <a3 e4>/4. r/4. |
+<a3 e4>/2. | <a3 d4>/2. |
+<b3 e4>/2. | <a3 e4>/2. |
+<a3 fis4>/2. | <b3 fis4>/4. <b3 e4>/4. |
+<b3 e4>/2. | <a3 e4>/2. |
+<a3 e4>/2. | <a3 d4>/2. |
+<b3 e4>/2. | \mp \> <a3 e4>/2. |
+<a3 fis4>/2. | <b3 fis4>/4. <b3 e4>/4. |
+<b3 e4>/4. <a3 e4>/4. | \mf a3/4 d4/8 fis4/4 d4/8 |
+a4/4. fis4/4. | r/2. |
+r/2. | b3/4 d4/8 g4/4 d4/8 |
+b4/4. g4/4. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | \mp <a3 e4>/4. r/4. |
+<a3 e4>/4. r/4. | <a3 d4>/4. r/4. |
+<b3 e4>/4. r/4. | <a3 e4>/4. r/4. |
+<a3 fis4>/4. r/4. | <b3 fis4>/4. <b3 e4>/4. |
+<b3 e4>/4. r/4. | <a3 e4>/4. r/4. |
+<a3 e4>/4. r/4. | <a3 d4>/4. r/4. |
+<b3 e4>/4. r/4. | <a3 e4>/4. r/4. |
+<a3 fis4>/4. r/4. | <b3 fis4>/4. <b3 e4>/4. |
+<b3 e4>/4. <a3 e4>/4. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | \mp \< d4/2 a3/4 |
+d4/2 e4/4 | d4/2 cis4/4 |
+b3/2 fis3/4 | e4/2 b3/4 |
+e4/2 fis4/4 | gis4/2 fis4/4 |
+e4/2 b3/4 | \mf cis4/4 fis4/8 cis4/4 b3/8 |
+a3/4 b3/8 cis4/4 fis4/8 | e4/4 a3/8 d4/4 e4/8 |
+d4/8 cis4/8 b3/2 | cis4/4 fis4/8 cis4/4 b3/8 |
+a3/4 b3/8 a3/4 fis3/8 | gis3/4 b3/8 d4/4 b3/8 |
+b3/8 cis4/8 d4/8 fis4/4. | cis4/4 fis4/8 cis4/4 b3/8 |
+a3/4 b3/8 cis4/4 fis4/8 | e4/4 a3/8 d4/4 e4/8 |
+d4/8 cis4/8 b3/2 | \mf \< cis4/4 fis4/8 cis4/4 b3/8 |
+a3/4 b3/8 a3/4 fis3/8 | gis3/4 b3/8 d4/4 b3/8 |
+gis3/8 b3/8 cis4/8 e4/4. | \ff dis4/4 gis4/8 dis4/4 cis4/8 |
+b3/4 cis4/8 dis4/4 gis4/8 | fis4/4 b3/8 e4/4 fis4/8 |
+e4/8 dis4/8 cis4/2 | dis4/4 gis4/8 dis4/4 cis4/8 |
+b3/4 cis4/8 b3/4 gis3/8 | ais3/4 cis4/8 e4/4 cis4/8 |
+cis4/8 dis4/8 e4/8 gis4/4. | dis4/4 gis4/8 dis4/4 cis4/8 |
+b3/4 cis4/8 dis4/4 gis4/8 | fis4/4 b3/8 e4/4 fis4/8 |
+e4/8 dis4/8 cis4/2 | \ff \> dis4/4 gis4/8 dis4/4 cis4/8 |
+b3/4 cis4/8 b3/4 gis3/8 | ais3/4 cis4/8 e4/4 cis4/8 |
+ais3/8 cis4/8 e4/8 dis4/4. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | \mf <a3 e4>/2. |
+<a3 e4>/2. | <a3 d4>/2. |
+<b3 e4>/2. | <a3 e4>/2. |
+<a3 fis4>/2. | <b3 fis4>/4. <b3 e4>/4. |
+<b3 e4>/2. | <a3 e4>/2. |
+<a3 e4>/2. | <a3 d4>/2. |
+<b3 e4>/2. | \mf \> <a3 e4>/2. |
+<a3 fis4>/2. | <b3 fis4>/4. <b3 e4>/4. |
+<b3 e4>/4. <a3 e4>/4. | r/2. |
+r/2. | r/2. |
+r/2. | \mf d4/4 a3/8 d4/4 e4/8 |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | \mf \< a3/4 e3/8 a3/4 b3/8 |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | \mf <a3 cis4 e4>/2. |
+
+track Glockenspiel | instrument: glockenspiel | pan: -30 | volume: 60
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | \mf a6/4 e6/8 a6/4 b6/8 |
+cis7/4 b6/8 a6/4 e6/8 | fis6/4 d7/8 a6/4 fis6/8 |
+gis6/8 a6/8 b6/8 b6/4. | a6/4 e6/8 a6/4 b6/8 |
+cis7/4 b6/8 cis7/4 e7/8 | d7/4 b6/8 gis6/4 b6/8 |
+cis7/8 b6/8 gis6/8 a6/4. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | \ff b5/4 fis5/8 b5/4 cis6/8 |
+dis6/4 cis6/8 b5/4 fis5/8 | gis5/4 e6/8 b5/4 gis5/8 |
+ais5/8 b5/8 cis6/8 cis6/4. | b5/4 fis5/8 b5/4 cis6/8 |
+dis6/4 cis6/8 dis6/4 fis6/8 | e6/4 cis6/8 ais5/4 cis6/8 |
+cis6/8 b5/8 ais5/8 fis5/4. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | \mf a6/2. |
+
+track Timpani | instrument: timpani | volume: 76
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | \mf a2/4 r/8 e2/4 r/8 |
+r/2. | d2/4 r/8 a2/4 r/8 |
+r/2. | a2/4 r/8 e2/4 r/8 |
+r/2. | b2/4 r/8 fis2/4 r/8 |
+r/2. | a2/4 r/8 e2/4 r/8 |
+r/2. | d2/4 r/8 a2/4 r/8 |
+r/2. | a2/4 r/8 e2/4 r/8 |
+r/2. | b2/4 r/8 fis2/4 r/8 |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | \p \< [ e2/32 ]*24 |
+[ e2/32 ]*24 | \mf a2/4 r/8 e2/4 r/8 |
+r/2. | d2/4 r/8 a2/4 r/8 |
+r/2. | a2/4 r/8 e2/4 r/8 |
+r/2. | b2/4 r/8 fis2/4 r/8 |
+r/2. | a2/4 r/8 e2/4 r/8 |
+r/2. | d2/4 r/8 a2/4 r/8 |
+r/2. | a2/4 r/8 e2/4 r/8 |
+r/2. | \mf \< [ fis2/32 ]*24 |
+[ fis2/32 ]*24 | \ff b2/4 r/8 fis2/4 r/8 |
+r/2. | e2/4 r/8 b2/4 r/8 |
+r/2. | b2/4 r/8 fis2/4 r/8 |
+r/2. | r/2. |
+r/2. | b2/4 r/8 fis2/4 r/8 |
+r/2. | e2/4 r/8 b2/4 r/8 |
+r/2. | b2/4 r/8 fis2/4 r/8 |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | \f a2/4 r/8 e2/4 r/8 |
+r/2. | d2/4 r/8 a2/4 r/8 |
+r/2. | a2/4 r/8 e2/4 r/8 |
+r/2. | b2/4 r/8 fis2/4 r/8 |
+r/2. | a2/4 r/8 e2/4 r/8 |
+r/2. | d2/4 r/8 a2/4 r/8 |
+r/2. | a2/4 r/8 e2/4 r/8 |
+r/2. | b2/4 r/8 fis2/4 r/8 |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | \f a2/4 r/8 e2/4 r/8 |
+r/2. | b2/4 r/8 fis2/4 r/8 |
+\mp \< [ e2/32 ]*12 [ a2/32 ]*12 | \mf a2/2. |
+
+track Harp | instrument: harp | pan: -50 | volume: 80
+\mp a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 | a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 |
+d3/8 a3/8 d4/8 fis4/8 a4/8 fis4/8 | e2/8 b2/8 e3/8 gis3/8 b3/8 gis3/8 |
+e2/8 b2/8 e3/8 gis3/8 b3/8 gis3/8 | \mp a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 |
+a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 | d3/8 a3/8 d4/8 fis4/8 a4/8 fis4/8 |
+e2/8 b2/8 e3/8 gis3/8 b3/8 gis3/8 | a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 |
+fis2/8 cis3/8 fis3/8 a3/8 cis4/8 a3/8 | b2/8 fis3/8 b3/8 gis3/8 b3/8 gis3/8 |
+e2/8 b2/8 e3/8 gis3/8 b3/8 gis3/8 | a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 |
+a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 | d3/8 a3/8 d4/8 fis4/8 a4/8 fis4/8 |
+e2/8 b2/8 e3/8 gis3/8 b3/8 gis3/8 | a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 |
+fis2/8 cis3/8 fis3/8 a3/8 cis4/8 a3/8 | b2/8 fis3/8 b3/8 gis3/8 b3/8 gis3/8 |
+e2/8 b2/8 e3/8 cis4/8 e4/8 cis4/8 | \mp fis2/8 cis3/8 fis3/8 a3/8 cis4/8 a3/8 |
+e2/8 b2/8 e3/8 gis3/8 b3/8 gis3/8 | d3/8 a3/8 d4/8 fis4/8 a4/8 fis4/8 |
+e2/8 b2/8 e3/8 gis3/8 b3/8 gis3/8 | fis2/8 cis3/8 fis3/8 a3/8 cis4/8 a3/8 |
+b2/8 fis3/8 b3/8 d4/8 fis4/8 d4/8 | b2/8 fis3/8 b3/8 cis4/8 e4/8 cis4/8 |
+e2/8 b2/8 e3/8 gis3/8 b3/8 gis3/8 | \mp fis2/8 cis3/8 fis3/8 a3/8 cis4/8 a3/8 |
+e2/8 b2/8 e3/8 gis3/8 b3/8 gis3/8 | d3/8 a3/8 d4/8 fis4/8 a4/8 fis4/8 |
+e2/8 b2/8 e3/8 gis3/8 b3/8 gis3/8 | fis2/8 cis3/8 fis3/8 a3/8 cis4/8 a3/8 |
+b2/8 fis3/8 b3/8 d4/8 fis4/8 d4/8 | b2/8 fis3/8 b3/8 cis4/8 e4/8 cis4/8 |
+e2/8 b2/8 e3/8 gis3/8 b3/8 gis3/8 | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | \mp a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 |
+a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 | d3/8 a3/8 d4/8 fis4/8 a4/8 fis4/8 |
+e2/8 b2/8 e3/8 gis3/8 b3/8 gis3/8 | a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 |
+fis2/8 cis3/8 fis3/8 a3/8 cis4/8 a3/8 | b2/8 fis3/8 b3/8 gis3/8 b3/8 gis3/8 |
+e2/8 b2/8 e3/8 gis3/8 b3/8 gis3/8 | a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 |
+a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 | d3/8 a3/8 d4/8 fis4/8 a4/8 fis4/8 |
+e2/8 b2/8 e3/8 gis3/8 b3/8 gis3/8 | \mp \> a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 |
+fis2/8 cis3/8 fis3/8 a3/8 cis4/8 a3/8 | b2/8 fis3/8 b3/8 gis3/8 b3/8 gis3/8 |
+e2/8 b2/8 e3/8 cis4/8 e4/8 cis4/8 | \mp d3/8 a3/8 d4/8 fis4/8 a4/8 fis4/8 |
+d3/8 a3/8 d4/8 fis4/8 a4/8 fis4/8 | d3/8 a3/8 d4/8 fis4/8 a4/8 fis4/8 |
+g2/8 d3/8 g3/8 fis4/8 a4/8 fis4/8 | g2/8 d3/8 g3/8 b3/8 d4/8 b3/8 |
+g2/8 d3/8 g3/8 b3/8 d4/8 b3/8 | e2/8 b2/8 e3/8 g3/8 b3/8 g3/8 |
+a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 | d3/8 a3/8 d4/8 fis4/8 a4/8 fis4/8 |
+d3/8 a3/8 d4/8 fis4/8 a4/8 fis4/8 | g2/8 d3/8 g3/8 b3/8 d4/8 b3/8 |
+a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 | b2/8 fis3/8 b3/8 d4/8 fis4/8 d4/8 |
+e2/8 b2/8 e3/8 gis3/8 b3/8 gis3/8 | e2/8 b2/8 e3/8 gis3/8 b3/8 gis3/8 |
+e2/8 b2/8 d3/8 e3/8 gis3/8 e3/8 | \mp a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 |
+a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 | d3/8 a3/8 d4/8 fis4/8 a4/8 fis4/8 |
+e2/8 b2/8 e3/8 gis3/8 b3/8 gis3/8 | a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 |
+fis2/8 cis3/8 fis3/8 a3/8 cis4/8 a3/8 | b2/8 fis3/8 b3/8 gis3/8 b3/8 gis3/8 |
+e2/8 b2/8 e3/8 gis3/8 b3/8 gis3/8 | a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 |
+a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 | d3/8 a3/8 d4/8 fis4/8 a4/8 fis4/8 |
+e2/8 b2/8 e3/8 gis3/8 b3/8 gis3/8 | a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 |
+fis2/8 cis3/8 fis3/8 a3/8 cis4/8 a3/8 | b2/8 fis3/8 b3/8 gis3/8 b3/8 gis3/8 |
+e2/8 b2/8 e3/8 cis4/8 e4/8 cis4/8 | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | \mp a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 |
+a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 | d3/8 a3/8 d4/8 fis4/8 a4/8 fis4/8 |
+e2/8 b2/8 e3/8 gis3/8 b3/8 gis3/8 | a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 |
+fis2/8 cis3/8 fis3/8 a3/8 cis4/8 a3/8 | b2/8 fis3/8 b3/8 gis3/8 b3/8 gis3/8 |
+e2/8 b2/8 e3/8 gis3/8 b3/8 gis3/8 | a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 |
+a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 | d3/8 a3/8 d4/8 fis4/8 a4/8 fis4/8 |
+e2/8 b2/8 e3/8 gis3/8 b3/8 gis3/8 | \mp \< a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 |
+fis2/8 cis3/8 fis3/8 a3/8 cis4/8 a3/8 | b2/8 fis3/8 b3/8 gis3/8 b3/8 gis3/8 |
+e2/8 b2/8 e3/8 fis3/8 ais3/8 fis3/8 | \f b2/8 fis3/8 b3/8 dis4/8 fis4/8 dis4/8 |
+b2/8 fis3/8 b3/8 dis4/8 fis4/8 dis4/8 | e2/8 b2/8 e3/8 gis3/8 b3/8 gis3/8 |
+fis2/8 cis3/8 fis3/8 ais3/8 cis4/8 ais3/8 | b2/8 fis3/8 b3/8 dis4/8 fis4/8 dis4/8 |
+gis2/8 dis3/8 gis3/8 b3/8 dis4/8 b3/8 | cis3/8 gis3/8 cis4/8 ais3/8 cis4/8 ais3/8 |
+fis2/8 cis3/8 fis3/8 ais3/8 cis4/8 ais3/8 | b2/8 fis3/8 b3/8 dis4/8 fis4/8 dis4/8 |
+b2/8 fis3/8 b3/8 dis4/8 fis4/8 dis4/8 | e2/8 b2/8 e3/8 gis3/8 b3/8 gis3/8 |
+fis2/8 cis3/8 fis3/8 ais3/8 cis4/8 ais3/8 | \f \> b2/8 fis3/8 b3/8 dis4/8 fis4/8 dis4/8 |
+gis2/8 dis3/8 gis3/8 b3/8 dis4/8 b3/8 | cis3/8 gis3/8 cis4/8 ais3/8 cis4/8 ais3/8 |
+fis2/8 cis3/8 fis3/8 dis4/8 fis4/8 dis4/8 | \pp fis2/8 cis3/8 fis3/8 a3/8 cis4/8 a3/8 |
+fis2/8 cis3/8 fis3/8 a3/8 cis4/8 a3/8 | cis3/8 gis3/8 cis4/8 e4/8 gis4/8 e4/8 |
+b2/8 fis3/8 b3/8 d4/8 fis4/8 d4/8 | fis2/8 cis3/8 fis3/8 a3/8 cis4/8 a3/8 |
+a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 | e2/8 b2/8 e3/8 d4/8 fis4/8 d4/8 |
+b2/8 fis3/8 b3/8 d4/8 fis4/8 d4/8 | fis2/8 cis3/8 fis3/8 a3/8 cis4/8 a3/8 |
+fis2/8 cis3/8 fis3/8 a3/8 cis4/8 a3/8 | cis3/8 gis3/8 cis4/8 e4/8 gis4/8 e4/8 |
+b2/8 fis3/8 b3/8 d4/8 fis4/8 d4/8 | \pp \< fis2/8 cis3/8 fis3/8 a3/8 cis4/8 a3/8 |
+a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 | e2/8 b2/8 e3/8 d4/8 fis4/8 d4/8 |
+b2/8 fis3/8 b3/8 a3/8 cis4/8 a3/8 | \mp a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 |
+a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 | d3/8 a3/8 d4/8 fis4/8 a4/8 fis4/8 |
+e2/8 b2/8 e3/8 gis3/8 b3/8 gis3/8 | \mp \< a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 |
+fis2/8 cis3/8 fis3/8 a3/8 cis4/8 a3/8 | b2/8 fis3/8 b3/8 gis3/8 b3/8 gis3/8 |
+e2/8 b2/8 e3/8 cis4/8 e4/8 cis4/8 | \mf a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 |
+a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 | d3/8 a3/8 d4/8 fis4/8 a4/8 fis4/8 |
+e2/8 b2/8 e3/8 gis3/8 b3/8 gis3/8 | a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 |
+fis2/8 cis3/8 fis3/8 a3/8 cis4/8 a3/8 | b2/8 fis3/8 b3/8 gis3/8 b3/8 gis3/8 |
+e2/8 b2/8 e3/8 gis3/8 b3/8 gis3/8 | a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 |
+a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 | d3/8 a3/8 d4/8 fis4/8 a4/8 fis4/8 |
+e2/8 b2/8 e3/8 gis3/8 b3/8 gis3/8 | \mf \> a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 |
+fis2/8 cis3/8 fis3/8 a3/8 cis4/8 a3/8 | b2/8 fis3/8 b3/8 gis3/8 b3/8 gis3/8 |
+e2/8 b2/8 e3/8 cis4/8 e4/8 cis4/8 | \mp a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 |
+d3/8 a3/8 d4/8 fis4/8 a4/8 fis4/8 | e2/8 b2/8 e3/8 gis3/8 b3/8 gis3/8 |
+fis2/8 cis3/8 fis3/8 a3/8 cis4/8 a3/8 | d3/8 a3/8 d4/8 fis4/8 a4/8 fis4/8 |
+e2/8 b2/8 e3/8 gis3/8 b3/8 gis3/8 | a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 |
+d3/8 a3/8 d4/8 fis4/8 a4/8 fis4/8 | \mp \< b2/8 fis3/8 b3/8 d4/8 fis4/8 d4/8 |
+e2/8 b2/8 e3/8 gis3/8 b3/8 gis3/8 | a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 |
+e2/8 b2/8 e3/8 gis3/8 b3/8 gis3/8 | \mf a2/8 e3/8 a3/8 cis4/8 e4/8 cis4/8 |
+fis2/8 cis3/8 fis3/8 a3/8 cis4/8 a3/8 | b2/8 fis3/8 b3/8 gis3/8 b3/8 gis3/8 |
+e2/8 b2/8 e3/8 cis4/8 e4/8 cis4/8 | \mf <a2 e3 a3 cis4 e4 a4>/2. |
+
+track Pizzicato | instrument: pizzicato strings | pan: 25 | volume: 78
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | \mp <a3 cis4 fis4>/4 <a3 cis4 fis4>/8 <a3 cis4 fis4>/4 <a3 cis4 fis4>/8 |
+<gis3 b3 e4>/4 <gis3 b3 e4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 | <a3 d4 fis4>/4 <a3 d4 fis4>/8 <a3 d4 fis4>/4 <a3 d4 fis4>/8 |
+<gis3 b3 e4>/4 <gis3 b3 e4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 | <a3 cis4 fis4>/4 <a3 cis4 fis4>/8 <a3 cis4 fis4>/4 <a3 cis4 fis4>/8 |
+<b3 d4 fis4>/4 <b3 d4 fis4>/8 <b3 d4 fis4>/4 <b3 d4 fis4>/8 | <b3 d4 fis4>/4 <b3 d4 fis4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 |
+<gis3 b3 e4>/4 <gis3 b3 e4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 | \mp <a3 cis4 fis4>/4 <a3 cis4 fis4>/8 <a3 cis4 fis4>/4 <a3 cis4 fis4>/8 |
+<gis3 b3 e4>/4 <gis3 b3 e4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 | <a3 d4 fis4>/4 <a3 d4 fis4>/8 <a3 d4 fis4>/4 <a3 d4 fis4>/8 |
+<gis3 b3 e4>/4 <gis3 b3 e4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 | <a3 cis4 fis4>/4 <a3 cis4 fis4>/8 <a3 cis4 fis4>/4 <a3 cis4 fis4>/8 |
+<b3 d4 fis4>/4 <b3 d4 fis4>/8 <b3 d4 fis4>/4 <b3 d4 fis4>/8 | <b3 d4 fis4>/4 <b3 d4 fis4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 |
+<gis3 b3 e4>/4 <gis3 b3 e4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 | \mp <a3 cis4 e4>/4 <a3 cis4 e4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 |
+<a3 cis4 e4>/4 <a3 cis4 e4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 | <a3 d4 fis4>/4 <a3 d4 fis4>/8 <a3 d4 fis4>/4 <a3 d4 fis4>/8 |
+<gis3 b3 e4>/4 <gis3 b3 e4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 | \mp \< <a3 cis4 e4>/4 <a3 cis4 e4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 |
+<a3 cis4 fis4>/4 <a3 cis4 fis4>/8 <a3 cis4 fis4>/4 <a3 cis4 fis4>/8 | <b3 d4 fis4>/4 <b3 d4 fis4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 |
+<gis3 b3 e4>/4 <gis3 b3 e4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 | \mp <a3 cis4 e4>/4 <a3 cis4 e4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 |
+<a3 cis4 e4>/4 <a3 cis4 e4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 | <a3 d4 fis4>/4 <a3 d4 fis4>/8 <a3 d4 fis4>/4 <a3 d4 fis4>/8 |
+<gis3 b3 e4>/4 <gis3 b3 e4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 | <a3 cis4 e4>/4 <a3 cis4 e4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 |
+<a3 cis4 fis4>/4 <a3 cis4 fis4>/8 <a3 cis4 fis4>/4 <a3 cis4 fis4>/8 | <b3 d4 fis4>/4 <b3 d4 fis4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 |
+<gis3 b3 e4>/4 <gis3 b3 e4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 | <a3 cis4 e4>/4 <a3 cis4 e4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 |
+<a3 cis4 e4>/4 <a3 cis4 e4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 | <a3 d4 fis4>/4 <a3 d4 fis4>/8 <a3 d4 fis4>/4 <a3 d4 fis4>/8 |
+<gis3 b3 e4>/4 <gis3 b3 e4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 | \mp \> <a3 cis4 e4>/4 <a3 cis4 e4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 |
+<a3 cis4 fis4>/4 <a3 cis4 fis4>/8 <a3 cis4 fis4>/4 <a3 cis4 fis4>/8 | <b3 d4 fis4>/4 <b3 d4 fis4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 |
+<gis3 b3 e4>/4 <gis3 b3 e4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 | \mp <a3 d4 fis4>/4 r/8 <a3 d4 fis4>/4 r/8 |
+<a3 d4 fis4>/4 r/8 <a3 d4 fis4>/4 r/8 | <a3 d4 fis4>/4 r/8 <a3 d4 fis4>/4 r/8 |
+<b3 d4 g4>/4 r/8 <a3 d4 fis4>/4 r/8 | <b3 d4 g4>/4 r/8 <b3 d4 g4>/4 r/8 |
+<b3 d4 g4>/4 r/8 <b3 d4 g4>/4 r/8 | <g3 b3 e4>/4 r/8 <g3 b3 e4>/4 r/8 |
+<a3 cis4 e4>/4 r/8 <a3 cis4 e4>/4 r/8 | <a3 d4 fis4>/4 r/8 <a3 d4 fis4>/4 r/8 |
+<a3 d4 fis4>/4 r/8 <a3 d4 fis4>/4 r/8 | <b3 d4 g4>/4 r/8 <b3 d4 g4>/4 r/8 |
+<a3 cis4 e4>/4 r/8 <a3 cis4 e4>/4 r/8 | <b3 d4 fis4>/4 r/8 <b3 d4 fis4>/4 r/8 |
+<gis3 b3 e4>/4 r/8 <gis3 b3 e4>/4 r/8 | <gis3 b3 e4>/4 r/8 <gis3 b3 e4>/4 r/8 |
+<gis3 b3 e4>/4 r/8 <gis3 b3 e4>/4 r/8 | \mp <a3 cis4 e4>/4 r/8 <a3 cis4 e4>/4 r/8 |
+<a3 cis4 e4>/4 r/8 <a3 cis4 e4>/4 r/8 | <a3 d4 fis4>/4 r/8 <a3 d4 fis4>/4 r/8 |
+<gis3 b3 e4>/4 r/8 <gis3 b3 e4>/4 r/8 | <a3 cis4 e4>/4 r/8 <a3 cis4 e4>/4 r/8 |
+<a3 cis4 fis4>/4 r/8 <a3 cis4 fis4>/4 r/8 | <b3 d4 fis4>/4 r/8 <gis3 b3 e4>/4 r/8 |
+<gis3 b3 e4>/4 r/8 <gis3 b3 e4>/4 r/8 | <a3 cis4 e4>/4 r/8 <a3 cis4 e4>/4 r/8 |
+<a3 cis4 e4>/4 r/8 <a3 cis4 e4>/4 r/8 | <a3 d4 fis4>/4 r/8 <a3 d4 fis4>/4 r/8 |
+<gis3 b3 e4>/4 r/8 <gis3 b3 e4>/4 r/8 | <a3 cis4 e4>/4 r/8 <a3 cis4 e4>/4 r/8 |
+<a3 cis4 fis4>/4 r/8 <a3 cis4 fis4>/4 r/8 | <b3 d4 fis4>/4 r/8 <gis3 b3 e4>/4 r/8 |
+<gis3 b3 e4>/4 r/8 <a3 cis4 e4>/4 r/8 | \p \< <a3 cis4 e4>/4 <a3 cis4 e4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 |
+<a3 cis4 e4>/4 <a3 cis4 e4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 | <a3 d4 fis4>/4 <a3 d4 fis4>/8 <a3 d4 fis4>/4 <a3 d4 fis4>/8 |
+<a3 d4 fis4>/4 <a3 d4 fis4>/8 <a3 d4 fis4>/4 <a3 d4 fis4>/8 | <gis3 b3 e4>/4 <gis3 b3 e4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 |
+<gis3 b3 e4>/4 <gis3 b3 e4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 | <a3 cis4 fis4>/4 <a3 cis4 fis4>/8 <a3 cis4 fis4>/4 <a3 cis4 fis4>/8 |
+<a3 cis4 fis4>/4 <a3 cis4 fis4>/8 <a3 cis4 fis4>/4 <a3 cis4 fis4>/8 | \mp \< <a3 d4 fis4>/4 <a3 d4 fis4>/8 <a3 d4 fis4>/4 <a3 d4 fis4>/8 |
+<a3 d4 fis4>/4 <a3 d4 fis4>/8 <a3 d4 fis4>/4 <a3 d4 fis4>/8 | <b3 d4 fis4>/4 <b3 d4 fis4>/8 <b3 d4 fis4>/4 <b3 d4 fis4>/8 |
+<b3 d4 fis4>/4 <b3 d4 fis4>/8 <b3 d4 fis4>/4 <b3 d4 fis4>/8 | <gis3 b3 e4>/4 <gis3 b3 e4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 |
+<gis3 b3 e4>/4 <gis3 b3 e4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 | <gis3 b3 e4>/4 <gis3 b3 e4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 |
+<gis3 b3 e4>/4 <gis3 b3 e4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 | \mp <a3 cis4 e4>/4 <a3 cis4 e4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 |
+<a3 cis4 e4>/4 <a3 cis4 e4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 | <a3 d4 fis4>/4 <a3 d4 fis4>/8 <a3 d4 fis4>/4 <a3 d4 fis4>/8 |
+<gis3 b3 e4>/4 <gis3 b3 e4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 | <a3 cis4 e4>/4 <a3 cis4 e4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 |
+<a3 cis4 fis4>/4 <a3 cis4 fis4>/8 <a3 cis4 fis4>/4 <a3 cis4 fis4>/8 | <b3 d4 fis4>/4 <b3 d4 fis4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 |
+<gis3 b3 e4>/4 <gis3 b3 e4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 | <a3 cis4 e4>/4 <a3 cis4 e4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 |
+<a3 cis4 e4>/4 <a3 cis4 e4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 | <a3 d4 fis4>/4 <a3 d4 fis4>/8 <a3 d4 fis4>/4 <a3 d4 fis4>/8 |
+<gis3 b3 e4>/4 <gis3 b3 e4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 | \mp \< <a3 cis4 e4>/4 <a3 cis4 e4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 |
+<a3 cis4 fis4>/4 <a3 cis4 fis4>/8 <a3 cis4 fis4>/4 <a3 cis4 fis4>/8 | <b3 d4 fis4>/4 <b3 d4 fis4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 |
+<gis3 b3 e4>/4 <ais3 cis4 e4>/8 <ais3 cis4 e4>/4 <ais3 cis4 e4>/8 | \f <b3 dis4 fis4>/4 <b3 dis4 fis4>/8 <b3 dis4 fis4>/4 <b3 dis4 fis4>/8 |
+<b3 dis4 fis4>/4 <b3 dis4 fis4>/8 <b3 dis4 fis4>/4 <b3 dis4 fis4>/8 | <gis3 b3 e4>/4 <gis3 b3 e4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 |
+<ais3 cis4 fis4>/4 <ais3 cis4 fis4>/8 <ais3 cis4 fis4>/4 <ais3 cis4 fis4>/8 | <b3 dis4 fis4>/4 <b3 dis4 fis4>/8 <b3 dis4 fis4>/4 <b3 dis4 fis4>/8 |
+<gis3 b3 dis4>/4 <gis3 b3 dis4>/8 <gis3 b3 dis4>/4 <gis3 b3 dis4>/8 | <gis3 cis4 e4>/4 <gis3 cis4 e4>/8 <ais3 cis4 fis4>/4 <ais3 cis4 fis4>/8 |
+<ais3 cis4 fis4>/4 <ais3 cis4 fis4>/8 <ais3 cis4 fis4>/4 <ais3 cis4 fis4>/8 | <b3 dis4 fis4>/4 <b3 dis4 fis4>/8 <b3 dis4 fis4>/4 <b3 dis4 fis4>/8 |
+<b3 dis4 fis4>/4 <b3 dis4 fis4>/8 <b3 dis4 fis4>/4 <b3 dis4 fis4>/8 | <gis3 b3 e4>/4 <gis3 b3 e4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 |
+<ais3 cis4 fis4>/4 <ais3 cis4 fis4>/8 <ais3 cis4 fis4>/4 <ais3 cis4 fis4>/8 | \f \> <b3 dis4 fis4>/4 <b3 dis4 fis4>/8 <b3 dis4 fis4>/4 <b3 dis4 fis4>/8 |
+<gis3 b3 dis4>/4 <gis3 b3 dis4>/8 <gis3 b3 dis4>/4 <gis3 b3 dis4>/8 | <gis3 cis4 e4>/4 <gis3 cis4 e4>/8 <ais3 cis4 fis4>/4 <ais3 cis4 fis4>/8 |
+<ais3 cis4 fis4>/4 <ais3 cis4 fis4>/8 <b3 dis4 fis4>/4 <b3 dis4 fis4>/8 | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | \mp <a3 cis4 e4>/4 <a3 cis4 e4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 |
+<a3 cis4 e4>/4 <a3 cis4 e4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 | <a3 d4 fis4>/4 <a3 d4 fis4>/8 <a3 d4 fis4>/4 <a3 d4 fis4>/8 |
+<gis3 b3 e4>/4 <gis3 b3 e4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 | \mp \< <a3 cis4 e4>/4 <a3 cis4 e4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 |
+<a3 cis4 fis4>/4 <a3 cis4 fis4>/8 <a3 cis4 fis4>/4 <a3 cis4 fis4>/8 | <b3 d4 fis4>/4 <b3 d4 fis4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 |
+<gis3 b3 e4>/4 <gis3 b3 e4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 | \mf <a3 cis4 e4>/4 <a3 cis4 e4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 |
+<a3 cis4 e4>/4 <a3 cis4 e4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 | <a3 d4 fis4>/4 <a3 d4 fis4>/8 <a3 d4 fis4>/4 <a3 d4 fis4>/8 |
+<gis3 b3 e4>/4 <gis3 b3 e4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 | <a3 cis4 e4>/4 <a3 cis4 e4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 |
+<a3 cis4 fis4>/4 <a3 cis4 fis4>/8 <a3 cis4 fis4>/4 <a3 cis4 fis4>/8 | <b3 d4 fis4>/4 <b3 d4 fis4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 |
+<gis3 b3 e4>/4 <gis3 b3 e4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 | <a3 cis4 e4>/4 <a3 cis4 e4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 |
+<a3 cis4 e4>/4 <a3 cis4 e4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 | <a3 d4 fis4>/4 <a3 d4 fis4>/8 <a3 d4 fis4>/4 <a3 d4 fis4>/8 |
+<gis3 b3 e4>/4 <gis3 b3 e4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 | \mf \> <a3 cis4 e4>/4 <a3 cis4 e4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 |
+<a3 cis4 fis4>/4 <a3 cis4 fis4>/8 <a3 cis4 fis4>/4 <a3 cis4 fis4>/8 | <b3 d4 fis4>/4 <b3 d4 fis4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 |
+<gis3 b3 e4>/4 <gis3 b3 e4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 | \mp <a3 cis4 e4>/4 <a3 cis4 e4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 |
+<a3 d4 fis4>/4 <a3 d4 fis4>/8 <a3 d4 fis4>/4 <a3 d4 fis4>/8 | <gis3 b3 e4>/4 <gis3 b3 e4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 |
+<a3 cis4 fis4>/4 <a3 cis4 fis4>/8 <a3 cis4 fis4>/4 <a3 cis4 fis4>/8 | <a3 d4 fis4>/4 <a3 d4 fis4>/8 <a3 d4 fis4>/4 <a3 d4 fis4>/8 |
+<gis3 b3 e4>/4 <gis3 b3 e4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 | <a3 cis4 e4>/4 <a3 cis4 e4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 |
+<a3 d4 fis4>/4 <a3 d4 fis4>/8 <a3 d4 fis4>/4 <a3 d4 fis4>/8 | \mp \< <b3 d4 fis4>/4 <b3 d4 fis4>/8 <b3 d4 fis4>/4 <b3 d4 fis4>/8 |
+<gis3 b3 e4>/4 <gis3 b3 e4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 | <a3 cis4 e4>/4 <a3 cis4 e4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 |
+<gis3 b3 e4>/4 <gis3 b3 e4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 | \mf <a3 cis4 e4>/4 <a3 cis4 e4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 |
+<a3 cis4 fis4>/4 <a3 cis4 fis4>/8 <a3 cis4 fis4>/4 <a3 cis4 fis4>/8 | <b3 d4 fis4>/4 <b3 d4 fis4>/8 <gis3 b3 e4>/4 <gis3 b3 e4>/8 |
+<gis3 b3 e4>/4 <gis3 b3 e4>/8 <a3 cis4 e4>/4 <a3 cis4 e4>/8 | r/2. |
+
+track Violins | instrument: strings | pan: -35 | volume: 90
+# 1-5 Intro: the harp's jig, then cellos and basses
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. |
+# 6-21 A1: the refrain (the tune twice), flute alone
+r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. |
+# 22-37 B1: episode in F-sharp minor, clarinets, then oboes above
+r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. |
+# 38-45 A2: the tune once, violins and oboes; the harp rests
+\mf a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 a5/4 e5/8 | fis5/4 d6/8 a5/4 fis5/8 |
+gis5/8 a5/8 b5/8 b5/4. | \mf \< a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 cis6/4 e6/8 | d6/4 b5/8 gis5/4 b5/8 |
+cis6/8 b5/8 gis5/8 a5/4. |
+# 46-61 A3: the first tutti
+\mf a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 a5/4 e5/8 | fis5/4 d6/8 a5/4 fis5/8 |
+gis5/8 a5/8 b5/8 b5/4. | a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 cis6/4 e6/8 | d6/4 b5/8 gis5/4 b5/8 |
+b5/8 a5/8 gis5/8 e5/4. | a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 a5/4 e5/8 | fis5/4 d6/8 a5/4 fis5/8 |
+gis5/8 a5/8 b5/8 b5/4. | \mf \> a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 cis6/4 e6/8 | d6/4 b5/8 gis5/4 b5/8 |
+cis6/8 b5/8 gis5/8 a5/4. |
+# 62-77 B2: D major, horn calls and oboe answers; the flutes lead home
+r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | \mf d5/4 b4/8 fis5/4 d5/8 |
+e5/4 gis5/8 b5/4 gis5/8 | b5/8 gis5/8 fis5/8 e5/4. |
+d5/4 b4/8 gis4/4 b4/8 |
+# 78-93 A4: flute and glockenspiel, the tune's mirror image (around B) in the clarinets
+r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. |
+# 94-109 B3: the rabbits - the refrain's head in canon, entries on bars 1, 6, 9, 11, 12, 13 (gaps 5, 3, 2, 1, 1)
+r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+\mp \< b5/4 fis5/8 b5/4 cis6/8 | gis5/4 fis5/8 e5/4 b4/8 |
+e5/4 b4/8 e5/4 fis5/8 | gis5/4 fis5/8 e5/4 b4/8 |
+e5/4 b4/8 e5/4 fis5/8 |
+# 110-125 A5: tutti held back (mf), the mirror in the horns; turning to B major
+\mf a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 a5/4 e5/8 | fis5/4 d6/8 a5/4 fis5/8 |
+gis5/8 a5/8 b5/8 b5/4. | a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 cis6/4 e6/8 | d6/4 b5/8 gis5/4 b5/8 |
+b5/8 a5/8 gis5/8 e5/4. | a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 a5/4 e5/8 | fis5/4 d6/8 a5/4 fis5/8 |
+gis5/8 a5/8 b5/8 b5/4. | \mf \< a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 cis6/4 e6/8 | d6/4 b5/8 gis5/4 b5/8 |
+cis6/8 b5/8 ais5/8 fis5/4. |
+# 126-141 A6: CLIMAX, the refrain a step higher in B major
+\ff b5/4 fis5/8 b5/4 cis6/8 |
+dis6/4 cis6/8 b5/4 fis5/8 | gis5/4 e6/8 b5/4 gis5/8 |
+ais5/8 b5/8 cis6/8 cis6/4. | b5/4 fis5/8 b5/4 cis6/8 |
+dis6/4 cis6/8 dis6/4 fis6/8 | e6/4 cis6/8 ais5/4 cis6/8 |
+cis6/8 b5/8 ais5/8 fis5/4. | b5/4 fis5/8 b5/4 cis6/8 |
+dis6/4 cis6/8 b5/4 fis5/8 | gis5/4 e6/8 b5/4 gis5/8 |
+ais5/8 b5/8 cis6/8 cis6/4. | \ff \> b5/4 fis5/8 b5/4 cis6/8 |
+dis6/4 cis6/8 dis6/4 fis6/8 | e6/4 cis6/8 ais5/4 cis6/8 |
+dis6/8 cis6/8 ais5/8 b5/4. |
+# 142-157 B4: the soft episode - the refrain upside down (F-sharp minor), flute then violas
+r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. |
+# 158-165 A7: back home, the tune once, strings only
+\mf a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 a5/4 e5/8 | fis5/4 d6/8 a5/4 fis5/8 |
+gis5/8 a5/8 b5/8 b5/4. | \mf \< a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 cis6/4 e6/8 | d6/4 b5/8 gis5/4 b5/8 |
+cis6/8 b5/8 gis5/8 a5/4. |
+# 166-181 A8: full again, the mirror in clarinets and violas
+\f a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 a5/4 e5/8 | fis5/4 d6/8 a5/4 fis5/8 |
+gis5/8 a5/8 b5/8 b5/4. | a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 cis6/4 e6/8 | d6/4 b5/8 gis5/4 b5/8 |
+b5/8 a5/8 gis5/8 e5/4. | a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 a5/4 e5/8 | fis5/4 d6/8 a5/4 fis5/8 |
+gis5/8 a5/8 b5/8 b5/4. | \f \> a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 cis6/4 e6/8 | d6/4 b5/8 gis5/4 b5/8 |
+cis6/8 b5/8 gis5/8 a5/4. |
+# 182-198 B5 coda: the head goes round the orchestra; the tune's last line; the A-major chord
+r/2. |
+r/2. | \mf e5/4 b4/8 e5/4 fis5/8 |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | \mf \< b5/4 fis5/8 b5/4 cis6/8 |
+r/2. | r/2. |
+r/2. | \f a5/4 e5/8 a5/4 b5/8 |
+cis6/4 b5/8 cis6/4 e6/8 | d6/4 b5/8 gis5/4 b5/8 |
+cis6/8 b5/8 gis5/8 a5/4. | \mf <a4 cis5 e5 a5>/2. |
+
+track Violas | instrument: viola | pan: 15 | volume: 80
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | \mp <a3 e4>/2. |
+<a3 e4>/2. | <a3 d4>/2. |
+<b3 e4>/2. | \mp \< <a3 e4>/2. |
+<a3 fis4>/2. | <b3 fis4>/4. <b3 e4>/4. |
+<b3 e4>/4. <a3 e4>/4.~ | <a3 e4>/2. |
+\mp <a3 e4>/2. | <a3 d4>/2. |
+<b3 e4>/2. | <a3 e4>/2. |
+<a3 fis4>/2. | <b3 fis4>/4. <b3 e4>/4. |
+<b3 e4>/2. | <a3 e4>/2. |
+<a3 e4>/2. | <a3 d4>/2. |
+<b3 e4>/2. | \mp \> <a3 e4>/2. |
+<a3 fis4>/2. | <b3 fis4>/4. <b3 e4>/4. |
+<b3 e4>/4. <a3 e4>/4. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+\mp \< e4/4 b3/8 e4/4 fis4/8 | a4/4 gis4/8 fis4/4 cis4/8 |
+fis4/4 cis4/8 fis4/4 gis4/8 | \mp \< fis4/4 e4/8 d4/4 a3/8 |
+d4/4 a3/8 d4/4 e4/8 | d4/4 cis4/8 b3/4 fis3/8 |
+b3/4 fis3/8 b3/4 cis4/8 | gis4/4 fis4/8 e4/4 b3/8 |
+e4/4 b3/8 e4/4 fis4/8 | gis4/4 fis4/8 e4/4 b3/8 |
+e4/4 b3/8 e4/4 fis4/8 | \mp <a3 e4>/2. |
+<a3 e4>/2. | <a3 d4>/2. |
+<b3 e4>/2. | <a3 e4>/2. |
+<a3 fis4>/2. | <b3 fis4>/4. <b3 e4>/4. |
+<b3 e4>/2. | <a3 e4>/2. |
+<a3 e4>/2. | <a3 d4>/2. |
+<b3 e4>/2. | \mp \< <a3 e4>/2. |
+<a3 fis4>/2. | <b3 fis4>/4. <b3 e4>/4. |
+<b3 e4>/4 <ais3 e4>/2 | \f <b3 dis4>/2. |
+<b3 dis4>/2. | <b3 e4>/2. |
+<cis4 fis4>/2. | <b3 fis4>/2. |
+<b3 dis4>/2. | <cis4 e4>/4. <cis4 fis4>/4. |
+<cis4 fis4>/2. | <b3 fis4>/2. |
+<b3 fis4>/2. | <b3 e4>/2. |
+<cis4 fis4>/2. | \f \> <b3 fis4>/2. |
+<b3 dis4>/2. | <cis4 e4>/4. <cis4 fis4>/4. |
+<cis4 fis4>/4. <b3 fis4>/4. | \p <a3 fis4>/2. |
+<a3 fis4>/2. | <gis3 e4>/2. |
+<b3 d4>/2. | <a3 cis4>/2. |
+<a3 cis4>/2. | <gis3 b3>/4. <b3 d4>/4. |
+<b3 d4>/2. | cis5/4 fis5/8 cis5/4 b4/8 |
+a4/4 b4/8 cis5/4 fis5/8 | e5/4 gis4/8 cis5/4 e5/8 |
+d5/4 b4/2 | \p \< cis5/4 fis5/8 cis5/4 b4/8 |
+a4/4 b4/8 a4/4 fis4/8 | gis4/4 b4/8 d5/4 b4/8 |
+a4/8 b4/8 d5/8 cis5/4. | \mf a4/4 e4/8 a4/4 b4/8 |
+cis5/4 b4/8 a4/4 e4/8 | fis4/4 d5/8 a4/4 fis4/8 |
+gis4/8 a4/8 b4/2 | \mf \< a4/4 e4/8 a4/4 b4/8 |
+cis5/4 b4/8 cis5/4 e5/8 | d5/4 b4/8 gis4/4 b4/8 |
+cis5/8 b4/8 gis4/8 a4/4. | \f cis5/4 fis5/8 cis5/4 b4/8 |
+a4/4 b4/8 cis5/4 fis5/8 | e5/4 a4/8 d5/4 e5/8 |
+d5/8 cis5/8 b4/2 | cis5/4 fis5/8 cis5/4 b4/8 |
+a4/4 b4/8 a4/4 fis4/8 | gis4/4 b4/8 d5/4 b4/8 |
+b4/8 cis5/8 d5/8 fis5/4. | cis5/4 fis5/8 cis5/4 b4/8 |
+a4/4 b4/8 cis5/4 fis5/8 | e5/4 a4/8 d5/4 e5/8 |
+d5/8 cis5/8 b4/2 | \f \> cis5/4 fis5/8 cis5/4 b4/8 |
+a4/4 b4/8 a4/4 fis4/8 | gis4/4 b4/8 d5/4 b4/8 |
+gis4/8 b4/8 d5/8 cis5/4. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+\mf gis4/4 fis4/8 e4/4 b3/8 | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | r/2. |
+r/2. | \mf <e4 a4>/2. |
+
+track Cellos | instrument: cello | pan: 35 | volume: 86
+r/2. | r/2. |
+\mp d3/2. | e2/2. |
+e2/2. | \mp a2/4. r/4. |
+a2/4. r/4. | d3/4. r/4. |
+e2/4. r/4. | a2/4. r/4. |
+fis2/4. r/4. | b2/4. e2/4. |
+e2/4. r/4. | a2/4. r/4. |
+a2/4. r/4. | d3/4. r/4. |
+e2/4. r/4. | a2/4. r/4. |
+fis2/4. r/4. | b2/4. e2/4. |
+e2/4. a2/4. | \mp fis2/2. |
+e2/2. | d3/2. |
+e2/2. | fis2/2. |
+b2/2.~ | b2/4. a2/4. |
+e2/2. | \mp fis2/2. |
+e2/2. | d3/2. |
+e2/2. | fis2/2. |
+b2/2.~ | b2/4. a2/4. |
+e2/2. | \mp a2/4. r/4. |
+a2/4. r/4. | d3/4. r/4. |
+e2/4. r/4. | \mp \< a2/4. r/4. |
+fis2/4. r/4. | b2/4. e2/4. |
+e2/4. a2/4.~ | a2/2. |
+\mp a2/2. | d3/2. |
+e2/2. | a2/2. |
+fis2/2. | b2/4. e2/4. |
+e2/2. | a2/2. |
+a2/2. | d3/2. |
+e2/2. | \mp \> a2/2. |
+fis2/2. | b2/4. e2/4. |
+e2/4. a2/4. | \mp d3/2. |
+d3/2.~ | d3/2. |
+g2/4. d3/4. | g2/2. |
+g2/2. | e2/2. |
+a2/2. | d3/2. |
+d3/2. | g2/2. |
+a2/2. | b2/2. |
+e2/2.~ | e2/2. |
+e2/2. | \mp a2/4. r/4. |
+a2/4. r/4. | d3/4. r/4. |
+e2/4. r/4. | a2/4. r/4. |
+fis2/4. r/4. | b2/4. e2/4. |
+e2/4. r/4. | a2/4. r/4. |
+a2/4. r/4. | d3/4. r/4. |
+e2/4. r/4. | a2/4. r/4. |
+fis2/4. r/4. | b2/4. e2/4. |
+e2/4. a2/4.~ | a2/2 \mp \< e2/4 |
+a2/2 b2/4 | fis3/2 e3/4 |
+d3/2 a2/4 | e3/2 b2/4 |
+e3/2 fis3/4 | a2/2 gis2/4 |
+fis2/2 cis2/4 | \mp \< d3/2 a2/4 |
+d3/2 e3/4 | d3/2 cis3/4 |
+b2/2 fis2/4 | e3/2 b2/4 |
+e3/2 fis3/4 | gis3/2 fis3/4 |
+e3/2 b2/4 | \mp a2/2. |
+a2/2. | d3/2. |
+e2/2. | a2/2. |
+fis2/2. | b2/4. e2/4. |
+e2/2. | a2/2. |
+a2/2. | d3/2. |
+e2/2. | \mp \< a2/2. |
+fis2/2. | b2/4. e2/4. |
+e2/4 fis2/2 | \f b2/2. |
+b2/2. | e2/2. |
+fis2/2. | b2/2. |
+gis2/2. | cis3/4. fis2/4. |
+fis2/2. | b2/2. |
+b2/2. | e2/2. |
+fis2/2. | \f \> b2/2. |
+gis2/2. | cis3/4. fis2/4. |
+fis2/4. b2/4. | \p fis2/2. |
+fis2/2. | cis3/2. |
+b2/2. | fis2/2. |
+a2/2. | e2/4. b2/4. |
+b2/2. | fis2/2. |
+fis2/2. | cis3/2. |
+b2/2. | \p \< fis2/2. |
+a2/2. | e2/4. b2/4. |
+b2/4. fis2/4. | \mp a2/4. r/4. |
+a2/4. r/4. | d3/4. r/4. |
+e2/4. r/4. | \mp \< a2/4. r/4. |
+fis2/4. r/4. | b2/4. e2/4. |
+e2/4. a2/4.~ | a2/2. |
+\mf a2/2. | d3/2. |
+e2/2. | a2/2. |
+fis2/2. | b2/4. e2/4. |
+e2/2. | a2/2. |
+a2/2. | d3/2. |
+e2/2. | \mf \> a2/2. |
+fis2/2. | b2/4. e2/4. |
+e2/4. a2/4.~ | a2/2. |
+\mp d3/2. | e2/2. |
+fis2/2. | d3/2. |
+e2/2. | a2/2. |
+d3/2. | \mp \< b2/2. |
+e2/2. | a2/2. |
+e2/2. | \mf a2/2. |
+fis2/2. | b2/4. e2/4. |
+e2/4. a2/4.~ | a2/2. |
+
+track Basses | instrument: contrabass | volume: 120
+r/2. | r/2. |
+\mp <d2 d3>/2. | <e1 e2>/2. |
+<e1 e2>/2. | \mp <a1 a2>/2. |
+<a1 a2>/2. | <d2 d3>/2. |
+<e1 e2>/2. | <a1 a2>/2. |
+<fis1 fis2>/2. | <b1 b2>/4. <e1 e2>/4. |
+<e1 e2>/2. | <a1 a2>/2. |
+<a1 a2>/2. | <d2 d3>/2. |
+<e1 e2>/2. | <a1 a2>/2. |
+<fis1 fis2>/2. | <b1 b2>/4. <e1 e2>/4. |
+<e1 e2>/4. <a1 a2>/4. | \mp <fis1 fis2>/2. |
+<e1 e2>/2. | <d2 d3>/2. |
+<e1 e2>/2. | <fis1 fis2>/2. |
+<b1 b2>/2.~ | <b1 b2>/4. <a1 a2>/4. |
+<e1 e2>/2. | \mp <fis1 fis2>/2. |
+<e1 e2>/2. | <d2 d3>/2. |
+<e1 e2>/2. | <fis1 fis2>/2. |
+<b1 b2>/2.~ | <b1 b2>/4. <a1 a2>/4. |
+<e1 e2>/2. | \mp <a1 a2>/2. |
+<a1 a2>/2. | <d2 d3>/2. |
+<e1 e2>/2. | \mp \< <a1 a2>/2. |
+<fis1 fis2>/2. | <b1 b2>/4. <e1 e2>/4. |
+<e1 e2>/4. <a1 a2>/4.~ | <a1 a2>/2. |
+\mp <a1 a2>/2. | <d2 d3>/2. |
+<e1 e2>/2. | <a1 a2>/2. |
+<fis1 fis2>/2. | <b1 b2>/4. <e1 e2>/4. |
+<e1 e2>/2. | <a1 a2>/2. |
+<a1 a2>/2. | <d2 d3>/2. |
+<e1 e2>/2. | \mp \> <a1 a2>/2. |
+<fis1 fis2>/2. | <b1 b2>/4. <e1 e2>/4. |
+<e1 e2>/4. <a1 a2>/4. | \mp <d2 d3>/2. |
+<d2 d3>/2.~ | <d2 d3>/2. |
+<g1 g2>/4. <d2 d3>/4. | <g1 g2>/2. |
+<g1 g2>/2. | <e1 e2>/2. |
+<a1 a2>/2. | <d2 d3>/2. |
+<d2 d3>/2. | <g1 g2>/2. |
+<a1 a2>/2. | <b1 b2>/2. |
+<e1 e2>/2.~ | <e1 e2>/2. |
+<e1 e2>/2. | \mp <a1 a2>/2. |
+<a1 a2>/2. | <d2 d3>/2. |
+<e1 e2>/2. | <a1 a2>/2. |
+<fis1 fis2>/2. | <b1 b2>/4. <e1 e2>/4. |
+<e1 e2>/2. | <a1 a2>/2. |
+<a1 a2>/2. | <d2 d3>/2. |
+<e1 e2>/2. | <a1 a2>/2. |
+<fis1 fis2>/2. | <b1 b2>/4. <e1 e2>/4. |
+<e1 e2>/4. <a1 a2>/4.~ | <a1 a2>/2. |
+\mp \< <a1 a2>/2. | <d2 d3>/2. |
+<d2 d3>/2. | <e1 e2>/2. |
+<e1 e2>/2. | <fis1 fis2>/2. |
+<fis1 fis2>/2. | \mp \< <d2 d3>/2. |
+<d2 d3>/2. | <b1 b2>/2. |
+<b1 b2>/2. | <e1 e2>/2. |
+<e1 e2>/2.~ | <e1 e2>/2. |
+<e1 e2>/2. | \mp <a1 a2>/2. |
+<a1 a2>/2. | <d2 d3>/2. |
+<e1 e2>/2. | <a1 a2>/2. |
+<fis1 fis2>/2. | <b1 b2>/4. <e1 e2>/4. |
+<e1 e2>/2. | <a1 a2>/2. |
+<a1 a2>/2. | <d2 d3>/2. |
+<e1 e2>/2. | \mp \< <a1 a2>/2. |
+<fis1 fis2>/2. | <b1 b2>/4. <e1 e2>/4. |
+<e1 e2>/4 <fis1 fis2>/2 | \f <b1 b2>/2. |
+<b1 b2>/2. | <e1 e2>/2. |
+<fis1 fis2>/2. | <b1 b2>/2. |
+<gis1 gis2>/2. | <cis2 cis3>/4. <fis1 fis2>/4. |
+<fis1 fis2>/2. | <b1 b2>/2. |
+<b1 b2>/2. | <e1 e2>/2. |
+<fis1 fis2>/2. | \f \> <b1 b2>/2. |
+<gis1 gis2>/2. | <cis2 cis3>/4. <fis1 fis2>/4. |
+<fis1 fis2>/4. <b1 b2>/4. | \p <fis1 fis2>/2. |
+<fis1 fis2>/2. | <cis2 cis3>/2. |
+<b1 b2>/2. | <fis1 fis2>/2. |
+<a1 a2>/2. | <e1 e2>/4. <b1 b2>/4. |
+<b1 b2>/2. | <fis1 fis2>/2. |
+<fis1 fis2>/2. | <cis2 cis3>/2. |
+<b1 b2>/2. | \p \< <fis1 fis2>/2. |
+<a1 a2>/2. | <e1 e2>/4. <b1 b2>/4. |
+<b1 b2>/4. <fis1 fis2>/4. | \mp <a1 a2>/2. |
+<a1 a2>/2. | <d2 d3>/2. |
+<e1 e2>/2. | \mp \< <a1 a2>/2. |
+<fis1 fis2>/2. | <b1 b2>/4. <e1 e2>/4. |
+<e1 e2>/4. <a1 a2>/4.~ | <a1 a2>/2. |
+\mf <a1 a2>/2. | <d2 d3>/2. |
+<e1 e2>/2. | <a1 a2>/2. |
+<fis1 fis2>/2. | <b1 b2>/4. <e1 e2>/4. |
+<e1 e2>/2. | <a1 a2>/2. |
+<a1 a2>/2. | <d2 d3>/2. |
+<e1 e2>/2. | \mf \> <a1 a2>/2. |
+<fis1 fis2>/2. | <b1 b2>/4. <e1 e2>/4. |
+<e1 e2>/4. <a1 a2>/4.~ | <a1 a2>/2. |
+\mp <d2 d3>/2. | <e1 e2>/2. |
+<fis1 fis2>/2. | <d2 d3>/2. |
+<e1 e2>/2. | <a1 a2>/2. |
+<d2 d3>/2. | \mp \< <b1 b2>/2. |
+<e1 e2>/2. | <a1 a2>/2. |
+<e1 e2>/2. | \mf <a1 a2>/2. |
+<fis1 fis2>/2. | <b1 b2>/4. <e1 e2>/4. |
+<e1 e2>/4. <a1 a2>/4.~ | <a1 a2>/2. |

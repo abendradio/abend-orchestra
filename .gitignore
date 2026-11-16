@@ -1,0 +1,16 @@
+# never publish sign-in folders
+.gh*/
+
+# build output
+bin/
+obj/
+*.exe
+*.dll
+*.pdb
+
+# renders and scratch
+*.mp3
+*.wav
+/out/
+/soundfonts/
+/tools/

@@ -1,0 +1,22 @@
+title: Evening Waltz
+composer: (your name)
+tempo: 132
+meter: 3/4
+rit @15-17: 100
+
+# The tune: 16 bars, every bar checked with |
+track Melody | instrument: flute
+\mp d5/2 b4/4 | (a4/4 g4/4 a4/4 | b4/2.) | r/4 g4/4 a4/4 |
+b4/2 d5/4 | (e5/4 d5/4 c5/4 | a4/2.) | r/4 a4/4 b4/4 |
+\< c5/2 e5/4 | d5/4 c5/4 b4/4 | \mf a4/2 fis4/4 | (g4/4 a4/4 b4/4 |
+c5/2 e5/4 | d5/4 b4/4 g4/4 | \> a4/2 fis4/4 | \p g4/2. |
+
+# Waltz accompaniment: rest on beat 1, chords on beats 2 and 3
+chords Strings | instrument: strings | voices: 3 | range: G3-B4 | pattern: 4: r c' c'
+\p G/2. | D7 | G | G | G | C | D | D7 |
+\< C | G | \mp D7 | G | C | G | \> D7 | \pp G |
+
+# Bass line on beat 1, taken from the chord's bass note
+chords Cellos | instrument: cello | voices: 1 | range: D2-D3 | bass: yes | pattern: 4: B r r | velocity: 72
+G/2. | D7 | G | G | G | C | D | D7 |
+C | G/B | D7/A | G | C | G | D7 | G |
