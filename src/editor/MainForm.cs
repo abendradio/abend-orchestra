@@ -98,7 +98,9 @@ namespace Abend
             var examples = new ToolStripMenuItem("Open e&xample");
             string exDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Examples");
             if (Directory.Exists(exDir))
-                foreach (var f in Directory.GetFiles(exDir, "*", SearchOption.AllDirectories).Where(x => x.EndsWith(".abscore", StringComparison.OrdinalIgnoreCase) || x.EndsWith(".mid", StringComparison.OrdinalIgnoreCase) || x.EndsWith(".abend", StringComparison.OrdinalIgnoreCase)).OrderBy(x => x))
+                // a .mid written next to a score (abendc song.abscore) is not listed a second time
+                foreach (var f in Directory.GetFiles(exDir, "*", SearchOption.AllDirectories).Where(x => x.EndsWith(".abscore", StringComparison.OrdinalIgnoreCase) || x.EndsWith(".abend", StringComparison.OrdinalIgnoreCase)
+                    || (x.EndsWith(".mid", StringComparison.OrdinalIgnoreCase) && !File.Exists(Path.ChangeExtension(x, ".abscore")))).OrderBy(x => x))
                 {
                     string fp = f;
                     examples.DropDownItems.Add(Item(Path.GetFileNameWithoutExtension(f), Keys.None, (s, e) => { if (ConfirmDiscard()) OpenPath(fp); }));
@@ -517,9 +519,11 @@ namespace Abend
         {
             var o = new RenderOptions();
             string fl, ff, sf;
-            if (AudioRender.CheckSetup(o, out fl, out ff, out sf) != null)
+            string first = AudioRender.CheckSetup(o, out fl, out ff, out sf);
+            if (first != null)
             {
-                if (MessageBox.Show(this, "Audio export needs FluidSynth, ffmpeg and a soundfont, which were not found next to the program.\n\nRun the setup script for the sounds first. Show me the folder that holds them?", "Export audio", MessageBoxButtons.OKCancel) != DialogResult.OK) return;
+                // say exactly what is missing (often only ffmpeg, which the user installs: winget install --id Gyan.FFmpeg -e)
+                if (MessageBox.Show(this, first + "\n\nIf they are in another folder, show me that folder?", "Export audio", MessageBoxButtons.OKCancel) != DialogResult.OK) return;
                 using (var fb = new FolderBrowserDialog { Description = "Choose the folder with the tools and soundfonts folders inside" })
                 {
                     if (fb.ShowDialog(this) != DialogResult.OK) return;
@@ -534,12 +538,13 @@ namespace Abend
                 if (d.ShowDialog(this) != DialogResult.OK) return;
                 target = d.FileName;
             }
-            double bass;
-            if (!AskBass(out bass)) return;
+            double bass; bool orchestra;
+            if (!AskBass(out bass, out orchestra)) return;
             o.BassDb = bass;
+            if (orchestra) { o.Library = "sonatina"; o.Expression = true; }
             player.Stop();
             var snapshot = song.Clone();
-            status.Text = "Rendering " + Path.GetFileName(target) + " with " + Path.GetFileName(sf) + "…";
+            status.Text = "Rendering " + Path.GetFileName(target) + " with " + (orchestra ? "the Sonatina orchestra" : Path.GetFileName(sf)) + "…";
             UseWaitCursor = true;
             var th = new System.Threading.Thread(() =>
             {
@@ -555,25 +560,30 @@ namespace Abend
             th.IsBackground = true; th.Start();
         }
 
-        // bass lift for audio export (remembered between exports); false = cancelled
-        bool AskBass(out double db)
+        // bass lift and sound set for audio export (both remembered between exports); false = cancelled
+        bool AskBass(out double db, out bool orchestra)
         {
-            db = 0;
+            db = 0; orchestra = false;
             double last;
             if (!double.TryParse(Settings.Get("bass") ?? "0", System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out last)) last = 0;
-            var f = new Form { Text = "Export audio", FormBorderStyle = FormBorderStyle.FixedDialog, StartPosition = FormStartPosition.CenterParent, MinimizeBox = false, MaximizeBox = false, ClientSize = new Size(360, 120) };
-            f.Controls.Add(new Label { Text = "Bass lift for subwoofers (dB below about 100 Hz).\r\n0 leaves the sound as it is; 3 to 6 is a clear lift.", Location = new Point(12, 10), Size = new Size(340, 34) });
+            bool have = Library.Find("sonatina", null) != null;
+            var f = new Form { Text = "Export audio", FormBorderStyle = FormBorderStyle.FixedDialog, StartPosition = FormStartPosition.CenterParent, MinimizeBox = false, MaximizeBox = false, ClientSize = new Size(380, 160) };
+            f.Controls.Add(new Label { Text = "Bass lift for subwoofers (dB below about 100 Hz).\r\n0 leaves the sound as it is; 3 to 6 is a clear lift.", Location = new Point(12, 10), Size = new Size(360, 34) });
             var n = new NumericUpDown { Minimum = 0, Maximum = 12, DecimalPlaces = 1, Increment = 0.5m, Value = (decimal)Math.Max(0, Math.Min(12, last)), Location = new Point(12, 50), Width = 70 };
             f.Controls.Add(n);
-            var okB = new Button { Text = "Export", DialogResult = DialogResult.OK, Location = new Point(184, 84), Width = 80 };
-            var cancel = new Button { Text = "Cancel", DialogResult = DialogResult.Cancel, Location = new Point(270, 84), Width = 80 };
+            var orch = new CheckBox { Text = have ? "Play it with the Sonatina orchestra, with natural playing" : "Sonatina orchestra: not installed (run setup-sounds.ps1)", Enabled = have,
+                Checked = have && Settings.Get("orchestra") == "1", Location = new Point(12, 84), AutoSize = true };
+            f.Controls.Add(orch);
+            var okB = new Button { Text = "Export", DialogResult = DialogResult.OK, Location = new Point(204, 122), Width = 80 };
+            var cancel = new Button { Text = "Cancel", DialogResult = DialogResult.Cancel, Location = new Point(290, 122), Width = 80 };
             f.Controls.Add(okB); f.Controls.Add(cancel); f.AcceptButton = okB; f.CancelButton = cancel;
             using (f)
             {
                 if (f.ShowDialog(this) != DialogResult.OK) return false;
-                db = (double)n.Value;
+                db = (double)n.Value; orchestra = orch.Checked;
             }
             Settings.Set("bass", db.ToString(System.Globalization.CultureInfo.InvariantCulture));
+            if (have) Settings.Set("orchestra", orchestra ? "1" : "0");
             return true;
         }
 
