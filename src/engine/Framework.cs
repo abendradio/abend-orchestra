@@ -8,6 +8,17 @@ using System.Text;
 
 namespace Sym
 {
+    // a stable sort: items with equal keys keep their order, so every .NET version and system gives the same result
+    // (List.Sort is unstable, and its tie order differs between .NET Framework and .NET 8)
+    public static class Stable
+    {
+        public static void Sort<TItem>(List<TItem> list, Comparison<TItem> cmp)
+        {
+            var sorted = list.OrderBy(x => x, Comparer<TItem>.Create(cmp)).ToList();   // LINQ OrderBy is stable
+            for (int i = 0; i < sorted.Count; i++) list[i] = sorted[i];
+        }
+    }
+
     public static class T
     {
         public const int PPQ = 480;
@@ -506,7 +517,7 @@ namespace Sym
         {
             meters.RemoveAll(m => m[0] == bar);
             meters.Add(new[] { bar, num, den });
-            meters.Sort((a, b) => a[0].CompareTo(b[0]));
+            Stable.Sort(meters, (a, b) => a[0].CompareTo(b[0]));
         }
         public int BarLen(int bar)
         {

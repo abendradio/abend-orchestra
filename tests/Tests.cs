@@ -117,6 +117,14 @@ namespace Abend { public static class Tests { public static int Main() {
     var r = ScoreScript.Parse(File.ReadAllText(p));
     ok(r.Ok, "example score " + Path.GetFileName(p) + ": " + (r.Ok ? r.Summary() : r.Errors[0]) + ", " + r.Warnings.Count + " warning(s)");
   }
+  // the same score gives the same MIDI on every system and .NET version (sorting is stable)
+  if (exDir != null)
+  {
+    var rr = ScoreScript.Parse(File.ReadAllText(Path.Combine(exDir, "station", "The Rabbit Rondo.abscore")));
+    string rrMid = Path.Combine(Path.GetTempPath(), "abend-rondo-" + Guid.NewGuid().ToString("N").Substring(0, 8) + ".mid");
+    MidiFile.Write(rr.Song, rrMid); string rrMd5 = AudioRender.Md5(rrMid); File.Delete(rrMid);
+    ok(rrMd5 == "ffe0a3dd7f9843a3f25f1cbbbe06d8e9", "reproducible: The Rabbit Rondo always gives the same MIDI (md5 " + rrMd5 + ")");
+  }
 
   ok(new RenderOptions().BassDb == 0 && AudioRender.BassFilter(4) == "bass=g=4:f=100:w=0.7" && AudioRender.BassFilter(2.5) == "bass=g=2.5:f=100:w=0.7", "render: bass lift off by default; filter " + AudioRender.BassFilter(4));
 
@@ -328,7 +336,7 @@ namespace Abend { public static class Tests { public static int Main() {
   // cover art: where covers are found
   string cv = Path.Combine(Path.GetTempPath(), "abend-covertest-" + Guid.NewGuid().ToString("N").Substring(0, 8));
   Directory.CreateDirectory(Path.Combine(cv, "art"));
-  Action<string, System.Drawing.Color> png = (file, col) => { using (var bmp = new System.Drawing.Bitmap(1600, 1600)) { using (var g = System.Drawing.Graphics.FromImage(bmp)) g.Clear(col); bmp.Save(file, System.Drawing.Imaging.ImageFormat.Png); } };
+  Action<string, int> png = (file, rgb) => TestPng.Write(file, 1600, 1600, rgb);   // a solid-colour 1600x1600 PNG, no image library needed
   try
   {
     string songF = Path.Combine(cv, "Song.abscore"), fb = Path.Combine(cv, "art", "fallback.png");
@@ -336,13 +344,13 @@ namespace Abend { public static class Tests { public static int Main() {
     ok(ScoreScript.Parse(File.ReadAllText(songF)).Cover == "art/front.png" && ScoreScript.Parse("title: Tcover: x.pngtempo: 100\ntrack A | instrument: flute\n\\mf c5/1 |\n").Cover == "x.png", "cover: header read (also after lost line breaks)");
     var w = new System.Collections.Generic.List<string>();
     ok(AudioRender.FindCover(songF, null, null, w) == null, "cover: none found -> no cover");
-    png(fb, System.Drawing.Color.Gray);
+    png(fb, 0x808080);
     ok(AudioRender.FindCover(songF, null, fb, w) == fb, "cover: --cover is the fallback");
-    png(Path.Combine(cv, "cover.jpg"), System.Drawing.Color.Blue);
+    png(Path.Combine(cv, "cover.jpg"), 0x0000FF);
     ok(AudioRender.FindCover(songF, null, fb, w).EndsWith("cover.jpg"), "cover: cover.jpg in the folder beats --cover");
-    png(Path.Combine(cv, "Song.png"), System.Drawing.Color.Green);
+    png(Path.Combine(cv, "Song.png"), 0x008000);
     ok(AudioRender.FindCover(songF, "art/front.png", fb, w).EndsWith("Song.png") && w.Count == 1, "cover: Song.png beats cover.jpg; a missing cover: file warns: " + w.FirstOrDefault());
-    png(Path.Combine(cv, "art", "front.png"), System.Drawing.Color.Red);
+    png(Path.Combine(cv, "art", "front.png"), 0xFF0000);
     ok(AudioRender.FindCover(songF, "art/front.png", fb, null).EndsWith(Path.Combine("art", "front.png")) && AudioRender.FindCover(songF, fb, null, null) == fb, "cover: the cover: header wins (relative or absolute)");
 
     // a real render with and without a cover: same audio, cover stream present, re-render when the cover changes
@@ -368,7 +376,7 @@ namespace Abend { public static class Tests { public static int Main() {
       string l0 = System.Text.RegularExpressions.Regex.Match(r0.Detail, @"\S+ LUFS").Value, l1 = System.Text.RegularExpressions.Regex.Match(r1.Detail, @"\S+ LUFS").Value;
       ok(audioMd5(r0.Output) == audioMd5(r1.Output) && audioMd5(r0.Output).Length == 32 && Math.Abs(r0.Seconds - r1.Seconds) < 0.1 && r1.Seconds > 5 && l0 == l1, "render: the cover does not change the audio (decoded MD5, " + r1.Seconds + " s, " + l1 + ")");
       ok(AudioRender.RenderFile(songF, ro, fl, ff, sf).Status == "UP-TO-DATE", "render: unchanged cover -> up to date");
-      png(Path.Combine(cv, "art", "front.png"), System.Drawing.Color.Yellow);
+      png(Path.Combine(cv, "art", "front.png"), 0xFFFF00);
       File.SetLastWriteTimeUtc(Path.Combine(cv, "art", "front.png"), new DateTime(2020, 1, 1));
       ok(AudioRender.RenderFile(songF, ro, fl, ff, sf).Status == "OK", "render: changed cover (even with an old file date) -> rendered again");
       File.Delete(Path.Combine(cv, "art", "front.png")); File.Delete(fb);
@@ -452,4 +460,33 @@ namespace Abend { public static class Tests { public static int Main() {
 
   Console.WriteLine(fails == 0 ? "ALL PASSED" : fails + " FAILED");
   return fails;
-} } }
+} }
+
+  // writes a solid-colour PNG (8-bit RGB) with only the standard library, so the cover tests run on every system
+  static class TestPng
+  {
+    public static void Write(string file, int w, int h, int rgb)
+    {
+      var raw = new MemoryStream();
+      for (int y = 0; y < h; y++) { raw.WriteByte(0); for (int x = 0; x < w; x++) { raw.WriteByte((byte)(rgb >> 16)); raw.WriteByte((byte)(rgb >> 8)); raw.WriteByte((byte)rgb); } }
+      byte[] data = raw.ToArray();
+      var z = new MemoryStream(); z.WriteByte(0x78); z.WriteByte(0x9C);
+      using (var d = new System.IO.Compression.DeflateStream(z, System.IO.Compression.CompressionMode.Compress, true)) d.Write(data, 0, data.Length);
+      uint a = 1, b = 0; foreach (byte v in data) { a = (a + v) % 65521; b = (b + a) % 65521; }
+      Be(z, (b << 16) | a);
+      var o = new MemoryStream(); o.Write(new byte[] { 137, 80, 78, 71, 13, 10, 26, 10 }, 0, 8);
+      var ihdr = new MemoryStream(); Be(ihdr, (uint)w); Be(ihdr, (uint)h); ihdr.Write(new byte[] { 8, 2, 0, 0, 0 }, 0, 5);
+      Chunk(o, "IHDR", ihdr.ToArray()); Chunk(o, "IDAT", z.ToArray()); Chunk(o, "IEND", new byte[0]);
+      File.WriteAllBytes(file, o.ToArray());
+    }
+    static void Be(Stream s, uint v) { s.WriteByte((byte)(v >> 24)); s.WriteByte((byte)(v >> 16)); s.WriteByte((byte)(v >> 8)); s.WriteByte((byte)v); }
+    static void Chunk(Stream s, string type, byte[] body)
+    {
+      Be(s, (uint)body.Length);
+      var tb = System.Text.Encoding.ASCII.GetBytes(type); s.Write(tb, 0, 4); s.Write(body, 0, body.Length);
+      uint c = 0xFFFFFFFF;
+      foreach (var bytes in new[] { tb, body }) foreach (byte v in bytes) { c ^= v; for (int k = 0; k < 8; k++) c = (c & 1) != 0 ? 0xEDB88320 ^ (c >> 1) : c >> 1; }
+      Be(s, c ^ 0xFFFFFFFF);
+    }
+  }
+}

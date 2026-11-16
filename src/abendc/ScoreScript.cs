@@ -238,7 +238,7 @@ namespace Abend
                 if (bad.Count > 0)
                     res.Warnings.Add(t.Name + ": " + bad.Count + " note(s) outside the instrument's comfortable range " + GM.NoteName(r[0]) + "-" + GM.NoteName(r[1]) + ", first " + GM.NoteName(bad[0].Pitch) + " in bar " + (bad[0].Start / song.BarTicks + 1) + ".");
             }
-            foreach (var t in song.Tracks) t.Notes.Sort((a, b) => a.Start.CompareTo(b.Start));
+            foreach (var t in song.Tracks) Sym.Stable.Sort(t.Notes, (a, b) => a.Start.CompareTo(b.Start));
             if (res.Ok) res.Warnings.AddRange(MusicChecks(song, keyName));
             // tunes made mostly of scales: only notes written in "track" blocks (chord and pattern blocks, bass lines included, are left out)
             if (res.Ok && Lint) res.Warnings.AddRange(ScaleRuns(song, song.Tracks.Where(t => !t.IsDrums).ToList(), melodic));
@@ -414,7 +414,7 @@ namespace Abend
             int beatT = Song.PPQ * 4 / song.Den;
             Func<string, string, int> at = (b, bt) => (int.Parse(b) - 1) * song.BarTicks + (bt.Length > 0 ? int.Parse(bt) - 1 : 0) * beatT;
             Func<int, double> bpmAt = tick => { double v = song.Tempos[0].Bpm; foreach (var t in song.Tempos) if (t.Tick <= tick) v = t.Bpm; return v; };
-            Action<int, double> set = (tick, v) => { song.Tempos.RemoveAll(t => t.Tick == tick); song.Tempos.Add(new TempoEv { Tick = tick, Bpm = v }); song.Tempos.Sort((a, b) => a.Tick.CompareTo(b.Tick)); };
+            Action<int, double> set = (tick, v) => { song.Tempos.RemoveAll(t => t.Tick == tick); song.Tempos.Add(new TempoEv { Tick = tick, Bpm = v }); Sym.Stable.Sort(song.Tempos, (a, b) => a.Tick.CompareTo(b.Tick)); };
             var ci = CultureInfo.InvariantCulture;
             var tempoLine = new Dictionary<int, double>();
             foreach (var o in ops.Where(x => x[0] == "tempo"))

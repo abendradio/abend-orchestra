@@ -290,8 +290,8 @@ namespace Abend
                     }
                     faded++;
                 }
-                foreach (var c in cont) c.Notes.Sort((a, b) => a.Start.CompareTo(b.Start));
-                t.Notes.Sort((a, b) => a.Start.CompareTo(b.Start));
+                foreach (var c in cont) Sym.Stable.Sort(c.Notes, (a, b) => a.Start.CompareTo(b.Start));
+                Sym.Stable.Sort(t.Notes, (a, b) => a.Start.CompareTo(b.Start));
                 s.Tracks.RemoveAll(x => cont.Contains(x) && x.Notes.Count == 0);
                 used.Add(t.Name + ": " + string.Join(", ", new[] { faded > 0 ? faded + " long note(s) continued with crossfades" : null, moved > 0 ? moved + " on the default sound (recording too short)" : null,
                     retrig > 0 ? retrig + " restarted (no spare channel)" : null }.Where(x => x != null)));

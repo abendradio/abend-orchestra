@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- abendc: the command line, for Windows, Mac and Linux -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>abendc</AssemblyName>
+    <RootNamespace>Abend</RootNamespace>
+    <StartupObject>Abend.Cli</StartupObject>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../engine/*.cs" />
+  </ItemGroup>
+</Project>

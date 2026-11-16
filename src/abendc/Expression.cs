@@ -56,7 +56,7 @@ namespace Abend
             int half = Song.PPQ * 2;
             foreach (var t in s.Tracks)
             {
-                t.Notes.Sort((a, b) => a.Start.CompareTo(b.Start));
+                Sym.Stable.Sort(t.Notes, (a, b) => a.Start.CompareTo(b.Start));
                 if (t.Notes.Count == 0) continue;
 
                 // 1. humanise: chords move together (onset +-8 ms), each note's loudness +-4
@@ -66,7 +66,7 @@ namespace Abend
                     int shift = g.Key == 0 ? 0 : rnd.Next(-span, span + 1);
                     foreach (var n in g) { written[n] = n.Start; n.Start = Math.Max(0, n.Start + shift); n.Vel = Math.Max(1, Math.Min(127, n.Vel + rnd.Next(-4, 5))); }
                 }
-                t.Notes.Sort((a, b) => a.Start.CompareTo(b.Start));
+                Sym.Stable.Sort(t.Notes, (a, b) => a.Start.CompareTo(b.Start));
                 bool shaped = Sustains(t) && t.Dyn != null && t.Dyn.Count > 0;   // dynamics shaped continuously below
                 if (!t.IsDrums && !shaped) EaseTerraces(s, t);
                 if (!Sustains(t)) continue;

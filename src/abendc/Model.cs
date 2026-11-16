@@ -153,7 +153,7 @@ namespace Abend
                 }
             }
             if (s.Tempos.Count == 0) s.Tempos.Add(new TempoEv { Tick = 0, Bpm = 100 });
-            s.Tempos.Sort((a, b) => a.Tick.CompareTo(b.Tick));
+            Sym.Stable.Sort(s.Tempos, (a, b) => a.Tick.CompareTo(b.Tick));
             return s;
         }
     }
@@ -328,7 +328,7 @@ namespace Abend
             song.Tempos = song.Tempos.OrderBy(x => x.Tick).ToList();
             if (song.Tempos[0].Tick != 0) song.Tempos.Insert(0, new TempoEv { Tick = 0, Bpm = song.Tempos[0].Bpm });
             song.Tracks = map.OrderBy(k => k.Key).Select(k => k.Value).Where(t => t.Notes.Count > 0).ToList();
-            foreach (var t in song.Tracks) t.Notes.Sort((x, y) => x.Start.CompareTo(y.Start));
+            foreach (var t in song.Tracks) Sym.Stable.Sort(t.Notes, (x, y) => x.Start.CompareTo(y.Start));
             return song;
         }
     }

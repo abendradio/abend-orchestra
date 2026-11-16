@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- the editor window (piano roll): Windows only -->
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <AssemblyName>AbendComposer</AssemblyName>
+    <RootNamespace>Abend</RootNamespace>
+    <StartupObject>Abend.App</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../abendc/*.cs" />
+    <Compile Include="../engine/*.cs" />
+  </ItemGroup>
+</Project>
