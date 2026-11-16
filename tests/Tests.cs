@@ -1,4 +1,4 @@
-using System; using System.IO; using System.Linq;
+using System; using System.Collections.Generic; using System.IO; using System.Linq;
 namespace Abend { public static class Tests { public static int Main() {
   int fails = 0;
   Action<bool,string> ok = (c, msg) => { Console.WriteLine((c ? "PASS " : "FAIL ") + msg); if (!c) fails++; };
@@ -354,12 +354,15 @@ namespace Abend { public static class Tests { public static int Main() {
     ok(AudioRender.FindCover(songF, "art/front.png", fb, null).EndsWith(Path.Combine("art", "front.png")) && AudioRender.FindCover(songF, fb, null, null) == fb, "cover: the cover: header wins (relative or absolute)");
 
     // a real render with and without a cover: same audio, cover stream present, re-render when the cover changes
-    var ro = new RenderOptions();
+    var ro = new RenderOptions { SoundFont = Path.Combine(cv, "test-sine.sf2") };   // a tiny made-up soundfont, so no download is needed
+    TestSf2.Write(ro.SoundFont);
     string fl, ff, sf;
-    if (AudioRender.CheckSetup(ro, out fl, out ff, out sf) != null) Console.WriteLine("SKIP render tests: FluidSynth/ffmpeg/soundfont not found");
+    string setupMissing = AudioRender.CheckSetup(ro, out fl, out ff, out sf);
+    if (setupMissing != null && Environment.GetEnvironmentVariable("ABEND_REQUIRE_RENDER") == "1") ok(false, "render tests required but cannot run: " + setupMissing);
+    else if (setupMissing != null) Console.WriteLine("SKIP render tests: FluidSynth/ffmpeg not found");
     else
     {
-      string probe = Path.Combine(Path.GetDirectoryName(ff), "ffprobe.exe");
+      string probe = Path.Combine(Path.GetDirectoryName(ff), AudioRender.Exe("ffprobe"));
       Func<string, string, string> tool = (exe, args) => { var psi = new System.Diagnostics.ProcessStartInfo(exe, args) { UseShellExecute = false, RedirectStandardOutput = true, RedirectStandardError = true, CreateNoWindow = true };
         using (var p = System.Diagnostics.Process.Start(psi)) { var so = p.StandardOutput.ReadToEndAsync(); var se = p.StandardError.ReadToEnd(); p.WaitForExit(); return so.Result + se; } };
       Func<string, string> audioMd5 = f => System.Text.RegularExpressions.Regex.Match(tool(ff, "-v error -i \"" + f + "\" -map 0:a -f md5 -"), "MD5=([0-9a-f]+)").Groups[1].Value;
@@ -487,6 +490,67 @@ namespace Abend { public static class Tests { public static int Main() {
       uint c = 0xFFFFFFFF;
       foreach (var bytes in new[] { tb, body }) foreach (byte v in bytes) { c ^= v; for (int k = 0; k < 8; k++) c = (c & 1) != 0 ? 0xEDB88320 ^ (c >> 1) : c >> 1; }
       Be(s, c ^ 0xFFFFFFFF);
+    }
+  }
+
+  // writes a tiny SoundFont (a few KB): one looped sine tone (441 Hz, 100 samples a cycle) that every General MIDI
+  // instrument (bank 0, presets 0-127) and the drum kit (bank 128) play. Made up here, so the render tests need no download.
+  static class TestSf2
+  {
+    public static void Write(string file)
+    {
+      const int cycle = 100, cycles = 20, rate = 44100;
+      var smpl = new MemoryStream(); var bw = new BinaryWriter(smpl);
+      for (int i = 0; i < cycle * cycles; i++) bw.Write((short)(Math.Sin(2 * Math.PI * i / cycle) * 12000));
+      for (int i = 0; i < 46; i++) bw.Write((short)0);   // the zeros SoundFont asks for after each sample
+
+      var presets = new List<int[]>();   // {program, bank}
+      for (int p = 0; p < 128; p++) presets.Add(new[] { p, 0 });
+      presets.Add(new[] { 0, 128 });
+
+      var phdr = new MemoryStream(); var w = new BinaryWriter(phdr);
+      for (int i = 0; i < presets.Count; i++) { Name(w, "Sine " + presets[i][0]); w.Write((ushort)presets[i][0]); w.Write((ushort)presets[i][1]); w.Write((ushort)i); w.Write(0); w.Write(0); w.Write(0); }
+      Name(w, "EOP"); w.Write((ushort)0); w.Write((ushort)0); w.Write((ushort)presets.Count); w.Write(0); w.Write(0); w.Write(0);
+      var pbag = new MemoryStream(); w = new BinaryWriter(pbag);
+      for (int i = 0; i <= presets.Count; i++) { w.Write((ushort)i); w.Write((ushort)0); }
+      var pgen = new MemoryStream(); w = new BinaryWriter(pgen);
+      for (int i = 0; i < presets.Count; i++) { w.Write((ushort)41); w.Write((ushort)0); }   // 41 = instrument 0
+      w.Write(0);
+      var inst = new MemoryStream(); w = new BinaryWriter(inst);
+      Name(w, "Sine"); w.Write((ushort)0); Name(w, "EOI"); w.Write((ushort)1);
+      var ibag = new MemoryStream(); w = new BinaryWriter(ibag);
+      w.Write((ushort)0); w.Write((ushort)0); w.Write((ushort)2); w.Write((ushort)0);
+      var igen = new MemoryStream(); w = new BinaryWriter(igen);
+      w.Write((ushort)54); w.Write((ushort)1);   // sampleModes: loop
+      w.Write((ushort)53); w.Write((ushort)0);   // sampleID 0 (must be last)
+      w.Write(0);
+      var shdr = new MemoryStream(); w = new BinaryWriter(shdr);
+      int len = cycle * cycles;
+      Name(w, "Sine"); w.Write(0); w.Write(len); w.Write(cycle * 5); w.Write(cycle * 15); w.Write(rate); w.Write((byte)69); w.Write((sbyte)0); w.Write((ushort)0); w.Write((ushort)1);
+      Name(w, "EOS"); w.Write(0); w.Write(0); w.Write(0); w.Write(0); w.Write(0); w.Write((byte)0); w.Write((sbyte)0); w.Write((ushort)0); w.Write((ushort)0);
+      var empty10 = new byte[10];
+
+      var info = List("INFO", Ck("ifil", new byte[] { 2, 0, 1, 0 }), Ck("isng", Z("EMU8000")), Ck("INAM", Z("Abend Orchestra test sine")));
+      var sdta = List("sdta", Ck("smpl", smpl.ToArray()));
+      var pdta = List("pdta", Ck("phdr", phdr.ToArray()), Ck("pbag", pbag.ToArray()), Ck("pmod", empty10), Ck("pgen", pgen.ToArray()),
+        Ck("inst", inst.ToArray()), Ck("ibag", ibag.ToArray()), Ck("imod", empty10), Ck("igen", igen.ToArray()), Ck("shdr", shdr.ToArray()));
+      var body = new MemoryStream(); body.Write(System.Text.Encoding.ASCII.GetBytes("sfbk"), 0, 4);
+      foreach (var part in new[] { info, sdta, pdta }) body.Write(part, 0, part.Length);
+      File.WriteAllBytes(file, Ck("RIFF", body.ToArray()));
+    }
+    static void Name(BinaryWriter w, string s) { var b = new byte[20]; var a = System.Text.Encoding.ASCII.GetBytes(s); Array.Copy(a, b, Math.Min(a.Length, 19)); w.Write(b); }
+    static byte[] Z(string s) { var a = System.Text.Encoding.ASCII.GetBytes(s); var b = new byte[(a.Length + 2) & ~1]; Array.Copy(a, b, a.Length); return b; }
+    static byte[] Ck(string id, byte[] data)
+    {
+      var m = new MemoryStream(); m.Write(System.Text.Encoding.ASCII.GetBytes(id), 0, 4); m.Write(BitConverter.GetBytes(data.Length), 0, 4); m.Write(data, 0, data.Length);
+      if ((data.Length & 1) != 0) m.WriteByte(0);
+      return m.ToArray();
+    }
+    static byte[] List(string type, params byte[][] chunks)
+    {
+      var m = new MemoryStream(); m.Write(System.Text.Encoding.ASCII.GetBytes(type), 0, 4);
+      foreach (var c in chunks) m.Write(c, 0, c.Length);
+      return Ck("LIST", m.ToArray());
     }
   }
 }

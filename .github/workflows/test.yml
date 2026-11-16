@@ -19,6 +19,12 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
+      - name: Install FluidSynth and ffmpeg (Linux)
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y fluidsynth ffmpeg
+      - name: Install FluidSynth and ffmpeg (Mac)
+        if: runner.os == 'macOS'
+        run: brew install fluid-synth ffmpeg
       - name: Build abendc
         run: dotnet build src/abendc/abendc.csproj -c Release
       - name: Build the editor window (Windows only)
@@ -26,6 +32,9 @@ jobs:
         run: dotnet build src/editor/AbendOrchestra.csproj -c Release
       - name: Run the tests
         run: dotnet run --project tests/runner.csproj -c Release
+        env:
+          # on Linux and Mac the render tests must run (FluidSynth and ffmpeg are installed above)
+          ABEND_REQUIRE_RENDER: ${{ runner.os != 'Windows' && '1' || '' }}
       - name: Check the example scores
         shell: bash
         run: |
