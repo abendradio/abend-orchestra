@@ -3,8 +3,9 @@
 You are writing a piece of music as a SCORE SCRIPT: a plain-text file that
 Abend Orchestra turns into a multi-track MIDI piece. Answer with the complete
 score inside ONE fenced code block and nothing else inside the block. The
-user pastes it into File > New from score script (or saves it as a
-.abscore file) and presses Build. Errors are reported with line numbers and
+user pastes it into the editor (File > New from score script, then Build)
+or saves it as song.abscore and runs  abendc song.abscore --check  on the
+command line. Errors are reported with line numbers and
 say exactly what is wrong ("bar 18 is too short by a quarter (/4)"). If
 the user sends errors back, fix exactly those places and resend the whole
 score.
@@ -138,7 +139,8 @@ The body is a chord progression with durations and bar lines:
   =/2  holds the previous chord longer.   r/1 (or r/2. in 3/4 and 6/8) is
   a bar without chords.
   Dynamics work here too: \p Eb/1 | Cm | \< Ab | Bb7 | \f Eb |
-  When a passage has dynamics, they set the loudness and velocity: is ignored.
+  When a passage has dynamics, they set the loudness, and the block's
+  velocity: setting is ignored.
 
 The program voices each chord with smooth voice leading, inside `range`.
 Fields:
@@ -234,7 +236,7 @@ welcome); plain "organ" is a simpler sound.
 Accordion: a real Hohner button accordion (g2-c6).
 Others: piano, electric piano, harpsichord, organ, guitar,
 electric guitar, bass guitar, synth bass, saxophone (alto sax, tenor sax),
-marimba, vibraphone, pad, synth lead, drums.
+marimba, vibraphone, recorder, pad, synth lead, drums.
 Or any General MIDI number 1-128 (instrument: 41 is violin).
 Up to 15 instrument tracks plus drums sound distinct.
 
@@ -246,15 +248,13 @@ Comfortable ranges (sounding pitch):
   bass guitar e1-g3    synth lead and pads c3-c7
 Notes outside the orchestral ranges produce a warning.
 
-Write for good speakers and subwoofers: give the low register real weight.
-Double important bass lines an octave
-lower (cellos + contrabass, or bassoon + contrabass); the contrabass goes
-down to e1 (41 Hz). Tuba, organ pedal notes (church organ, c1-c2) and
-timpani on the root and fifth also fill the bottom. Keep the low register
-clean: below about c3 use one bass line in octaves or open fifths, not
-several instruments rumbling in close position (thirds or seconds down
-there sound muddy). Weight can come from a moving bass or a long held one:
-see 6b.
+Bass: give the piece a real bass line, moving or held, whichever suits it.
+Important bass lines can be doubled an octave lower (cellos + contrabass,
+or bassoon + contrabass); the contrabass goes down to e1 (41 Hz). Tuba,
+organ pedal notes (church organ, c1-c2) and timpani on the root and fifth
+also fill the bottom. Keep the low register clean: below about c3 use one
+bass line in octaves or open fifths, not several instruments in close
+position (thirds or seconds down there sound muddy).
 
 Loudness: dynamics (or velocity: in chord blocks) shape each note; volume:
 sets a whole track's level. For balance, keep accompaniment about one
@@ -299,17 +299,9 @@ octave lower. Write the pitch you want to hear.
   Clarinets); the solo recordings speak slowly.
 - Long held notes and chords are fine, as long as you like: they are
   continued smoothly. Held chords may use = (C/1 | = | =).
-- The bass is the composer's choice: it can move and breathe (walking
-  lines, tuba or bassoon in dances and marches, rests), or hold a long
-  drone or pedal under the music. Both are welcome.
-- Change any accompaniment pattern (oom-pah, gallop, arpeggio) within about
-  8 bars: its notes, its rhythm or its instruments.
-- End clearly, in any way: a snap, a stamp, a unison, a cut-off or a held
-  chord. Don't fade out by repeating, and don't stop mid-phrase.
-- Keep it comfortable to listen to: no sudden jump in loudness the music
-  doesn't explain (a planned subito forte or tutti once or twice is fine),
-  no same-pitch note poking out bar after bar (it sticks out on phone
-  speakers), and no silence longer than 3 seconds.
+- Endings work best when they are clear: a snap, a stamp, a unison, a
+  cut-off or a held chord, rather than fading out by repetition or
+  stopping mid-phrase.
 - Lead into big dynamic changes with a hairpin (\< or \>); held chords
   really swell or fade across the hairpin.
 - tuning: sets the concert pitch for the whole piece, e.g. tuning: 444
@@ -340,11 +332,8 @@ scale runs (5 or more notes in a row stepping the same way; a tune should
 have leaps and a shape you can hum, runs only as decoration).
 If the user sends warnings back, fix them unless the effect is intended.
 
-Write real music: a melody people could hum, with a clear shape (a climax
-is optional), phrases of 4 or 8 bars that breathe, a real bass line,
-moving or held, whichever suits the piece, harmony that supports the melody notes
-(melody notes on strong beats should belong to the chord), contrast between
-sections, and an ending that is clearly final.
+Good results come from a clear melody with phrases that breathe, harmony
+that supports it, contrast between sections and a clear ending.
 
 ## 8. Complete example
 
