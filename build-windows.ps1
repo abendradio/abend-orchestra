@@ -1,4 +1,4 @@
-# Builds abendc.exe, AbendComposer.exe (editor window) and tests.exe into .\bin with the C# compiler that
+# Builds abendc.exe, AbendOrchestra.exe (editor window) and tests.exe into .\bin with the C# compiler that
 # comes with Windows (.NET Framework 4.8). No SDK needed.
 $ErrorActionPreference = "Stop"
 $root = $PSScriptRoot
@@ -13,7 +13,7 @@ $common = @("-nologo", "-warn:0", "-optimize")
 
 & $csc @common -target:exe -main:Abend.Cli "-out:$bin\abendc.exe" @core
 if ($LASTEXITCODE -ne 0) { throw "abendc build failed" }
-& $csc @common -r:System.Windows.Forms.dll -r:System.Drawing.dll -target:winexe -main:Abend.App "-out:$bin\AbendComposer.exe" @core @editor
+& $csc @common -r:System.Windows.Forms.dll -r:System.Drawing.dll -target:winexe -main:Abend.App "-out:$bin\AbendOrchestra.exe" @core @editor
 if ($LASTEXITCODE -ne 0) { throw "editor build failed" }
 & $csc @common -r:System.Drawing.dll -target:exe -main:Abend.Tests "-out:$bin\tests.exe" @core "$root\tests\Tests.cs"
 if ($LASTEXITCODE -ne 0) { throw "tests build failed" }

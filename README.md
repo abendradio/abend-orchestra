@@ -62,7 +62,7 @@ With the [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) (Windows
 ```
 dotnet build src/abendc/abendc.csproj -c Release          # the command line
 dotnet run --project tests/runner.csproj -c Release       # the tests
-dotnet build src/editor/AbendComposer.csproj -c Release   # the editor window (Windows only)
+dotnet build src/editor/AbendOrchestra.csproj -c Release   # the editor window (Windows only)
 ```
 
 You also need FluidSynth and ffmpeg for audio:

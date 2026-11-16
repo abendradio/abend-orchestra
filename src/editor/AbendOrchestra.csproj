@@ -4,7 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
-    <AssemblyName>AbendComposer</AssemblyName>
+    <AssemblyName>AbendOrchestra</AssemblyName>
     <RootNamespace>Abend</RootNamespace>
     <StartupObject>Abend.App</StartupObject>
   </PropertyGroup>

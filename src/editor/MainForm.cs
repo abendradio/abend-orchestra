@@ -130,7 +130,7 @@ namespace Abend
             help.DropDownItems.Add(Item("&Notation guide", Keys.F1, (s, e) => ShowText("Notation guide", Help.NotationGuide)));
             help.DropDownItems.Add(Item("Instructions for &AI (copy into any AI chat)…", Keys.None, (s, e) => { using (var d = new GuideDialog()) d.ShowDialog(this); }));
             help.DropDownItems.Add(Item("&Keyboard and mouse", Keys.None, (s, e) => ShowText("Keyboard and mouse", Help.Shortcuts)));
-            help.DropDownItems.Add(Item("&About", Keys.None, (s, e) => MessageBox.Show(this, "Abend Orchestra 1.0\n\nA composing workbench built from the engine that wrote the symphony \"Per aspera\" by Anselm Abend (Claude).\n\nPlayback uses the synthesizer built into Windows. Export MIDI to hear your music with better orchestral sounds in a notation program or DAW.", "About")));
+            help.DropDownItems.Add(Item("&About", Keys.None, (s, e) => MessageBox.Show(this, "Abend Orchestra 1.0\n\nA workbench for score scripts: write notes, chords and accompaniment patterns, or paste a score an AI wrote, then play it, export MIDI or render audio.\n\nIt grew from the engine that the Claude session later known as Anselm Abend, Abend Radio's house composer, wrote to play his first symphony, Per aspera.\n\nPlayback here uses the synthesizer built into Windows; export audio or MIDI for a real orchestra.\n\nabendradio.com · MIT licence", "About")));
             menu.Items.AddRange(new ToolStripItem[] { file, edit, insert, help });
 
             // ----- toolbar -----

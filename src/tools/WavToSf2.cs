@@ -246,7 +246,7 @@ namespace Sym
             var pmod = new byte[10];
 
             var info = List("INFO", Chunk("ifil", new byte[] { 2, 0, 1, 0 }), Chunk("isng", Str("EMU8000", 8)), Chunk("INAM", Str(name, 64)),
-                Chunk("ICMT", Str("Built by Abend Composer's WavToSf2 from CC0 recordings (Versilian Community Sample Library).", 128)));
+                Chunk("ICMT", Str("Built by Abend Orchestra's WavToSf2 from CC0 recordings (Versilian Community Sample Library).", 128)));
             var sdta = List("sdta", Chunk("smpl", smpl.ToArray()));
             var pdta = List("pdta", Chunk("phdr", phdr.ToArray()), Chunk("pbag", pbag.ToArray()), Chunk("pmod", pmod), Chunk("pgen", pgen.ToArray()),
                 Chunk("inst", inst.ToArray()), Chunk("ibag", ibag.ToArray()), Chunk("imod", imod.ToArray()), Chunk("igen", igen.ToArray()), Chunk("shdr", hdr.ToArray()));

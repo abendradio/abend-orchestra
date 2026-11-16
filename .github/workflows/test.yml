@@ -23,7 +23,7 @@ jobs:
         run: dotnet build src/abendc/abendc.csproj -c Release
       - name: Build the editor window (Windows only)
         if: runner.os == 'Windows'
-        run: dotnet build src/editor/AbendComposer.csproj -c Release
+        run: dotnet build src/editor/AbendOrchestra.csproj -c Release
       - name: Run the tests
         run: dotnet run --project tests/runner.csproj -c Release
       - name: Check the example scores
