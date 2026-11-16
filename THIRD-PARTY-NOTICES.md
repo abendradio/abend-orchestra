@@ -7,7 +7,11 @@ Abend Orchestra runs FluidSynth and ffmpeg as separate programs, and reads sound
 | Tool | Licence | How you get it |
 |---|---|---|
 | **FluidSynth** (https://www.fluidsynth.org) | GNU LGPL 2.1. Source: https://github.com/FluidSynth/fluidsynth | Windows: included in the release download, with its licence. Mac/Linux: install it with your package manager |
-| **ffmpeg** (https://ffmpeg.org) | LGPL/GPL, depending on the build | Not included. Install it yourself (winget, Homebrew, apt), or let the setup script fetch it |
+| **libsndfile** (sndfile.dll, part of FluidSynth's Windows build) | GNU LGPL 2.1. Source: https://github.com/libsndfile/libsndfile | Windows: included with FluidSynth |
+| **SDL3** (SDL3.dll, part of FluidSynth's Windows build) | zlib licence. Source: https://github.com/libsdl-org/SDL | Windows: included with FluidSynth |
+| **ffmpeg** (https://ffmpeg.org) | LGPL/GPL, depending on the build | Not included. Install it yourself (winget, Homebrew, apt); on Windows the setup script can run winget for you (`-InstallFfmpeg`) |
+
+The licence texts are in `licenses/`, and in the Windows download also next to FluidSynth in `tools/fluidsynth/`.
 
 ## Sounds
 

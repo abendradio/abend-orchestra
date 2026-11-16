@@ -98,7 +98,7 @@ namespace Abend
             var examples = new ToolStripMenuItem("Open e&xample");
             string exDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Examples");
             if (Directory.Exists(exDir))
-                foreach (var f in Directory.GetFiles(exDir).Where(x => x.EndsWith(".mid", StringComparison.OrdinalIgnoreCase) || x.EndsWith(".abend", StringComparison.OrdinalIgnoreCase)).OrderBy(x => x))
+                foreach (var f in Directory.GetFiles(exDir, "*", SearchOption.AllDirectories).Where(x => x.EndsWith(".abscore", StringComparison.OrdinalIgnoreCase) || x.EndsWith(".mid", StringComparison.OrdinalIgnoreCase) || x.EndsWith(".abend", StringComparison.OrdinalIgnoreCase)).OrderBy(x => x))
                 {
                     string fp = f;
                     examples.DropDownItems.Add(Item(Path.GetFileNameWithoutExtension(f), Keys.None, (s, e) => { if (ConfirmDiscard()) OpenPath(fp); }));
