@@ -431,9 +431,17 @@ namespace Abend
                     kept.Add(t.Name + " (" + GM.Names[t.Program].ToLower() + (c == null ? ", not in the library" : ", notes outside the library's range") + (t.Program == 6 ? "; softened: low-pass, -15% volume, more reverb" : "") + ")");
                     continue;
                 }
+                // why not the first choice (a solo oboe part played by the oboes): say which end of its range the part passes
+                string why = "";
+                var pref = c != null ? c[IsSection(t) ? 1 : 0][0] : null;
+                if (pref != null && pick != pref && pick != byName)
+                {
+                    if (t.Notes.Any(n => n.Pitch + pref.Tr > pref.Hi)) why = " (" + pref.Name + " ends at " + ScoreScript.Spell(pref.Hi - pref.Tr) + ")";
+                    else if (t.Notes.Any(n => n.Pitch + pref.Tr < pref.Lo)) why = " (" + pref.Name + " starts at " + ScoreScript.Spell(pref.Lo - pref.Tr) + ")";
+                }
                 t.Bank = Bank; t.Program = Second(t, pick).P;
                 if (pick.Tr != 0) foreach (var n in t.Notes) n.Pitch += pick.Tr;
-                used.Add(t.Name + " = " + Second(t, pick).Name);
+                used.Add(t.Name + " = " + Second(t, pick).Name + why);
 
                 // solo violin and cello samples carry a wide recorded vibrato (up to 40-46 cents on high notes); the section
                 // patch playing the same line about 9 dB underneath narrows it by a quarter to a third without hiding the soloist

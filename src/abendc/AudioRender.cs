@@ -59,14 +59,16 @@ namespace Abend
                 return BitConverter.ToString(md5.ComputeHash(s)).Replace("-", "").ToLowerInvariant();
         }
 
+        // where abendc looks for its tools (and soundfonts), in this order: --tools, the ABEND_TOOLS environment variable,
+        // the program's own folder (and its tools\ and soundfonts\), the folder saved by the editor window; tools last on PATH.
+        // Not the current folder or the folder above the program: a downloaded tools\ folder there must never be run.
         public static IEnumerable<string> SearchRoots(string toolsDir)
         {
             var roots = new List<string>();
             if (!string.IsNullOrEmpty(toolsDir)) roots.Add(toolsDir);
-            string exeDir = AppDomain.CurrentDomain.BaseDirectory;
-            roots.Add(exeDir);
-            roots.Add(Path.Combine(exeDir, ".."));
-            roots.Add(Environment.CurrentDirectory);
+            string env = Environment.GetEnvironmentVariable("ABEND_TOOLS");
+            if (!string.IsNullOrEmpty(env)) roots.Add(env);
+            roots.Add(AppDomain.CurrentDomain.BaseDirectory);
             string saved = Settings.Get("radio");
             if (saved != null) roots.Add(saved);
             return roots.Where(Directory.Exists).Select(Path.GetFullPath).Distinct();
@@ -120,7 +122,7 @@ namespace Abend
             if (o.Library != null && o.Harpsichord != null) { if ((o.HarpsichordFile = Library.FindHarpsichord(o.ToolsDir, o.Harpsichord)) == null) missing.Add("the harpsichord soundfont " + o.Harpsichord); }
             if (o.Library != null) o.ExtrasFile = Library.FindExtras(o.ToolsDir);
             if (o.Library != null && (o.LibraryFile = Library.Find(o.Library, o.ToolsDir)) == null) missing.Add("the " + o.Library + " library (soundfonts/Sonatina/*.sf2)");
-            return missing.Count == 0 ? null : "Could not find " + string.Join(", ", missing) + ". Install FluidSynth and ffmpeg (or put them in a tools folder next to abendc), run the setup script for the sounds (a soundfonts folder next to abendc), or pass --tools and --soundfont.";
+            return missing.Count == 0 ? null : "Could not find " + string.Join(", ", missing) + ". Install FluidSynth and ffmpeg (or put them in a tools folder next to abendc), run the setup script for the sounds (a soundfonts folder next to abendc), or pass --tools (or set ABEND_TOOLS) and --soundfont.";
         }
 
         // ---------- batch ----------
@@ -136,7 +138,7 @@ namespace Abend
             else throw new Exception("Nothing found at " + input);
             if (o.OutDir == null) o.OutDir = Directory.Exists(input) ? input : Path.GetDirectoryName(Path.GetFullPath(input));
             Directory.CreateDirectory(o.OutDir);
-            say("Soundfont: " + Path.GetFileName(sf2) + "   target " + o.Lufs.ToString("0.#", CI) + " LUFS, " + o.Bitrate + " kbps" + (o.BassDb != 0 ? ", bass " + o.BassDb.ToString("+0.#;-0.#", CI) + " dB" : "")+ (o.Library != null ? ", library " + o.Library : "") + (o.Expression ? ", expression" : "") + "   output: " + o.OutDir);
+            say((o.Library != null ? "Soundfonts: " + o.Library.Substring(0, 1).ToUpperInvariant() + o.Library.Substring(1) + " (+ " + Path.GetFileName(sf2) + " for the other parts)" : "Soundfont: " + Path.GetFileName(sf2)) + "   target " + o.Lufs.ToString("0.#", CI) + " LUFS, " + o.Bitrate + " kbps" + (o.BassDb != 0 ? ", bass " + o.BassDb.ToString("+0.#;-0.#", CI) + " dB" : "")+ (o.Library != null ? ", library " + o.Library : "") + (o.Expression ? ", expression" : "") + "   output: " + o.OutDir);
             var results = new List<RenderResult>();
             string rootOut = o.OutDir, rootIn = Directory.Exists(input) ? Path.GetFullPath(input).TrimEnd('\\', '/') : null;
             // scores in one folder that share an album: header are rendered together with one loudness gain
@@ -811,7 +813,7 @@ namespace Abend
             }
             string key = r.Key ?? RenderKey(o), keyTag = key.Length > 0 ? " -metadata " + RenderTag + "=" + key : "";
             var e = Run(ffmpeg, "-hide_banner -nostats -y -i " + Q(wav) + coverIn + " -af \"" + af + "\" -c:a libmp3lame -b:a " + o.Bitrate + "k" + coverOut + keyTag +
-                " -metadata title=" + Q(title) + " -metadata artist=" + Q(artist) + (string.IsNullOrEmpty(r.Album ?? o.Album) ? "" : " -metadata album=" + Q(r.Album ?? o.Album)) + " -metadata comment=" + Q("Made with Abend Orchestra") + " " + Q(tmpMp3), 600);
+                " -metadata title=" + Q(title) + " -metadata artist=" + Q(artist) + (string.IsNullOrEmpty(r.Album ?? o.Album) ? "" : " -metadata album=" + Q(r.Album ?? o.Album)) + " -metadata comment=" + Q(o.Library == "sonatina" ? "Made with Abend Orchestra. Orchestra samples: Sonatina Symphonic Orchestra by Mattias Westlund, CC Sampling Plus 1.0 (https://creativecommons.org/licenses/sampling+/1.0/)" : "Made with Abend Orchestra") + " " + Q(tmpMp3), 600);
             if (!File.Exists(tmpMp3) || new FileInfo(tmpMp3).Length < 1000) { r.Status = "FAILED"; r.Detail = "ffmpeg could not encode the MP3. " + Short(e); return r; }
             var j2 = LastJson(e);
             File.Copy(tmpMp3, r.Output, true);
@@ -875,7 +877,17 @@ namespace Abend
     // tiny per-user settings file (remembers where the tools and soundfonts folder is)
     public static class Settings
     {
-        static string FilePath { get { return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "AbendComposer", "settings.txt"); } }
+        static string Dir(string name) { return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), name); }
+        // the folder was called AbendComposer before the program was renamed: its settings are copied over once
+        static string FilePath
+        {
+            get
+            {
+                string now = Path.Combine(Dir("AbendOrchestra"), "settings.txt"), old = Path.Combine(Dir("AbendComposer"), "settings.txt");
+                try { if (!File.Exists(now) && File.Exists(old)) { Directory.CreateDirectory(Path.GetDirectoryName(now)); File.Copy(old, now); } } catch { }
+                return now;
+            }
+        }
         public static string Get(string key)
         {
             try { foreach (var l in File.ReadAllLines(FilePath)) if (l.StartsWith(key + "=")) return l.Substring(key.Length + 1); } catch { }

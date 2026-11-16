@@ -64,9 +64,12 @@ namespace Abend
             catch (Exception ex) { Console.Error.WriteLine(ex.Message); return 2; }
         }
 
+        public const string Version = "1.0.0";
+
         public static int Main(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
+            if (args.Length > 0 && (args[0] == "--version" || args[0] == "-v")) { Console.WriteLine("Abend Orchestra " + Version + " (abendc)"); return 0; }
             if (args.Length == 0 || args[0] == "-h" || args[0] == "--help" || args[0] == "/?")
             {
                 Console.WriteLine(
@@ -80,6 +83,7 @@ namespace Abend
   abendc song.abscore --tuning 444    concert pitch A4 in Hz (415-466; also the score header tuning: 444)
   abendc - < song.abscore             read the script from standard input
   abendc --guide                      print the instructions for AI models
+  abendc --version                    print the version
 
   abendc render <folder or file> [--out dir] [--soundfont file.sf2] [--tools dir]
                 [--lufs -14] [--lra 15] [--bass 0] [--bitrate 192] [--gap 1.5] [--artist name] [--album name] [--cover image]

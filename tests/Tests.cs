@@ -120,6 +120,14 @@ namespace Abend { public static class Tests { public static int Main() {
   var halves = ScoreScript.Parse("title: T\ntempo: 100\nmeter: 4/4\ntrack A | instrument: flute\n\\mf c5/2 d5/2 | e5/2 |\nf5/2 g5/2 | a5/4 |\nb5/1 |\n");
   ok(!halves.Ok && halves.Errors.Any(x => x.StartsWith("line 5 ") && x.Contains("bar 2")) && halves.Errors.Any(x => x.StartsWith("line 6 ") && x.Contains("bar 4")), "errors: several short bars, each on its line: " + string.Join(" / ", halves.Errors));
   ok(ScoreScript.Spell(70) == "bes4" && ScoreScript.Spell(54) == "fis3" && ScoreScript.Spell(60) == "c4", "warnings spell pitches as the notation does (bes4, fis3, c4)");
+  {
+    // tools are never searched for in the current folder (a downloaded tools\ folder there must not be run)
+    string plant = Path.Combine(Path.GetTempPath(), "abend-plant-" + Guid.NewGuid().ToString("N").Substring(0, 8)), keep = Environment.CurrentDirectory;
+    Directory.CreateDirectory(Path.Combine(plant, "tools"));
+    File.WriteAllText(Path.Combine(plant, "tools", AudioRender.Exe("planted-tool")), "");
+    try { Environment.CurrentDirectory = plant; ok(AudioRender.FindTool(AudioRender.Exe("planted-tool"), null) == null && !AudioRender.SearchRoots(null).Any(r => Path.GetFullPath(r).TrimEnd(Path.DirectorySeparatorChar) == Path.GetFullPath(plant).TrimEnd(Path.DirectorySeparatorChar)), "tools: the current folder is not searched"); }
+    finally { Environment.CurrentDirectory = keep; Directory.Delete(plant, true); }
+  }
   var twice = score("", mel + acc + "chords Strings | voices: 3\n\\p F/1 | F | C | C |\n");
   ok(warned(twice, "start it with @5"), "warn: second block without @ plays on top of the first: " + twice.Warnings.FirstOrDefault());
   var mixed = score("", "track Piano | instrument: piano\n\\mf c5/2 e5/2 | g5/2 e5/2 | d5/2 b4/2 | c5/1 |\nchords Piano | voices: 3 | range: G3-E4\n\\p C/1 | C | G | C |\n");
