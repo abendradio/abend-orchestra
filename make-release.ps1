@@ -35,15 +35,54 @@ function CopyCommon($to) {
     foreach ($f in @("GeneralUser-GS.sf2", "GeneralUser-GS-LICENSE.txt")) {
         $p = Join-Path $src $f; if (-not (Test-Path $p)) { throw "missing asset: $p" }; Copy-Item $p $sf
     }
+    # the READMEs of the Flemish harpsichord and the extras come from release-assets\ (public wording), not -Assets
     $want = @{
-        "VCSL-Flemish-Harpsichord" = @("VCSL-Flemish-Harpsichord.sf2", "LICENSE.txt", "README.txt");
+        "VCSL-Flemish-Harpsichord" = @("VCSL-Flemish-Harpsichord.sf2", "LICENSE.txt");
         "VCSL-Harpsichord"         = @("VCSL-English-Harpsichord.sf2", "LICENSE.txt", "VCSL-README.md");
-        "Abend-Extras"             = @("Abend-Extras-2.sf2", "README.txt")
+        "Abend-Extras"             = @("Abend-Extras-2.sf2")
     }
     foreach ($d in $want.Keys) {
         $dd = Join-Path $sf $d; New-Item -ItemType Directory -Force $dd | Out-Null
         foreach ($f in $want[$d]) { $p = Join-Path (Join-Path $src $d) $f; if (-not (Test-Path $p)) { throw "missing asset: $p" }; Copy-Item $p $dd }
+        $readme = Join-Path $root "release-assets\$d\README.txt"
+        if (Test-Path $readme) { Copy-Item $readme $dd }
     }
+    # the info text inside the soundfonts names the program and the real sources (the copies only; -Assets is not changed)
+    $vcsl = "Built by Abend Orchestra's WavToSf2 from CC0 recordings (Versilian Community Sample Library)."
+    Set-Sf2Comment (Join-Path $sf "VCSL-Flemish-Harpsichord\VCSL-Flemish-Harpsichord.sf2") $vcsl
+    Set-Sf2Comment (Join-Path $sf "VCSL-Harpsichord\VCSL-English-Harpsichord.sf2") $vcsl
+    Set-Sf2Comment (Join-Path $sf "Abend-Extras\Abend-Extras-2.sf2") "Built by Abend Orchestra's SfzToSf2 from CC0 recordings: the VCSL pipe organ (Versilian Community Sample Library; sampled by Ivy Audio) and the FreePats Button Accordion HN."
+}
+
+# rewrites the ICMT (comment) entry of a SoundFont's INFO list; the sample data and presets stay byte for byte the same
+function Set-Sf2Comment($path, $text) {
+    $b = [IO.File]::ReadAllBytes($path)
+    $ascii = [Text.Encoding]::ASCII
+    if ($ascii.GetString($b, 0, 4) -ne "RIFF" -or $ascii.GetString($b, 8, 4) -ne "sfbk") { throw "not a SoundFont: $path" }
+    $out = New-Object IO.MemoryStream
+    $pos = 12
+    while ($pos -lt $b.Length) {
+        $id = $ascii.GetString($b, $pos, 4); $len = [BitConverter]::ToInt32($b, $pos + 4); $next = $pos + 8 + $len + ($len -band 1)
+        if ($id -eq "LIST" -and $ascii.GetString($b, $pos + 8, 4) -eq "INFO") {
+            $info = New-Object IO.MemoryStream; $info.Write($ascii.GetBytes("INFO"), 0, 4)
+            $p = $pos + 12; $done = $false
+            while ($p -lt $pos + 8 + $len) {
+                $sid = $ascii.GetString($b, $p, 4); $sl = [BitConverter]::ToInt32($b, $p + 4); $sn = $p + 8 + $sl + ($sl -band 1)
+                if ($sid -ne "ICMT") { $info.Write($b, $p, $sn - $p) }
+                $p = $sn
+            }
+            $t = $ascii.GetBytes($text); $tl = $t.Length + 1; if ($tl % 2) { $tl++ }
+            $pad = New-Object byte[] $tl; [Array]::Copy($t, $pad, $t.Length)
+            $info.Write($ascii.GetBytes("ICMT"), 0, 4); $info.Write([BitConverter]::GetBytes([int]$tl), 0, 4); $info.Write($pad, 0, $tl)
+            $ib = $info.ToArray()
+            $out.Write($ascii.GetBytes("LIST"), 0, 4); $out.Write([BitConverter]::GetBytes([int]$ib.Length), 0, 4); $out.Write($ib, 0, $ib.Length)
+        } else { $out.Write($b, $pos, $next - $pos) }
+        $pos = $next
+    }
+    $body = $out.ToArray()
+    $f = New-Object IO.MemoryStream
+    $f.Write($ascii.GetBytes("RIFF"), 0, 4); $f.Write([BitConverter]::GetBytes([int]($body.Length + 4)), 0, 4); $f.Write($ascii.GetBytes("sfbk"), 0, 4); $f.Write($body, 0, $body.Length)
+    [IO.File]::WriteAllBytes($path, $f.ToArray())
 }
 
 function Zip($folder) {
