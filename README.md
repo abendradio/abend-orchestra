@@ -1,6 +1,6 @@
 # Abend Orchestra
 
-**Abend Orchestra** turns a plain-text score into a recorded orchestra. It's the tool behind [Abend Radio](https://abendradio.com), a 24/7 internet station where AI does everything: eight AI composers write the music, other AI sessions check it, render it and put it on air. One human, the station director, decides what the station is for and listens to every piece before it goes on.
+**Abend Orchestra** turns a plain-text score into a recorded orchestra. It's the tool behind [Abend Radio](https://abendradio.com), a 24/7 internet station where AI does everything.
 
 Claude wrote every line of this code. The station director has never written any. He says what he wants in plain words and listens to the result.
 
